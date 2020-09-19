@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sunny_dart/sunny_dart.dart';
-
-import '../sunny_form_submit.dart';
 
 /// Enforces HitTest.opaque and removes parameters
 Widget tappable<R>(Widget child,
-    {FutureOrCallback onTap,
+    {FutureOrTappableCallback onTap,
     Key key,
     double pressOpacity: 1.0,
     BuildContext context,
@@ -32,7 +30,8 @@ Widget tappable<R>(Widget child,
       behavior: HitTestBehavior.opaque);
 }
 
-typedef FutureOrCallback<T> = FutureOr<T> Function();
+typedef FutureOrTappableCallback<T> = FutureOr<T> Function();
+typedef FutureTappableCallback<T> = FutureOr<T> Function(BuildContext context);
 
 enum TapTransform {
   opacity,
@@ -40,15 +39,19 @@ enum TapTransform {
 }
 
 class Tappable extends StatefulWidget {
+  static const defaultScale = 0.98;
+
   final double pressOpacity;
   final double pressScale;
-  final FutureCallback onTap;
+  final FutureTappableCallback onTap;
+  final FutureTappableCallback onLongPress;
   final Widget child;
   final Duration duration;
 
   Tappable.link(
     String s, {
     this.onTap,
+    this.onLongPress,
     TextStyle style,
   })  : duration = const Duration(milliseconds: 300),
         pressOpacity = null,
@@ -59,6 +62,7 @@ class Tappable extends StatefulWidget {
       {Key key,
       this.pressOpacity = 0.7,
       this.pressScale,
+      this.onLongPress,
       this.duration = const Duration(milliseconds: 300),
       this.onTap,
       this.child})
@@ -80,9 +84,9 @@ class _TappableState extends State<Tappable>
 
     _ac = AnimationController(
       vsync: this,
-      duration: widget.duration ?? 300.ms,
+      duration: widget.duration ?? const Duration(milliseconds: 300),
       value: 0,
-      reverseDuration: widget.duration ?? 300.ms,
+      reverseDuration: widget.duration ?? const Duration(milliseconds: 300),
     );
     _opacityAnimation =
         _ac.drive(Tween(begin: 1, end: widget.pressOpacity ?? 1));
@@ -110,6 +114,12 @@ class _TappableState extends State<Tappable>
             }
           }
         },
+        onLongPress: widget.onLongPress == null
+            ? null
+            : () {
+                HapticFeedback.heavyImpact();
+                widget.onLongPress(context);
+              },
         onTapDown: (tap) {
           setState(() {
             _ac.forward();
