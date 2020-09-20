@@ -35,7 +35,6 @@ lane :publish do |options|
 
   pub_publish
   finalize_version
-  release_clean_up
 end
 
 lane :icons do
