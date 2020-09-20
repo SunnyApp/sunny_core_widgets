@@ -21,7 +21,7 @@
 #.vscode/
 
 fastlane/report.xml
-
+.release-notes
 # Flutter/Dart/Pub related
 **/doc/api/
 .dart_tool/
