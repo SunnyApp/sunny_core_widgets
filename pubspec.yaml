@@ -1,22 +1,16 @@
 name: sunny_core_widgets
+version: 0.1.1+1
 description: Core widgets used by Sunny
-version: 0.1.1
-
-environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.17.0 <2.0.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
+repository: https://github.com:SunnyApp/sunny_core_widgets
+environment: 
+  sdk: '>=2.7.0 <3.0.0'
+  flutter: '>=1.17.0 <2.0.0'
+dependencies: 
   provider: ^4.3.2+2
   sunny_dart: ^0.5.8
-dev_dependencies:
-  flutter_test:
+  flutter: 
     sdk: flutter
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-
-# The following section is specific to Flutter.
-flutter:
+dev_dependencies: 
+  flutter_test: 
+    sdk: flutter
+flutter: null
