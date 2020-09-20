@@ -1,7 +1,7 @@
 name: sunny_core_widgets
-version: 0.1.1+3
+version: 0.1.1+4
+homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
-homepage: "https://github.com:SunnyApp/sunny_core_widgets"
 environment: 
   sdk: '>=2.7.0 <3.0.0'
   flutter: '>=1.17.0 <2.0.0'
