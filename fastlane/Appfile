@@ -1,0 +1,6 @@
+app_identifier("com.trippiapp.trippi") # the iOS package name
+package_name("com.trippiapp.trippi") # the Android package name
+json_key_file "android/release-manager-key.json" # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+apple_id("eric@sunnyapp.co") # Your Apple email address
+team_id("539M3PKYF7")
+itc_team_id("121844526")

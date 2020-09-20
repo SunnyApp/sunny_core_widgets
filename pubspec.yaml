@@ -9,8 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: any
-  sunny_dart: any
+  provider: ^4.3.2+2
+  sunny_dart: ^0.5.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

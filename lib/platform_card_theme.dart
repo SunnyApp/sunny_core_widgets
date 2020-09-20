@@ -11,8 +11,7 @@ class PlatformCardTheme {
 
   static const kDefaultMargin =
       EdgeInsets.only(left: 10, right: 10, bottom: 10);
-  static const kDefaultBorderRadius =
-      const BorderRadius.all(Radius.circular(8));
+  static const kDefaultBorderRadius = BorderRadius.all(Radius.circular(8));
 
   static const kDefaultPadding =
       EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0);

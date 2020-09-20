@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 Widget tappable<R>(Widget child,
     {FutureOrTappableCallback onTap,
     Key key,
-    double pressOpacity: 1.0,
+    double pressOpacity = 1.0,
     BuildContext context,
     String routeName,
     arguments,
