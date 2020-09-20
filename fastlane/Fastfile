@@ -22,8 +22,8 @@ p $VERBOSE
 lane :publish do |options|
   ensure_git_status_clean
 
-  helper = Helper::SunnyProjectHelper
-  old_version = helper.current_semver_path
+
+  old_version = curr_semver
 
   increase_version
 
