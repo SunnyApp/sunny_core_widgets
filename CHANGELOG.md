@@ -1,3 +1,6 @@
+## [0.1.1+11]
+ * CHANGELOG manual commit
+
 ## [0.1.1+10]
  * CHANGELOG cleanup
 
