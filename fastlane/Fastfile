@@ -34,9 +34,7 @@ lane :publish do |options|
   puts(changes)
 
   pub_publish
-
-  finalize_version_action
-
+  finalize_version
 end
 
 lane :icons do
