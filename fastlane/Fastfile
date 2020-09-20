@@ -23,7 +23,6 @@ lane :publish do |options|
   ensure_git_status_clean
 
   helper = Helper::SunnyProjectHelper
-  helper.exec_cmd('flutter test', 'flutter test')
   old_version = helper.current_semver_path
 
   increase_version
