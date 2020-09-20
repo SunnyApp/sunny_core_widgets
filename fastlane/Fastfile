@@ -29,7 +29,7 @@ lane :publish do |options|
 
   # Whatever happened with the incrementing, this is the build number we're
   # going with
-  version = helper.current_semver_path
+  version = curr_semver
   changes = release_notes options
   puts(changes)
 
