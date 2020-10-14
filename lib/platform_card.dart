@@ -1,21 +1,25 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_degen/annotations.dart';
 import 'package:sunny_core_widgets/platform_card_theme.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 import 'package:sunny_dart/helpers/functions.dart';
 
-class PlatformCard extends StatelessWidget {
+part 'platform_card.g.dart';
+
+class PlatformCardArgs {
   final EdgeInsets padding;
   final EdgeInsets margin;
   final Color color;
-
   final BorderRadius borderRadius;
   final bool useShadow;
   final double height;
   final double width;
-  final Widget child;
+
   final double minHeight;
   final double minWidth;
   final double pressOpacity;
@@ -26,8 +30,7 @@ class PlatformCard extends StatelessWidget {
   final PlatformCardTheme theme;
   final bool shouldClip;
 
-  const PlatformCard({
-    Key key,
+  const PlatformCardArgs({
     this.pressOpacity = 1,
     this.pressScale = Tappable.defaultScale,
     this.padding,
@@ -36,7 +39,6 @@ class PlatformCard extends StatelessWidget {
     this.color = Colors.white,
     this.height,
     this.width,
-    this.child,
     this.useShadow = true,
     this.minWidth,
     this.theme,
@@ -45,7 +47,20 @@ class PlatformCard extends StatelessWidget {
     this.shouldClip,
     this.onLongPress,
     this.shadow,
-  }) : super(key: key);
+  });
+}
+
+class PlatformCard extends StatelessWidget with _PlatformCardArgsMixin {
+  @delegate(implementDelegate: true)
+  final PlatformCardArgs _args;
+  final Widget child;
+
+  PlatformCard({
+    PlatformCardArgs args,
+    this.child,
+    Key key,
+  })  : _args = args ?? const PlatformCardArgs(),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -20,21 +20,11 @@ class PlatformCardTheme {
       color: kDefaultShadowColor,
       offset: Offset(0, 8),
       spreadRadius: 0,
-      blurRadius: 20, // has the effect of softening the shadow
+      blurRadius: 24, // has the effect of softening the shadow
     ),
   ];
 
-  static const kDefaultShadowColor = CupertinoDynamicColor(
-    debugLabel: "contrast300",
-    color: _gray300,
-    darkColor: _gray600,
-    darkElevatedColor: _gray500,
-    elevatedColor: _gray400,
-    highContrastColor: _gray200,
-    highContrastElevatedColor: _gray400,
-    darkHighContrastElevatedColor: _gray500,
-    darkHighContrastColor: _gray500,
-  );
+  static const kDefaultShadowColor = Color.fromRGBO(33, 36, 41, 0.18);
 
   factory PlatformCardTheme.of(BuildContext context) {
     try {
@@ -44,6 +34,7 @@ class PlatformCardTheme {
     }
   }
 
+  final String debugLabel;
   final EdgeInsets padding;
   final EdgeInsets margin;
   final Color cardColor;
@@ -52,15 +43,23 @@ class PlatformCardTheme {
 
   const PlatformCardTheme(
       {this.boxShadow = kDefaultShadow,
+      this.debugLabel,
       this.cardColor = Colors.white,
       this.padding = kDefaultPadding,
       this.margin = kDefaultMargin,
       this.borderRadius = kDefaultBorderRadius});
+
   PlatformCardTheme.ofRadius({
     double radiusAmount,
     this.boxShadow = kDefaultShadow,
+    this.debugLabel,
     this.cardColor = Colors.white,
     this.padding = kDefaultPadding,
     this.margin = kDefaultMargin,
   }) : borderRadius = BorderRadius.all(Radius.circular(radiusAmount));
+
+  @override
+  String toString() {
+    return 'PlatformCardTheme{debugLabel: $debugLabel, padding: $padding, margin: $margin, cardColor: $cardColor, borderRadius: $borderRadius, boxShadow: $boxShadow}';
+  }
 }

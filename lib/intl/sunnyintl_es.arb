@@ -1,0 +1,109 @@
+{
+  "required": "Este valor es requerido",
+  "@required": {
+    "description": "Required error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "help": "Ayuda",
+  "@help": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "username": "Email",
+  "@username": {
+    "description": "Label for the username",
+    "type": "text",
+    "placeholders": {}
+  },
+  "password": "Contraseña Burrito",
+  "@password": {
+    "description": "Label for the password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginPageTitle": "Bienvenido a Sunny",
+  "@loginPageTitle": {
+    "description": "Header for the login page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerPageTitle": "Crea una cuenta",
+  "@registerPageTitle": {
+    "description": "Header for the register page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "contactImportPageTitle": "Bienvenido a Sunny",
+  "@contactImportPageTitle": {
+    "description": "Import your contacts",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginButton": "Iniciar sesión",
+  "@loginButton": {
+    "description": "Label for the login submit button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginFailed": "Iniciar sesión",
+  "@loginFailed": {
+    "description": "Label for the login submit button",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerButtonLabel": "Registro",
+  "@registerButtonLabel": {
+    "description": "Header for the register page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerSubmitLabel": "Crear una cuenta",
+  "@registerSubmitLabel": {
+    "description": "Header for the register page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginButtonLabel": "Iniciar sesión",
+  "@loginButtonLabel": {
+    "description": "Header for the register page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sunnyBundle": "Haz",
+  "@sunnyBundle": {
+    "description": "Label: Sunny Bundle",
+    "type": "text",
+    "placeholders": {}
+  },
+  "sunnyPack": "Chimichanga",
+  "@sunnyPack": {
+    "description": "Label: Sunny Pack",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerPasswordLabel": "Email",
+  "@registerPasswordLabel": {
+    "description": "Label for password field",
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerUsernameLabel": "Contraseña Burrito",
+  "@registerUsernameLabel": {
+    "description": "Label for username field",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginPasswordLabel": "Email",
+  "@loginPasswordLabel": {
+    "description": "Label for password field",
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginUsernameLabel": "Contraseña Burrito",
+  "@loginUsernameLabel": {
+    "description": "Label for username field",
+    "type": "text",
+    "placeholders": {}
+  }
+}
