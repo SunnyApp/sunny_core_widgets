@@ -3,9 +3,10 @@ version: 0.1.1+11
 homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
 environment: 
-  sdk: '>=2.7.0 <3.0.0'
+  sdk: '>=2.8.0 <3.0.0'
   flutter: '>=1.17.0 <2.0.0'
-dependencies: 
+dependencies:
+  badges: ^1.1.3
   provider: ^4.3.2+2
   sunny_dart: ^0.5.8+2
   permission_handler: ^5.0.1+1
@@ -26,8 +27,8 @@ dependencies:
   flutter: 
     sdk: flutter
 dependency_overrides:
-#  flutter_platform_widgets:
-#    path: ../flutter_platform_widgets
+  flutter_platform_widgets:
+    path: ../flutter_platform_widgets
   waypoints:
     path: ../sunny_entities/waypoints
   sunny_sdk_core:

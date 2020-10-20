@@ -28,6 +28,15 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
     this.trailing,
   }) : super(key: key);
 
+  const PlatformListTile.defaults({
+    Key key,
+    this.leading,
+    this.title,
+    this.subtitle,
+    this.trailing,
+  })  : _args = const PlatformCardArgs(),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return PlatformCard(
@@ -38,6 +47,22 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
         trailing: trailing,
         subtitle: subtitle,
       ),
+    );
+  }
+
+  PlatformListTile copyWith({
+    Widget leading,
+    Widget title,
+    Widget subtitle,
+    Widget trailing,
+    PlatformCardArgs args,
+  }) {
+    return new PlatformListTile(
+      args,
+      leading: leading ?? this.leading,
+      title: title ?? this.title,
+      subtitle: subtitle ?? this.subtitle,
+      trailing: trailing ?? this.trailing,
     );
   }
 }
