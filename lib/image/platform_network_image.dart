@@ -4,8 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-ImageProvider PlatformNetworkImageProvider(String url) {
-  return (kIsWeb ? NetworkImage(url) : CachedNetworkImageProvider(url))
+ImageProvider PlatformNetworkImageProvider(dynamic url) {
+  return (kIsWeb ? NetworkImage("$url") : CachedNetworkImageProvider("$url"))
       as ImageProvider<dynamic>;
 }
 
@@ -21,7 +21,7 @@ class PlatformNetworkImage extends PlatformWidgetBase {
   final bool useOldImageOnUrlChange;
   final BoxFit fit;
   PlatformNetworkImage(
-    this.imageUrl, {
+    dynamic imageUrl, {
     Key key,
     this.height,
     this.width,
@@ -31,7 +31,9 @@ class PlatformNetworkImage extends PlatformWidgetBase {
     this.alignment,
     this.useOldImageOnUrlChange,
     this.fit,
-  }) : super(key: key);
+  })  : assert(imageUrl != null),
+        imageUrl = "$imageUrl",
+        super(key: key);
 
   @override
   Widget createMaterialWidget(BuildContext context) => createNative();

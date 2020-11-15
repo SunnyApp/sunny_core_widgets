@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:sunny_dart/sunny_dart.dart';
 
 extension TypeToRouteExt on dynamic {
-  String toRoute() {
+  String toSimpleRoute() {
     final self = this;
     if (self is Type) {
       return "/${self.simpleName?.uncapitalize()}";

@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PlatformCardTheme {
-  static const _gray600 = Color(0xFF868F96);
-  static const _gray500 = Color(0xFFADB6BD);
-  static const _gray400 = Color(0xFFCFD4DA);
-  static const _gray300 = Color(0xFFDEE1E6);
-  static const _gray200 = Color(0xFFE8ECEF);
+  // static const _gray600 = Color(0xFF868F96);
+  // static const _gray500 = Color(0xFFADB6BD);
+  // static const _gray400 = Color(0xFFCFD4DA);
+  // static const _gray300 = Color(0xFFDEE1E6);
+  // static const _gray200 = Color(0xFFE8ECEF);
 
   static const kDefaultMargin =
       EdgeInsets.only(left: 10, right: 10, bottom: 10);

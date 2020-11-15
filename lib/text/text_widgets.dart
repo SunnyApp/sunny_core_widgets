@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sunny_core_widgets/taps.dart';
+import 'package:sunny_core_widgets/theme/sunny_colors.dart';
 import 'package:sunny_core_widgets/theme/sunny_text_theme.dart';
 import 'package:sunny_core_widgets/theme/sunny_theme_ext.dart';
 import 'package:sunny_core_widgets/typedefs.dart';
@@ -30,7 +33,8 @@ class TileTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return title is Widget
         ? (title as Widget)
-        : Text(title.toString(), maxLines: 3, softWrap: true, overflow: TextOverflow.ellipsis);
+        : Text(title.toString(),
+            maxLines: 3, softWrap: true, overflow: TextOverflow.ellipsis);
   }
 }
 
@@ -48,11 +52,17 @@ class TileSubtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return title is Widget
         ? (title as Widget)
-        : Text(title.toString(), maxLines: 3, softWrap: true, overflow: TextOverflow.ellipsis);
+        : Text(title.toString(),
+            maxLines: 3, softWrap: true, overflow: TextOverflow.ellipsis);
   }
 }
 
-Widget textOrNull(final txt, {TextAlign alignment, TextStyle style, Color color, bool wrap = true, int maxLines}) {
+Widget textOrNull(final txt,
+    {TextAlign alignment,
+    TextStyle style,
+    Color color,
+    bool wrap = true,
+    int maxLines}) {
   if (txt is Widget) return txt;
   if (txt == null) return null;
   final text = "$txt";
@@ -101,16 +111,17 @@ class NormalText extends StatelessWidget {
 }
 
 // ignore: non_constant_identifier_names
-Text SingleLineText(String text, {TextAlign alignment, TextStyle style}) => text == null
-    ? null
-    : Text(
-        text,
-        textAlign: alignment,
-        style: style,
-        maxLines: 1,
-        softWrap: false,
-        overflow: TextOverflow.fade,
-      );
+Text SingleLineText(String text, {TextAlign alignment, TextStyle style}) =>
+    text == null
+        ? null
+        : Text(
+            text,
+            textAlign: alignment,
+            style: style,
+            maxLines: 1,
+            softWrap: false,
+            overflow: TextOverflow.fade,
+          );
 
 class PrimaryText extends StatelessWidget {
   final String text;
@@ -118,15 +129,22 @@ class PrimaryText extends StatelessWidget {
   final TextAlign textAlign;
   final bool nowrap;
 
-  const PrimaryText(this.text, {this.label, this.textAlign, this.nowrap = false});
+  const PrimaryText(this.text,
+      {this.label, this.textAlign, this.nowrap = false});
 
   @override
   Widget build(BuildContext context) {
     if (label != null) {
       return RichText(
         text: TextSpan(children: [
-          TextSpan(text: label, style: sunnyText.body2Normal.copyWith(fontWeight: FontWeight.bold)),
-          TextSpan(text: text ?? "", style: sunnyText.body2Normal.copyWith(fontWeight: FontWeight.normal)),
+          TextSpan(
+              text: label,
+              style:
+                  sunnyText.body2Normal.copyWith(fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: text ?? "",
+              style: sunnyText.body2Normal
+                  .copyWith(fontWeight: FontWeight.normal)),
         ]),
         textAlign: textAlign ?? TextAlign.start,
         maxLines: nowrap == true ? 1 : null,
@@ -246,7 +264,8 @@ class SecondaryText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: sunnyText.body2Normal.copyWith(fontWeight: isBold == true ? FontWeight.bold : null),
+      style: sunnyText.body2Normal
+          .copyWith(fontWeight: isBold == true ? FontWeight.bold : null),
       maxLines: nowrap == true ? 1 : null,
       overflow: nowrap == true ? TextOverflow.ellipsis : TextOverflow.clip,
     );
@@ -264,7 +283,9 @@ class TertiaryText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: sunnyText.body3Light.copyWith(color: color, fontWeight: this.isBold == true ? FontWeight.bold : null),
+      style: sunnyText.body3Light.copyWith(
+          color: color,
+          fontWeight: this.isBold == true ? FontWeight.bold : null),
     );
   }
 }
@@ -311,7 +332,10 @@ class PageSectionHeaderText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text ?? '', style: Theme.of(context).textTheme.headline4, maxLines: 1, overflow: TextOverflow.fade);
+    return Text(text ?? '',
+        style: Theme.of(context).textTheme.headline4,
+        maxLines: 1,
+        overflow: TextOverflow.fade);
   }
 }
 
@@ -400,7 +424,9 @@ abstract class StyledText extends StatelessWidget {
     switch (fontType) {
       case FontType.light:
         // Is there ever a bold or medium in the light color?
-        style = style.copyWith(fontWeight: FontWeight.normal, color: _lightColor ?? style.color.withOpacity(0.7));
+        style = style.copyWith(
+            fontWeight: FontWeight.normal,
+            color: _lightColor ?? style.color.withOpacity(0.7));
         break;
       case FontType.normal:
         style = style.copyWith(fontWeight: FontWeight.w400);
@@ -474,7 +500,8 @@ class Body1Text extends StyledText {
       : fontType = FontType.light,
         super(key: key);
 
-  const factory Body1Text(String text, {Color color, Key key}) = Body1Text.normal;
+  const factory Body1Text(String text, {Color color, Key key}) =
+      Body1Text.normal;
 
   @override
   StyleExtractor get styleGetter => (theme) => theme.bodyText1;
@@ -501,7 +528,8 @@ class Body0Text extends StyledText {
       : fontType = FontType.light,
         super(key: key);
 
-  const factory Body0Text(String text, {Color color, Key key}) = Body0Text.normal;
+  const factory Body0Text(String text, {Color color, Key key}) =
+      Body0Text.normal;
 
   @override
   StyleExtractor get styleGetter => (theme) => theme.subtitle1;
@@ -515,24 +543,32 @@ class Body2Text extends StyledText {
   final int maxLines;
   final TextOverflow overflow;
 
-  const Body2Text.normal(this.text, {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
+  const Body2Text.normal(this.text,
+      {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
       : fontType = FontType.normal,
         super(key: key);
 
-  const Body2Text.bold(this.text, {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
+  const Body2Text.bold(this.text,
+      {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
       : fontType = FontType.bold,
         super(key: key);
 
-  const Body2Text.medium(this.text, {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
+  const Body2Text.medium(this.text,
+      {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
       : fontType = FontType.medium,
         super(key: key);
 
-  const Body2Text.light(this.text, {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
+  const Body2Text.light(this.text,
+      {this.softWrap, this.maxLines, this.overflow, this.color, Key key})
       : fontType = FontType.light,
         super(key: key);
 
-  const factory Body2Text(String text, {bool softWrap, int maxLines, TextOverflow overflow, Color color, Key key}) =
-      Body2Text.normal;
+  const factory Body2Text(String text,
+      {bool softWrap,
+      int maxLines,
+      TextOverflow overflow,
+      Color color,
+      Key key}) = Body2Text.normal;
 
   @override
   StyleExtractor get styleGetter => (theme) => theme.bodyText2;
@@ -546,7 +582,8 @@ Widget richTextBuilder(BuildContext context, RichTextBuild build) {
   return b.build();
 }
 
-Widget richTextInvertedBuilder(BuildContext context, void build(RichTextBuilder builder)) {
+Widget richTextInvertedBuilder(
+    BuildContext context, void build(RichTextBuilder builder)) {
   final b = RichTextBuilder.inverted(context);
   build(b);
   return b.build();
@@ -572,25 +609,35 @@ class RichTextBuilder {
 
   int _maxLines;
   TextAlign _textAlign = TextAlign.start;
+  TextAlignVertical _textAlignVertical = TextAlignVertical.center;
+  double _height = null;
   bool _softWrap = true;
   TextOverflow _overflow = TextOverflow.clip;
 
-  final List<TextSpan> children = [];
+  final List<InlineSpan> children = [];
 
   RichTextBuilder(BuildContext context, {Color lightColor})
-      : this.ofTextTheme(context: context, textTheme: Theme.of(context).textTheme);
+      : this.ofTextTheme(
+            context: context, textTheme: Theme.of(context).textTheme);
 
   RichTextBuilder.dark(BuildContext context, {Color lightColor})
-      : this.ofTextTheme(context: context, textTheme: context.darkTheme.textTheme);
+      : this.ofTextTheme(
+            context: context, textTheme: context.darkTheme.textTheme);
 
   RichTextBuilder.inverted(BuildContext context, {Color lightColor})
-      : this.ofTextTheme(context: context, textTheme: context.invertedTheme.textTheme);
+      : this.ofTextTheme(
+            context: context, textTheme: context.invertedTheme.textTheme);
 
-  RichTextBuilder.ofTextTheme({@required this.context, this.textTheme, Color lightColor})
-      : lightStyle2 = textTheme.bodyText2
-            .copyWith(color: lightColor ?? _lightColor ?? textTheme.bodyText2.color.withOpacity(0.7)),
-        lightStyle1 = textTheme.bodyText1
-            .copyWith(color: lightColor ?? _lightColor ?? textTheme.bodyText1.color.withOpacity(0.7));
+  RichTextBuilder.ofTextTheme(
+      {@required this.context, this.textTheme, Color lightColor})
+      : lightStyle2 = textTheme.bodyText2.copyWith(
+            color: lightColor ??
+                _lightColor ??
+                textTheme.bodyText2.color.withOpacity(0.7)),
+        lightStyle1 = textTheme.bodyText1.copyWith(
+            color: lightColor ??
+                _lightColor ??
+                textTheme.bodyText1.color.withOpacity(0.7));
 
   RichTextBuilder space([int count = 1]) {
     children.add(TextSpan(text: ' '.repeat(count)));
@@ -599,6 +646,45 @@ class RichTextBuilder {
 
   RichTextBuilder body2(String text) {
     return applyChild(text, baseStyle: textTheme.bodyText2);
+  }
+
+  RichTextBuilder icon(IconData data,
+      {double size, Color color, double offset}) {
+    if (data == null) return this;
+    size ??= 20;
+    offset ??= 0;
+    final sizeWithOffset = size + offset;
+    return widget(SizedBox(
+        height: sizeWithOffset,
+        width: size,
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Icon(
+            data,
+            size: size,
+            color: color ?? sunnyColors.text,
+          ),
+        )));
+
+    // children.add(TextSpan(
+    //   text: String.fromCharCode(data.codePoint),
+    //   style: TextStyle(
+    //       fontFamily: data.fontFamily,
+    //       fontSize: size,
+    //       color: color ?? sunnyColors.text),
+    // ));
+    // return this;
+  }
+
+  RichTextBuilder widget(Widget widget) {
+    if (widget != null) {
+      children.add(WidgetSpan(
+        child: Semantics(enabled: true, child: widget),
+        alignment: PlaceholderAlignment.middle,
+        // baseline: TextBaseline.alphabetic,
+      ));
+    }
+    return this;
   }
 
   RichTextBuilder preserve() {
@@ -654,7 +740,8 @@ class RichTextBuilder {
   }
 
   RichTextBuilder underline() {
-    return this.._temp = _tmpStyle.copyWith(decoration: TextDecoration.underline);
+    return this
+      .._temp = _tmpStyle.copyWith(decoration: TextDecoration.underline);
   }
 
   RichTextBuilder fontSize(double size) {
@@ -663,6 +750,14 @@ class RichTextBuilder {
 
   RichTextBuilder style(TextStyle style) {
     return this.._temp = _tmpStyle.mergeOrDefault(style);
+  }
+
+  RichTextBuilder height(double height) {
+    return this.._height = height;
+  }
+
+  RichTextBuilder textVertAlign(TextAlignVertical vert) {
+    return this.._textAlignVertical = vert;
   }
 
   RichTextBuilder applyChild(
@@ -680,9 +775,10 @@ class RichTextBuilder {
         _gesture = null;
       }
       children.add(TextSpan(
+        style: baseStyle.mergeOrDefault(_temp),
         text: text,
         recognizer: recognizer,
-        style: baseStyle.mergeOrDefault(_temp),
+        semanticsLabel: "Tap to open record",
       ));
     }
     if (_preserveStyles != true) _temp = null;
@@ -723,11 +819,15 @@ class RichTextBuilder {
   }
 
   RichTextBuilder h4bold(String text) {
-    return applyChild(text, baseStyle: _header4Bold ??= textTheme.headline4.copyWith(fontWeight: FontWeight.bold));
+    return applyChild(text,
+        baseStyle: _header4Bold ??=
+            textTheme.headline4.copyWith(fontWeight: FontWeight.bold));
   }
 
   RichTextBuilder h4normal(String text) {
-    return applyChild(text, baseStyle: _header4Normal ??= textTheme.headline4.copyWith(fontWeight: FontWeight.normal));
+    return applyChild(text,
+        baseStyle: _header4Normal ??=
+            textTheme.headline4.copyWith(fontWeight: FontWeight.normal));
   }
 
   RichTextBuilder h4(String text) {
@@ -739,8 +839,12 @@ class RichTextBuilder {
   }
 
   Widget build() {
+    TextStyle ts = null;
+    if (_height != null) {
+      ts = TextStyle(height: _height);
+    }
     final richText = RichText(
-      text: TextSpan(children: children),
+      text: TextSpan(children: children, style: ts),
       softWrap: _softWrap,
       textAlign: _textAlign,
       maxLines: _maxLines,
@@ -787,6 +891,7 @@ class TitleText extends StatelessWidget {
 
 extension TextStyleMergeExt on TextStyle {
   TextStyle orDefault([TextStyle def]) => this ?? def ?? const TextStyle();
+
   TextStyle mergeOrDefault([TextStyle mergeTarget]) {
     if (this == null || mergeTarget == null) {
       return this ?? mergeTarget;

@@ -6,7 +6,7 @@ import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 import 'package:sunny_core_widgets/text/text_widgets.dart';
 import 'package:sunny_dart/helpers.dart';
 import 'package:sunny_dart/sunny_dart.dart';
-import 'sunny_theme_ext.dart';
+
 import 'sunny_colors.dart';
 
 const defaultFontFamily = 'Roboto';
@@ -76,15 +76,15 @@ class SunnyTextTheme {
   static void setFontScale(double scale) {
     assert(scale != null);
 
-    _trippiTextTheme = SunnyTextTheme.defaults;
-    _trippiTextTheme = _trippiTextTheme.applyEach((style) {
+    _sunnyTextTheme = SunnyTextTheme.defaults;
+    _sunnyTextTheme = _sunnyTextTheme.applyEach((style) {
       return style.apply(fontSizeFactor: scale);
     }).copyWith(fontScale: scale);
   }
 
   static void setBrightness(BuildContext context) {
-    _trippiTextTheme ??= SunnyTextTheme.defaults;
-    _trippiTextTheme = _trippiTextTheme.applyEach((style) {
+    _sunnyTextTheme ??= SunnyTextTheme.defaults;
+    _sunnyTextTheme = _sunnyTextTheme.applyEach((style) {
       final resolved = style.color;
       return style.copyWith(color: resolved);
     });
@@ -94,7 +94,7 @@ class SunnyTextTheme {
     _sunnyText = theme ?? SunnyTextTheme.defaults;
   }
 
-  factory SunnyTextTheme() => _trippiTextTheme ??= SunnyTextTheme.defaults;
+  factory SunnyTextTheme() => _sunnyTextTheme ??= SunnyTextTheme.defaults;
 
   /// The internal constructor
   SunnyTextTheme._({
@@ -415,7 +415,7 @@ extension TextStylePlatformExt on TextStyle {
   }
 }
 
-SunnyTextTheme _trippiTextTheme;
+SunnyTextTheme _sunnyTextTheme;
 
 class HeroText extends StyledText {
   final String text;

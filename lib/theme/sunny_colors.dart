@@ -124,30 +124,34 @@ abstract class SunnyColors {
   });
 }
 
+class RawSunnyColors {
+  static const gray950 = Color(0xFF202327);
+  static const gray900 = Color(0xFF212429);
+  static const gray800 = Color(0xFF353A40);
+  static const gray700 = Color(0xFF495058);
+  static const gray600 = Color(0xFF868F96);
+  static const gray500 = Color(0xFFADB6BD);
+  static const gray400 = Color(0xFFCFD4DA);
+  static const gray300 = Color(0xFFDEE1E6);
+  static const gray200 = Color(0xFFE8ECEF);
+  static const gray100 = Color(0xFFF2F3F5);
+  static const gray50 = Color(0xFFF8F9FB);
+  static const blueColor = Color(0xFF0F54F0);
+  static const linkColor = Color(0xFF0A42BE);
+}
+
 /// This class hold unmodified constants.
 class _DefaultSunnyColors with SunnyColorMixin {
-  static const _gray950 = Color(0xFF202327);
-  static const _gray900 = Color(0xFF212429);
-  static const _gray800 = Color(0xFF353A40);
-  static const _gray700 = Color(0xFF495058);
-  static const _gray600 = Color(0xFF868F96);
-  static const _gray500 = Color(0xFFADB6BD);
-  static const _gray400 = Color(0xFFCFD4DA);
-  static const _gray300 = Color(0xFFDEE1E6);
-  static const _gray200 = Color(0xFFE8ECEF);
-  static const _gray100 = Color(0xFFF2F3F5);
-  static const _gray50 = Color(0xFFF8F9FB);
-
   CupertinoDynamicColor get primaryColor =>
       const CupertinoDynamicColor.withBrightness(
-        color: Color(0xFF0F54F0),
-        darkColor: Color(0xFF0F54F0),
+        color: RawSunnyColors.blueColor,
+        darkColor: RawSunnyColors.blueColor,
       );
 
   CupertinoDynamicColor get linkColor =>
       const CupertinoDynamicColor.withBrightness(
-        color: Color(0xFF0A42BE),
-        darkColor: Color(0xFF0A42BE),
+        color: RawSunnyColors.linkColor,
+        darkColor: RawSunnyColors.linkColor,
       );
 
   CupertinoDynamicColor get text => g800;
@@ -169,123 +173,123 @@ class _DefaultSunnyColors with SunnyColorMixin {
   /// Lowest contrast colors
   CupertinoDynamicColor get g50 => const CupertinoDynamicColor(
         debugLabel: "contrast50",
-        color: _gray50,
-        darkColor: _gray900,
-        darkElevatedColor: _gray800,
-        elevatedColor: _gray100,
+        color: RawSunnyColors.gray50,
+        darkColor: RawSunnyColors.gray900,
+        darkElevatedColor: RawSunnyColors.gray800,
+        elevatedColor: RawSunnyColors.gray100,
         highContrastColor: Colors.white,
-        highContrastElevatedColor: _gray100,
-        darkHighContrastElevatedColor: _gray800,
-        darkHighContrastColor: _gray800,
+        highContrastElevatedColor: RawSunnyColors.gray100,
+        darkHighContrastElevatedColor: RawSunnyColors.gray800,
+        darkHighContrastColor: RawSunnyColors.gray800,
       );
 
   CupertinoDynamicColor get g100 => const CupertinoDynamicColor(
         debugLabel: "contrast100",
-        color: _gray100,
-        darkColor: _gray800,
-        darkElevatedColor: _gray700,
-        elevatedColor: _gray200,
-        highContrastColor: _gray50,
-        highContrastElevatedColor: _gray200,
-        darkHighContrastElevatedColor: _gray700,
-        darkHighContrastColor: _gray700,
+        color: RawSunnyColors.gray100,
+        darkColor: RawSunnyColors.gray800,
+        darkElevatedColor: RawSunnyColors.gray700,
+        elevatedColor: RawSunnyColors.gray200,
+        highContrastColor: RawSunnyColors.gray50,
+        highContrastElevatedColor: RawSunnyColors.gray200,
+        darkHighContrastElevatedColor: RawSunnyColors.gray700,
+        darkHighContrastColor: RawSunnyColors.gray700,
       );
 
   CupertinoDynamicColor get g200 => const CupertinoDynamicColor(
         debugLabel: "contrast200",
-        color: _gray200,
-        darkColor: _gray700,
-        darkElevatedColor: _gray600,
-        elevatedColor: _gray300,
-        highContrastColor: _gray100,
-        highContrastElevatedColor: _gray300,
-        darkHighContrastElevatedColor: _gray600,
-        darkHighContrastColor: _gray600,
+        color: RawSunnyColors.gray200,
+        darkColor: RawSunnyColors.gray700,
+        darkElevatedColor: RawSunnyColors.gray600,
+        elevatedColor: RawSunnyColors.gray300,
+        highContrastColor: RawSunnyColors.gray100,
+        highContrastElevatedColor: RawSunnyColors.gray300,
+        darkHighContrastElevatedColor: RawSunnyColors.gray600,
+        darkHighContrastColor: RawSunnyColors.gray600,
       );
 
   CupertinoDynamicColor get g300 => const CupertinoDynamicColor(
         debugLabel: "contrast300",
-        color: _gray300,
-        darkColor: _gray600,
-        darkElevatedColor: _gray500,
-        elevatedColor: _gray400,
-        highContrastColor: _gray200,
-        highContrastElevatedColor: _gray400,
-        darkHighContrastElevatedColor: _gray500,
-        darkHighContrastColor: _gray500,
+        color: RawSunnyColors.gray300,
+        darkColor: RawSunnyColors.gray600,
+        darkElevatedColor: RawSunnyColors.gray500,
+        elevatedColor: RawSunnyColors.gray400,
+        highContrastColor: RawSunnyColors.gray200,
+        highContrastElevatedColor: RawSunnyColors.gray400,
+        darkHighContrastElevatedColor: RawSunnyColors.gray500,
+        darkHighContrastColor: RawSunnyColors.gray500,
       );
 
   CupertinoDynamicColor get g400 => const CupertinoDynamicColor(
         debugLabel: "contrast400",
-        color: _gray400,
-        darkColor: _gray600,
-        darkElevatedColor: _gray500,
-        elevatedColor: _gray500,
-        highContrastColor: _gray500,
-        highContrastElevatedColor: _gray500,
-        darkHighContrastElevatedColor: _gray500,
-        darkHighContrastColor: _gray500,
+        color: RawSunnyColors.gray400,
+        darkColor: RawSunnyColors.gray600,
+        darkElevatedColor: RawSunnyColors.gray500,
+        elevatedColor: RawSunnyColors.gray500,
+        highContrastColor: RawSunnyColors.gray500,
+        highContrastElevatedColor: RawSunnyColors.gray500,
+        darkHighContrastElevatedColor: RawSunnyColors.gray500,
+        darkHighContrastColor: RawSunnyColors.gray500,
       );
 
   CupertinoDynamicColor get g500 => const CupertinoDynamicColor(
         debugLabel: "contrast500",
-        color: _gray500,
-        darkColor: _gray500,
-        darkElevatedColor: _gray400,
-        elevatedColor: _gray500,
-        highContrastColor: _gray300,
-        highContrastElevatedColor: _gray400,
-        darkHighContrastElevatedColor: _gray400,
-        darkHighContrastColor: _gray400,
+        color: RawSunnyColors.gray500,
+        darkColor: RawSunnyColors.gray500,
+        darkElevatedColor: RawSunnyColors.gray400,
+        elevatedColor: RawSunnyColors.gray500,
+        highContrastColor: RawSunnyColors.gray300,
+        highContrastElevatedColor: RawSunnyColors.gray400,
+        darkHighContrastElevatedColor: RawSunnyColors.gray400,
+        darkHighContrastColor: RawSunnyColors.gray400,
       );
 
   CupertinoDynamicColor get g600 => const CupertinoDynamicColor(
         debugLabel: "contrast300",
-        color: _gray600,
-        elevatedColor: _gray500,
-        highContrastElevatedColor: _gray500,
-        highContrastColor: _gray500,
-        darkColor: _gray300,
-        darkElevatedColor: _gray400,
-        darkHighContrastColor: _gray200,
-        darkHighContrastElevatedColor: _gray400,
+        color: RawSunnyColors.gray600,
+        elevatedColor: RawSunnyColors.gray500,
+        highContrastElevatedColor: RawSunnyColors.gray500,
+        highContrastColor: RawSunnyColors.gray500,
+        darkColor: RawSunnyColors.gray300,
+        darkElevatedColor: RawSunnyColors.gray400,
+        darkHighContrastColor: RawSunnyColors.gray200,
+        darkHighContrastElevatedColor: RawSunnyColors.gray400,
       );
 
   CupertinoDynamicColor get g700 => const CupertinoDynamicColor(
         debugLabel: "contrast700",
-        darkColor: _gray200,
-        darkElevatedColor: _gray300,
-        darkHighContrastColor: _gray100,
-        darkHighContrastElevatedColor: _gray300,
-        color: _gray700,
-        elevatedColor: _gray600,
-        highContrastElevatedColor: _gray600,
-        highContrastColor: _gray600,
+        darkColor: RawSunnyColors.gray200,
+        darkElevatedColor: RawSunnyColors.gray300,
+        darkHighContrastColor: RawSunnyColors.gray100,
+        darkHighContrastElevatedColor: RawSunnyColors.gray300,
+        color: RawSunnyColors.gray700,
+        elevatedColor: RawSunnyColors.gray600,
+        highContrastElevatedColor: RawSunnyColors.gray600,
+        highContrastColor: RawSunnyColors.gray600,
       );
 
   CupertinoDynamicColor get g800 => const CupertinoDynamicColor(
         debugLabel: "contrast800",
-        color: _gray800,
-        elevatedColor: _gray700,
-        highContrastElevatedColor: _gray700,
-        highContrastColor: _gray700,
-        darkColor: _gray100,
-        darkHighContrastColor: _gray50,
-        darkHighContrastElevatedColor: _gray200,
-        darkElevatedColor: _gray200,
+        color: RawSunnyColors.gray800,
+        elevatedColor: RawSunnyColors.gray700,
+        highContrastElevatedColor: RawSunnyColors.gray700,
+        highContrastColor: RawSunnyColors.gray700,
+        darkColor: RawSunnyColors.gray100,
+        darkHighContrastColor: RawSunnyColors.gray50,
+        darkHighContrastElevatedColor: RawSunnyColors.gray200,
+        darkElevatedColor: RawSunnyColors.gray200,
       );
 
   /// Highest contrast colors
   CupertinoDynamicColor get g900 => const CupertinoDynamicColor(
         debugLabel: "g900",
-        color: _gray900,
-        elevatedColor: _gray800,
-        highContrastElevatedColor: _gray800,
-        highContrastColor: _gray800,
-        darkColor: _gray50,
-        darkElevatedColor: _gray100,
+        color: RawSunnyColors.gray900,
+        elevatedColor: RawSunnyColors.gray800,
+        highContrastElevatedColor: RawSunnyColors.gray800,
+        highContrastColor: RawSunnyColors.gray800,
+        darkColor: RawSunnyColors.gray50,
+        darkElevatedColor: RawSunnyColors.gray100,
         darkHighContrastColor: Colors.white,
-        darkHighContrastElevatedColor: _gray100,
+        darkHighContrastElevatedColor: RawSunnyColors.gray100,
       );
 
   /// Highest contrast colors
@@ -316,17 +320,17 @@ class _DefaultSunnyColors with SunnyColorMixin {
   CupertinoDynamicColor get separator => g400;
 
   /// Names from the hex values to make it easier
-  static const x202327 = _gray950;
-  static const x212429 = _gray900;
-  static const x353A40 = _gray800;
-  static const x495058 = _gray700;
-  static const x868F96 = _gray600;
-  static const xADB6BD = _gray500;
-  static const xCFD4DA = _gray400;
-  static const xDEE1E6 = _gray300;
-  static const xE8ECEF = _gray200;
-  static const xF2F3F5 = _gray100;
-  static const xF8F9FB = _gray50;
+  static const x202327 = RawSunnyColors.gray950;
+  static const x212429 = RawSunnyColors.gray900;
+  static const x353A40 = RawSunnyColors.gray800;
+  static const x495058 = RawSunnyColors.gray700;
+  static const x868F96 = RawSunnyColors.gray600;
+  static const xADB6BD = RawSunnyColors.gray500;
+  static const xCFD4DA = RawSunnyColors.gray400;
+  static const xDEE1E6 = RawSunnyColors.gray300;
+  static const xE8ECEF = RawSunnyColors.gray200;
+  static const xF2F3F5 = RawSunnyColors.gray100;
+  static const xF8F9FB = RawSunnyColors.gray50;
 
   const _DefaultSunnyColors();
 }
@@ -577,9 +581,20 @@ extension BrightnessExt on Brightness {
   bool get isLight => !isDark;
 }
 
+extension CupertinoDynamicColorToWidgetExt on CupertinoDynamicColor {
+  BorderSide toBorderSide(double amount) {
+    return BorderSide(color: this, width: amount);
+  }
+}
+
+
 extension ColorToWidgetExt on Color {
   BorderSide get borderSide1 {
     return BorderSide(color: this);
+  }
+
+  BorderSide toBorderSide(double amount) {
+    return BorderSide(color: this, width: amount);
   }
 
   BorderSide get borderSide05 {
