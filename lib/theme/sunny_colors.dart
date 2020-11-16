@@ -1,3 +1,4 @@
+// ignore_for_file: unused_field
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sunny_dart/helpers.dart';
@@ -586,7 +587,6 @@ extension CupertinoDynamicColorToWidgetExt on CupertinoDynamicColor {
     return BorderSide(color: this, width: amount);
   }
 }
-
 
 extension ColorToWidgetExt on Color {
   BorderSide get borderSide1 {

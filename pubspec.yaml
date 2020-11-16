@@ -7,8 +7,9 @@ environment:
   flutter: '>=1.17.0 <2.0.0'
 dependencies:
   badges: ^1.1.4
+  cached_network_image: ^2.3.3
   provider: ^4.3.2+2
-  sunny_dart: ^0.5.8+2
+  sunny_dart: ^0.5.8+3
   permission_handler: ^5.0.1+1
   flutter_platform_widgets: 0.70.2
   material_segmented_control: ^2.1.0+1
@@ -27,6 +28,7 @@ dependencies:
     path: ../sunny_sdk_core
   flutter: 
     sdk: flutter
+  timeago: ^2.0.28
   uri: ^0.11.3+1
 dependency_overrides:
   flutter_platform_widgets:
