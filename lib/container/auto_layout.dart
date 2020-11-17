@@ -63,8 +63,17 @@ class AutoLayout {
       this._borderRadius,
       this._wrappers);
 
-  Widget build(Iterable items) {
+  Widget build([item1, item2, item3, item4, item5, item6, item7, item8, item9, item10]) {
     assert(_layout != null, "You cannot build unless you have a layout");
+    final items = [];
+    [item1,item2,item3,item4,item5,item6,item7,item8,item9,item10].forEach((element) {
+      if(element==null) return;
+      if(element is Iterable) {
+        items.addAll(element);
+      } else {
+        items.add(element);
+      }
+    });
     return applyTo(items, this._layout);
   }
 

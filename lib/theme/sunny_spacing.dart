@@ -62,10 +62,15 @@ class SunnySpacing {
     topRight: sixteenPxRadius,
   );
 
+  EdgeInsets get cardMargin =>
+      EdgeInsets.all(cardSpacing);
+
   EdgeInsets get hPaddingPage =>
       EdgeInsets.symmetric(horizontal: pageSideMargin);
+  
   final double _appBarHeight;
   final double appBarHeight;
+
 
   SizedBox get cardSpacingBox => SizedBox(height: cardSpacing);
 
