@@ -2,8 +2,7 @@ library sunny_core_widgets;
 
 export 'button/chip_button.dart';
 export 'container.dart';
-export 'core_ext/flexi_date_ext.dart';
-export 'core_ext/layout_info.dart';
+export 'core_ext.dart';
 export 'data/data_service_extensions.dart';
 export 'image/platform_network_image.dart';
 export 'intl.dart';
@@ -18,3 +17,4 @@ export 'text/text_widgets.dart';
 export 'theme.dart';
 export 'typedefs.dart';
 export 'widgets.dart';
+export 'layouts.dart';

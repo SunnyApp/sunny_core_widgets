@@ -163,3 +163,7 @@ class _ScrollerArgs extends ScrollerArgs {
 
   _ScrollerArgs(this.scroller) : super({"scroller": scroller});
 }
+
+extension MModelIdArgsExt<X extends MModel> on X {
+  IdArgs<X> idArgs([String id]) => IdArgs(id ?? this.id, record: this);
+}

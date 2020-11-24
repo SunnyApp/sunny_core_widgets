@@ -14,7 +14,7 @@ const mediumWeight = FontWeight.w500;
 
 const input0Size = 18.0;
 const input0Height = 24.0 / 18.0;
-const input0Spacing = 0.56;
+const input0Spacing = 0.0;
 
 const body1Size = 16.0;
 const body1Height = 22.0 / 16.0;
@@ -461,5 +461,11 @@ extension RichTextBuilderTrippiExt on RichTextBuilder {
           style: textTheme.headline4.copyWith(fontWeight: FontWeight.normal)));
     }
     return this;
+  }
+}
+
+extension TextStyleWidgetBuilderExt on TextStyle {
+  Widget build(String text, {TextAlign textAlign = TextAlign.left}) {
+    return Text(text, style: this, textAlign: textAlign);
   }
 }

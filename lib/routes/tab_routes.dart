@@ -10,23 +10,26 @@ import 'routing.dart';
 
 extension AppRouteNavigationExtension<R, P extends RouteParams>
     on AppRoute<R, P> {
-  Future<R> modalNested(BuildContext context, [P parameters]) async {
+  Future<R> modalNested(BuildContext context, {P args}) async {
     if (this is AppPageRoute<R, P>) {
       final ar = this as AppPageRoute<R, P>;
       return nestedModal<R>(context, (context) {
-        return ar.handleAny(context, parameters);
+        return ar.handleAny(context, args);
       });
     }
-    return go(context, args: parameters);
+    return go(context, args: args);
   }
 
-  Future<R> openModal(BuildContext context,
-      {P args,
-      ModalArgsBuilder<P> argsBuilder,
-      bool expand = true,
-      bool showHandle = true,
-      String label,
-      bool replace = false}) async {
+  Future<R> openModal(
+    BuildContext context, {
+    P args,
+    ModalArgsBuilder<P> argsBuilder,
+    bool expand = true,
+    bool showHandle = true,
+    String label,
+    bool replace = false,
+    bool nestModals = false,
+  }) async {
     final _args = args ?? argsBuilder?.call(null);
     if (this is AppPageRoute<R, P>) {
       final ar = this as AppPageRoute<R, P>;
@@ -41,6 +44,7 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
         ),
         expand: expand,
         settings: PathRouteSettings.ofAppRoute(ar, routeParams: _args),
+        nestModals: nestModals,
       );
     }
 
@@ -135,8 +139,13 @@ extension AppRouteMatchGoExtension on AppRouteMatch {
 
 extension AppRouteGoNavigationExtension<R, P extends RouteParams>
     on AppRoute<R, P> {
-  Future<R> go(BuildContext context,
-      {P args, bool replace = false, bool useRootNavigator = false}) async {
+  Future<R> go(
+    BuildContext context, {
+    P args,
+    bool replace = false,
+    bool useRootNavigator = false,
+    bool nestModals = false,
+  }) async {
     final routes = SunnyRouting.router;
     if (R == dynamic) {
       return (await routes.navigateToDynamicRoute(context, this,

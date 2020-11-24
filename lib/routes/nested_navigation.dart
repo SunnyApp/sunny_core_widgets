@@ -98,6 +98,7 @@ Future<T> nestedModal<T>(
   BuildContext context,
   WidgetBuilder scrollBuilder, {
   bool displayDragHandle = true,
+  @required PathRouteSettings settings,
 }) {
   Widget w;
   return context.page<T>((context) {
@@ -110,7 +111,10 @@ Future<T> modal<T>(
   @required WidgetBuilder builder,
   bool displayDragHandle = true,
   @required PathRouteSettings settings,
+  double width,
+  double height,
   bool expand = true,
+  bool nestModals = false,
 }) {
   // switch (context.screenType) {
   //   case rs.DeviceScreenType.desktop:
@@ -133,6 +137,8 @@ Future<T> modal<T>(
   //   );
   // }
   if (isIOS == false) {
+    width ??= 600.px;
+    height ??= 570.px;
     return showPlatformDialog<T>(
         context: context,
         useRootNavigator: true,
@@ -148,8 +154,8 @@ Future<T> modal<T>(
                   Container(
                     padding: EdgeInsets.all(16),
                     child: SizedBox(
-                      width: 600.px,
-                      height: 570.px,
+                      width: width,
+                      height: height,
                       child: Center(child: builder(context)),
                     ),
                   ),
@@ -161,7 +167,7 @@ Future<T> modal<T>(
     final nn = Provided.find<NestedNavigatorContainer>(context);
     final navState = nestedGlobalKey.currentState;
     Widget _p;
-    if (navState != null) {
+    if (navState != null && nestModals == true) {
       return navState.push<T>(
         PlatformPageRoute(
           settings: settings,

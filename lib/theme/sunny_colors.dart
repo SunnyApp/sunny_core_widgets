@@ -6,7 +6,9 @@ import 'package:sunny_dart/helpers.dart';
 SunnyColors _sunnyColors;
 
 SunnyColors get sunnyColors =>
-    _sunnyColors ?? illegalState("No sunny colors have been initialized");
+    _sunnyColors ??
+    illegalState(
+        "No sunny colors have been initialized.  Set using SunnyColors.init");
 
 abstract class SunnyColors {
   CupertinoDynamicColor get white;
@@ -61,6 +63,8 @@ abstract class SunnyColors {
 
   CupertinoDynamicColor get linkColor;
 
+  Color get barrierColor;
+
   const factory SunnyColors({
     @required CupertinoDynamicColor primaryColor,
     @required CupertinoDynamicColor linkColor,
@@ -87,6 +91,7 @@ abstract class SunnyColors {
     @required CupertinoDynamicColor separator,
     @required CupertinoDynamicColor text,
     @required CupertinoDynamicColor textLight,
+    @required Color barrierColor,
   }) = SunnyColorData;
 
   static void init([SunnyColors color]) {
@@ -122,6 +127,7 @@ abstract class SunnyColors {
     CupertinoDynamicColor separator,
     CupertinoDynamicColor text,
     CupertinoDynamicColor textLight,
+    Color barrierColor,
   });
 }
 
@@ -320,6 +326,13 @@ class _DefaultSunnyColors with SunnyColorMixin {
 
   CupertinoDynamicColor get separator => g400;
 
+  Color get barrierColor => isIOS
+      ? CupertinoDynamicColor.withBrightness(
+          color: Color(0x33000000),
+          darkColor: Color(0x7A000000),
+        )
+      : CupertinoColors.black.withOpacity(0.35);
+
   /// Names from the hex values to make it easier
   static const x202327 = RawSunnyColors.gray950;
   static const x212429 = RawSunnyColors.gray900;
@@ -364,6 +377,7 @@ class SunnyColorData with SunnyColorMixin implements SunnyColors {
   final CupertinoDynamicColor separator;
   final CupertinoDynamicColor text;
   final CupertinoDynamicColor textLight;
+  final Color barrierColor;
 
   const SunnyColorData({
     @required this.white,
@@ -392,6 +406,7 @@ class SunnyColorData with SunnyColorMixin implements SunnyColors {
     @required this.separator,
     @required this.text,
     @required this.textLight,
+    @required this.barrierColor,
   });
 }
 
@@ -423,6 +438,7 @@ mixin SunnyColorMixin implements SunnyColors {
     CupertinoDynamicColor separator,
     CupertinoDynamicColor text,
     CupertinoDynamicColor textLight,
+    Color barrierColor,
   }) {
     return SunnyColorData(
       white: white ?? this.white,
@@ -451,6 +467,7 @@ mixin SunnyColorMixin implements SunnyColors {
       separator: separator ?? this.separator,
       text: text ?? this.text,
       textLight: textLight ?? this.textLight,
+      barrierColor: barrierColor ?? this.barrierColor,
     );
   }
 }

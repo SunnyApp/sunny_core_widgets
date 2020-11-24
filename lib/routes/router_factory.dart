@@ -1,12 +1,15 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:sunny_core_widgets/provided.dart';
+import 'package:sunny_core_widgets/routes/nested_navigation.dart';
 import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 
 final _log = Logger("routes");
 
 class SunnyRouterFactory implements RouterFactory {
-  const SunnyRouterFactory();
+  final bool allowNestedModals;
+  const SunnyRouterFactory({this.allowNestedModals = false});
 
   @override
   RouteCreator<R, P> generate<R, P extends RouteParams>(
@@ -14,7 +17,7 @@ class SunnyRouterFactory implements RouterFactory {
       TransitionType transition,
       Duration transitionDuration,
       transitionsBuilder) {
-    return (context, params) {
+    return (name, params) {
       _log.info("Creating route for ${appRoute} using ${params}");
       if (appRoute is CompletableAppRoute<R, P>) {
         _log.info(" [${appRoute.route}] is CompletableRoute");
@@ -36,7 +39,19 @@ class SunnyRouterFactory implements RouterFactory {
         // ignore: missing_required_param
         return PlatformPageRoute<R>(
           settings: routeSettings,
-          builder: (context) => appRoute.handleAny(context, params),
+          builder: (context) {
+            /// Do we support nested navigation?
+            if (allowNestedModals) {
+              /// Previous behavior
+              final nn = Provided.find<NestedNavigatorContainer>(context);
+              final navState = nestedGlobalKey.currentState;
+              Widget _p;
+              if (nn != null) {
+                return _p ??= appRoute.handle(context, params);
+              }
+            }
+            return appRoute.handleAny(context, params);
+          },
           fullscreenDialog: transition == TransitionType.nativeModal,
         );
       } else {

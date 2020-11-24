@@ -6,28 +6,28 @@ environment:
   sdk: '>=2.8.0 <3.0.0'
   flutter: '>=1.17.0 <2.0.0'
 dependencies:
+  flutter:
+    sdk: flutter
   badges: ^1.1.4
   cached_network_image: ^2.3.3
-  provider: ^4.3.2+2
-  sunny_dart: ^0.5.8+3
-  permission_handler: ^5.0.1+1
-  flutter_platform_widgets: 0.70.2
-  material_segmented_control: ^2.1.0+1
-  logging: any
-  flutter_screen_scaling:
-    path: ../flutter_screen_scaling
+  equatable: ^1.2.5
   expanding_cards:
     path: ../expanding_cards
-  equatable: ^1.2.5
-  responsive_builder: ^0.3.0
+  fluro: ^1.7.7
   flutter_degen:
     path: ../flutter_degen
-  fluro: ^1.7.7
-  modal_bottom_sheet: ^0.2.2
+  flutter_platform_widgets: 0.70.2
+  flutter_screen_scaling:
+    path: ../flutter_screen_scaling
+  logging: any
+  material_segmented_control: ^2.1.0+1
+  modal_bottom_sheet: ^1.0.0+1
+  permission_handler: ^5.0.1+1
+  provider: ^4.3.2+2
+  responsive_builder: ^0.3.0
+  sunny_dart: ^0.5.8+3
   sunny_sdk_core:
     path: ../sunny_sdk_core
-  flutter: 
-    sdk: flutter
   timeago: ^2.0.28
   uri: ^0.11.3+1
 dependency_overrides:

@@ -15,7 +15,7 @@ class Themes with EquatableMixin {
   final CupertinoVisualStyle visualStyle;
   final CupertinoThemeData cupertinoTheme;
   final PlatformCardTheme cardTheme;
-
+  final ListTileTheme listTileTheme;
   Themes(
       {@required this.brightness,
       @required this.cardTheme,
@@ -23,8 +23,24 @@ class Themes with EquatableMixin {
       @required this.lightTheme,
       @required this.visualStyle,
       @required this.cupertinoTheme,
+      this.listTileTheme = const ListTileTheme(),
       @required this.darkTheme});
 
   @override
   List<Object> get props => [brightness, lightTheme, darkTheme, cupertinoTheme];
+
+  Widget buildListTileTheme({Widget child}) {
+    return ListTileTheme(
+      dense: listTileTheme.dense,
+      shape: listTileTheme.shape,
+      style: listTileTheme.style,
+      selectedColor: listTileTheme.selectedColor,
+      iconColor: listTileTheme.iconColor,
+      textColor: listTileTheme.textColor,
+      contentPadding: listTileTheme.contentPadding,
+      tileColor: listTileTheme.tileColor,
+      selectedTileColor: listTileTheme.selectedTileColor,
+      child: child,
+    );
+  }
 }

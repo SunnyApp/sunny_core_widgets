@@ -44,32 +44,47 @@ extension DataServiceBuilder<X> on DataService<X> {
   Widget buildWithContext(
       {DataServiceWidgetBuilderWithContext<X> builder,
       String key,
-      bool allowNull = false}) {
+      bool allowNull = false,
+      bool isSliver = false,
+      bool crossFade = true,
+      SimpleWidgetBuilder loading}) {
     final service = this;
     return StreamBuilder<X>(
       key: Key("${X}${key ?? 'StreamBuilder'}"),
       stream: service.stream,
       initialData: service.currentValue,
-      builder: (context, snapshot) =>
-          snapshot.render(context, allowNull: allowNull, successFn: (data) {
-        return builder(context, data, service);
-      }),
+      builder: (context, snapshot) => snapshot.render(
+        context,
+        allowNull: allowNull,
+        crossFade: crossFade,
+        isSliver: isSliver,
+        successFn: (data) {
+          return builder(context, data, service);
+        },
+      ),
     );
   }
 }
 
 extension RecordDataServiceBuilder<X> on RecordDataService<X> {
   Widget buildFromRecordStream(String recordId,
-      {RecordDataServiceWidgetBuilder<X> builder, String key}) {
+      {RecordDataServiceWidgetBuilder<X> builder,
+      String key,
+      X initialValue,
+      SimpleWidgetBuilder loadingFn}) {
     final service = this;
     assert(recordId != null);
     return StreamBuilder<X>(
       key: Key("${X}${key ?? recordId}"),
       stream: service.recordStream(recordId),
-      builder: (context, snapshot) =>
-          snapshot.render(context, successFn: (data) {
-        return builder(data, service);
-      }),
+      initialData: initialValue,
+      builder: (context, snapshot) => snapshot.render(
+        context,
+        loadingFn: loadingFn,
+        successFn: (data) {
+          return builder(data, service);
+        },
+      ),
     );
   }
 

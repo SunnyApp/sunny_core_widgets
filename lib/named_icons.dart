@@ -2,8 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sunny_dart/sunny_dart.dart';
 
+import 'container/spaced.dart';
+
+NamedIconContainer _NamedIcons;
+
 NamedIconContainer get NamedIcons {
-  return GlobalIconResolver.icons;
+  return _NamedIcons ?? GlobalIconResolver.icons;
+}
+
+set NamedIcons(NamedIconContainer _) {
+  _NamedIcons = _;
 }
 
 extension NamedIconContainerExt on NamedIconContainer {
@@ -258,7 +266,10 @@ class GlobalIconResolver implements IconResolver {
   final _iconMapping = <String, NamedIcon>{};
   @override
   NamedIcon getIcon(String name, {NamedIcon fallback}) {
-    return _iconMapping[name] ?? fallback;
+    return _iconMapping[name] ??
+        fallback ??
+        NamedIcon(
+            name, Icons.check_box_outline_blank, Icons.check_box_outline_blank);
   }
 
   @override
@@ -363,41 +374,6 @@ class NamedIcon extends IconData {
   //   return this.widget.tappable(onTap);
   // }
 
-  Widget get widget {
-    if (circular) {
-      return ClipOval(
-        child: Container(
-          // We have to include the padding in the size, otherwise, the offsets are wrong
-          height: size,
-          width: size,
-//          constraints: BoxConstraints(maxWidth: size, maxHeight: size),
-          alignment: AlignmentDirectional.center,
-          padding: EdgeInsets.all(size / 8),
-          color: _color ?? NamedIcons.defaultColor,
-          child: Center(
-            child: Icon(
-              _isSolid ? solidData : iconData,
-              color: _foregroundColor ?? Colors.white,
-              size: size - (size / 4) + 1,
-            ),
-          ),
-        ),
-      );
-    } else {
-      return Container(
-        height: size,
-        width: size,
-//        alignment: Alignment.center,
-//        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.transparent, border: Border.all(color: color, width: 1)),
-        child: Icon(
-          _isSolid ? solidData : iconData,
-          size: size * .55,
-          color: _color,
-        ),
-      );
-    }
-  }
-
   /// Builds as a widget
   Widget build({
     bool circular,
@@ -490,6 +466,42 @@ extension NamedIconTypedExtensions on NamedIcon {
 
   NamedIcon tileIcon({bool dense = false}) {
     return this.sized(tileIconSize(dense: dense));
+  }
+
+  Widget get widget {
+    if (this == null) return emptyBox;
+    if (circular) {
+      return ClipOval(
+        child: Container(
+          // We have to include the padding in the size, otherwise, the offsets are wrong
+          height: size,
+          width: size,
+//          constraints: BoxConstraints(maxWidth: size, maxHeight: size),
+          alignment: AlignmentDirectional.center,
+          padding: EdgeInsets.all(size / 8),
+          color: _color ?? NamedIcons.defaultColor,
+          child: Center(
+            child: Icon(
+              _isSolid ? solidData : iconData,
+              color: _foregroundColor ?? Colors.white,
+              size: size - (size / 4) + 1,
+            ),
+          ),
+        ),
+      );
+    } else {
+      return Container(
+        height: size,
+        width: size,
+//        alignment: Alignment.center,
+//        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.transparent, border: Border.all(color: color, width: 1)),
+        child: Icon(
+          _isSolid ? solidData : iconData,
+          size: size * .55,
+          color: _color,
+        ),
+      );
+    }
   }
 }
 

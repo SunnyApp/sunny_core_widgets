@@ -15,6 +15,7 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
   final Widget title;
   final Widget subtitle;
   final Widget trailing;
+  final Widget bottom;
 
   @delegate(implementDelegate: true)
   final PlatformCardArgs _args;
@@ -24,6 +25,7 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
     Key key,
     this.leading,
     this.title,
+    this.bottom,
     this.subtitle,
     this.trailing,
   }) : super(key: key);
@@ -32,27 +34,47 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
     Key key,
     this.leading,
     this.title,
+    this.bottom,
     this.subtitle,
     this.trailing,
   })  : _args = const PlatformCardArgs(),
         super(key: key);
 
+  const PlatformListTile.nocard({
+    Key key,
+    this.leading,
+    this.title,
+    this.bottom,
+    this.subtitle,
+    this.trailing,
+  })  : _args = const PlatformCardArgs(
+          useShadow: false,
+        ),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final tile = ListTile(
+      title: title,
+      leading: leading,
+      trailing: trailing,
+      subtitle: subtitle,
+    );
     return PlatformCard(
       args: this,
-      child: ListTile(
-        title: title,
-        leading: leading,
-        trailing: trailing,
-        subtitle: subtitle,
-      ),
+      child: bottom == null
+          ? tile
+          : Layout.column().build(
+              tile,
+              bottom,
+            ),
     );
   }
 
   PlatformListTile copyWith({
     Widget leading,
     Widget title,
+    Widget bottom,
     Widget subtitle,
     Widget trailing,
     PlatformCardArgs args,
@@ -61,6 +83,7 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
       args,
       leading: leading ?? this.leading,
       title: title ?? this.title,
+      bottom: bottom ?? this.bottom,
       subtitle: subtitle ?? this.subtitle,
       trailing: trailing ?? this.trailing,
     );

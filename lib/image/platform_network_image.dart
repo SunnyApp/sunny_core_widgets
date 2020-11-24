@@ -28,7 +28,7 @@ class PlatformNetworkImage extends PlatformWidgetBase {
     this.httpHeaders,
     this.placeholder,
     this.errorWidget,
-    this.alignment,
+    this.alignment = Alignment.center,
     this.useOldImageOnUrlChange,
     this.fit,
   })  : assert(imageUrl != null),
@@ -49,17 +49,16 @@ class PlatformNetworkImage extends PlatformWidgetBase {
             color: Colors.grey.withOpacity(0.5),
           )
         : kIsWeb
-            ? Image.network(
-                imageUrl,
-                width: width,
+            ? CachedNetworkImage(
+                imageUrl: imageUrl,
                 height: height,
+                width: width,
                 fit: fit,
-                alignment: alignment,
-                headers: httpHeaders,
-                errorBuilder: errorWidget == null
-                    ? null
-                    : (context, obj, stack) =>
-                        errorWidget?.call(context, imageUrl, obj),
+                alignment: alignment ?? Alignment.center,
+                placeholder: placeholder,
+                httpHeaders: httpHeaders,
+                errorWidget: errorWidget,
+                useOldImageOnUrlChange: useOldImageOnUrlChange,
               )
             : CachedNetworkImage(
                 imageUrl: imageUrl,

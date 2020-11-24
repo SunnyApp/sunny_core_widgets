@@ -9,7 +9,8 @@ import 'theme/sunny_spacing.dart';
 import 'text/text_widgets.dart';
 
 typedef WidgetDataBuilder<I> = Widget Function(I input);
-typedef WidgetContextDataBuilder<I> = Widget Function(BuildContext context, I input);
+typedef WidgetContextDataBuilder<I> = Widget Function(
+    BuildContext context, I input);
 typedef WidgetErrorBuilder = Widget Function(Object err, StackTrace stack);
 typedef SimpleWidgetBuilder = Widget Function();
 
@@ -18,8 +19,14 @@ final _log = Logger("snapshots");
 
 class Snapshots {}
 
-final loadingIndicator = Center(child: PlatformCircularProgressIndicator());
-final sliverLoadingIndicator = SliverToBoxAdapter(child: Center(child: PlatformCircularProgressIndicator()));
+final loadingIndicator = Center(
+  child: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: PlatformCircularProgressIndicator(),
+  ),
+);
+final sliverLoadingIndicator = SliverToBoxAdapter(
+    child: Center(child: PlatformCircularProgressIndicator()));
 
 extension SnapshotExtensions<X> on AsyncSnapshot<X> {
   Widget render(
@@ -38,11 +45,16 @@ extension SnapshotExtensions<X> on AsyncSnapshot<X> {
     }
 
     errorFn ??= (Object err, StackTrace stack) {
-      _log.severe("Error rendering snapshot!: $err", err, stack ?? StackTrace.current);
+      _log.severe(
+          "Error rendering snapshot!: $err", err, stack ?? StackTrace.current);
       // analytics.encounteredError(err, stack, "Rendering snapshot ${X}");
       return Layout.container().alignCenter.padAll(sunnySpacing * 2).single(
             context.richText(
-              (_) => _.center().color(sunnyColors.red).softWrap().body1("There was a problem loading"),
+              (_) => _
+                  .center()
+                  .color(sunnyColors.red)
+                  .softWrap()
+                  .body1("There was a problem loading"),
             ),
           );
     };
@@ -58,7 +70,9 @@ extension SnapshotExtensions<X> on AsyncSnapshot<X> {
     } else {
       widget = loadingFn();
     }
-    return (crossFade != true || isSliver == true) ? widget : AnimatedSwitcher(duration: 300.ms, child: widget);
+    return (crossFade != true || isSliver == true)
+        ? widget
+        : AnimatedSwitcher(duration: 300.ms, child: widget);
   }
 }
 
@@ -81,7 +95,8 @@ extension StreamWidgetBuilder<T> on Stream<T> {
           isSliver: isSliver,
           crossFade: crossFade,
           successFn: builder,
-          loadingFn: simpleLoader ?? (loadingBuilder == null ? null : () => loadingBuilder(context)),
+          loadingFn: simpleLoader ??
+              (loadingBuilder == null ? null : () => loadingBuilder(context)),
           allowNull: allowNull,
         );
       },
@@ -91,7 +106,8 @@ extension StreamWidgetBuilder<T> on Stream<T> {
 }
 
 extension FutureWidgetExt<T> on Future<T> {
-  Widget build(WidgetDataBuilder<T> builder, {Key key, SimpleWidgetBuilder loading, bool crossFade = true}) {
+  Widget build(WidgetDataBuilder<T> builder,
+      {Key key, SimpleWidgetBuilder loading, bool crossFade = true}) {
     return FutureBuilder<T>(
       future: this,
       key: key,
@@ -106,12 +122,14 @@ extension FutureWidgetExt<T> on Future<T> {
     );
   }
 
-  Widget buildContext({WidgetContextDataBuilder<T> builder, T initialValue, Key key}) {
+  Widget buildContext(
+      {WidgetContextDataBuilder<T> builder, T initialValue, Key key}) {
     return StreamBuilder<T>(
       key: key,
       stream: Stream.fromFuture(this),
       initialData: initialValue,
-      builder: (context, snap) => snap.render(context, successFn: (data) => builder(context, data)),
+      builder: (context, snap) =>
+          snap.render(context, successFn: (data) => builder(context, data)),
     );
   }
 }
