@@ -13,7 +13,7 @@ dependencies:
   equatable: ^1.2.5
   expanding_cards:
     path: ../expanding_cards
-  fluro: ^1.7.7
+  fluro: ^1.7.8
   flutter_degen:
     path: ../flutter_degen
   flutter_platform_widgets: 0.70.2
