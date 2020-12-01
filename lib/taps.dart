@@ -105,6 +105,11 @@ class _TappableState extends State<Tappable>
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
+        onSecondaryTap: widget.onLongPress == null
+            ? null
+            : () {
+                widget.onLongPress(context);
+              },
         onTap: () async {
           try {
             await widget.onTap?.call(context);

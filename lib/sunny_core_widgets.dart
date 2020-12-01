@@ -6,7 +6,6 @@ export 'core_ext.dart';
 export 'data/data_service_extensions.dart';
 export 'image/platform_network_image.dart';
 export 'intl.dart';
-export 'named_icons.dart';
 export 'platform_card.dart';
 export 'provided.dart';
 export 'platform_card_theme.dart';

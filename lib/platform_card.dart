@@ -26,12 +26,14 @@ class PlatformCardArgs {
   final double pressScale;
   final FutureTappableCallback onTap;
   final FutureTappableCallback onLongPress;
+  final FutureTappableCallback onHover;
   final List<BoxShadow> shadow;
   final PlatformCardTheme theme;
   final bool shouldClip;
 
   const PlatformCardArgs({
     this.pressOpacity = 1,
+    this.onHover,
     this.pressScale = Tappable.defaultScale,
     this.padding,
     this.margin,
@@ -78,7 +80,7 @@ class PlatformCard extends StatelessWidget with _PlatformCardArgsMixin {
         decoration: BoxDecoration(
             color: color ?? theme.cardColor,
             borderRadius: borderRadius ?? theme.borderRadius,
-            boxShadow: useShadow ? shadow ?? theme.boxShadow : null),
+            boxShadow: useShadow == true ? shadow ?? theme.boxShadow : null),
         child: inner,
       );
     } else {
@@ -90,7 +92,7 @@ class PlatformCard extends StatelessWidget with _PlatformCardArgsMixin {
           ));
     }
 
-    if (onTap != null || onLongPress != null) {
+    if (onTap != null || onLongPress != null || onHover != null) {
       return Tappable(
         pressOpacity: pressOpacity,
         pressScale: pressScale,

@@ -10,7 +10,9 @@ import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 
 part 'platform_list_tile.g.dart';
 
-class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
+@degen()
+abstract class _PlatformListTile extends StatelessWidget
+    with _PlatformCardArgsMixin {
   final Widget leading;
   final Widget title;
   final Widget subtitle;
@@ -20,7 +22,17 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
   @delegate(implementDelegate: true)
   final PlatformCardArgs _args;
 
-  const PlatformListTile(
+  const _PlatformListTile(
+    @flatten() this._args, {
+    Key key,
+    this.leading,
+    this.title,
+    this.bottom,
+    this.subtitle,
+    this.trailing,
+  }) : super(key: key);
+
+  const _PlatformListTile.cardArgs(
     this._args, {
     Key key,
     this.leading,
@@ -30,17 +42,7 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
     this.trailing,
   }) : super(key: key);
 
-  const PlatformListTile.defaults({
-    Key key,
-    this.leading,
-    this.title,
-    this.bottom,
-    this.subtitle,
-    this.trailing,
-  })  : _args = const PlatformCardArgs(),
-        super(key: key);
-
-  const PlatformListTile.nocard({
+  const _PlatformListTile.nocard({
     Key key,
     this.leading,
     this.title,
@@ -79,7 +81,7 @@ class PlatformListTile extends StatelessWidget with _PlatformCardArgsMixin {
     Widget trailing,
     PlatformCardArgs args,
   }) {
-    return new PlatformListTile(
+    return PlatformListTile.cardArgs(
       args,
       leading: leading ?? this.leading,
       title: title ?? this.title,

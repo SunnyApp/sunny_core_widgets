@@ -62,7 +62,7 @@ class _PermissionSuggestCardState extends State<PermissionSuggestCard> {
       await widget.onStatusChanged?.call(result);
     });
     return widget.requestArgs?.copyWith(args: cardArgs) ??
-        PlatformListTile(cardArgs, title: Text("Request Permission"));
+        PlatformListTile.cardArgs(cardArgs, title: Text("Request Permission"));
   }
 
   Widget _openAppSettingsWidget() {
@@ -70,7 +70,7 @@ class _PermissionSuggestCardState extends State<PermissionSuggestCard> {
       final result = await openAppSettings();
     });
     return widget.requestArgs?.copyWith(args: cardArgs) ??
-        PlatformListTile(PlatformCardArgs(), title: Text("Open App Settings"));
+        PlatformListTile(title: Text("Open App Settings"));
   }
 
   @override

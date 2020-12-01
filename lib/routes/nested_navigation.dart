@@ -149,7 +149,8 @@ Future<T> modal<T>(
           (context) => Center(
             child: Layout.container()
                 .borderRadiusAll(16)
-                .backgroundColor(sunnyColors.white)
+                .backgroundColor(
+                    expand == false ? Colors.transparent : sunnyColors.white)
                 .single(
                   Container(
                     padding: EdgeInsets.all(16),

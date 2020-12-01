@@ -165,5 +165,6 @@ class _ScrollerArgs extends ScrollerArgs {
 }
 
 extension MModelIdArgsExt<X extends MModel> on X {
-  IdArgs<X> idArgs([String id]) => IdArgs(id ?? this.id, record: this);
+  IdArgs<X> idArgs({String id, Map<String, dynamic> args}) =>
+      IdArgs(id ?? this.id, args: args, record: this);
 }

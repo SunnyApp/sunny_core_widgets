@@ -1,5 +1,10 @@
 include: package:sunny_dart/analysis_options.yaml
 analyzer:
+  exclude:
+    - ".direnv"
+    - ".dart_tool"
+    - "build"
+    - "fastlane"
   enable-experiment:
     - variance
   errors:

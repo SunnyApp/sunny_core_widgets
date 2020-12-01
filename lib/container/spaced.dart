@@ -111,6 +111,8 @@ const sliverLoader = const SliverFillRemaining(
 Widget sliverLoaderFn() {
   return sliverLoader;
 }
+const sliverSpinner = sliverLoader;
+const sliverSpinnerFn = sliverLoaderFn;
 
 const noBorder = const Border.fromBorderSide(BorderSide.none);
 

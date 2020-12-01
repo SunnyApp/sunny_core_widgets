@@ -2,12 +2,12 @@
 // DelegateGenerator
 // **************************************************************************
 
-abstract class PlatformCardArgsDelegate {
+abstract class _PlatformCardArgsDelegate {
   PlatformCardArgs get _args;
 }
 
 mixin _PlatformCardArgsMixin
-    implements PlatformCardArgsDelegate, PlatformCardArgs {
+    implements _PlatformCardArgsDelegate, PlatformCardArgs {
   EdgeInsets get padding => _args.padding;
   EdgeInsets get margin => _args.margin;
   Color get color => _args.color;
@@ -21,6 +21,7 @@ mixin _PlatformCardArgsMixin
   double get pressScale => _args.pressScale;
   FutureOr<dynamic> Function(BuildContext) get onTap => _args.onTap;
   FutureOr<dynamic> Function(BuildContext) get onLongPress => _args.onLongPress;
+  FutureOr<dynamic> Function(BuildContext) get onHover => _args.onHover;
   List<BoxShadow> get shadow => _args.shadow;
   PlatformCardTheme get theme => _args.theme;
   bool get shouldClip => _args.shouldClip;

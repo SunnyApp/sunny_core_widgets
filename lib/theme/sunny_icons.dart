@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sunny_core_widgets/named_icons.dart';
 import 'package:sunny_dart/sunny_dart.dart';
+import 'package:sunny_sdk_core/services.dart';
 
 final globalIcons = GlobalIconResolver.instance;
 

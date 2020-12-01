@@ -7,3 +7,5 @@ export 'routes/app_route_extensions.dart';
 export 'routes/router_factory.dart';
 export 'routes/routing.dart';
 export 'routes/tab_routes.dart';
+
+import 'package:sunny_core_widgets/platform_list_tile.dart';

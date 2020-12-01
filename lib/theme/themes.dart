@@ -23,7 +23,7 @@ class Themes with EquatableMixin {
       @required this.lightTheme,
       @required this.visualStyle,
       @required this.cupertinoTheme,
-      this.listTileTheme = const ListTileTheme(),
+      this.listTileTheme = const ListTileTheme(child: null),
       @required this.darkTheme});
 
   @override

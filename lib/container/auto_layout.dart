@@ -34,6 +34,8 @@ class AutoLayout {
   bool _centerEach = false;
   Widget _divider;
   EdgeInsets _padding;
+  double _height;
+  double _width;
   EdgeInsets _margin;
   Color _backgroundColor;
   BorderRadius _borderRadius;
@@ -44,26 +46,29 @@ class AutoLayout {
   AutoLayout(this._layout);
 
   AutoLayout.of(
-      this._layout,
-      this._color,
-      this._radius,
-      this._softWrap,
-      this._spacing,
-      this._divider,
-      this._style,
-      this._textAlign,
-      this._useFlex,
-      this._isMax,
-      this._isCrossMax,
-      this._mainAxisAlignment,
-      this._mainAxisSize,
-      this._crossAxisAlignment,
-      this._padding,
-      this._margin,
-      this._backgroundColor,
-      this._borderRadius,
-      this._wrappers,
-      this._centerEach);
+    this._layout,
+    this._color,
+    this._radius,
+    this._softWrap,
+    this._spacing,
+    this._divider,
+    this._style,
+    this._textAlign,
+    this._useFlex,
+    this._isMax,
+    this._isCrossMax,
+    this._mainAxisAlignment,
+    this._mainAxisSize,
+    this._crossAxisAlignment,
+    this._padding,
+    this._margin,
+    this._backgroundColor,
+    this._borderRadius,
+    this._wrappers,
+    this._centerEach,
+    this._height,
+    this._width,
+  );
 
   Widget build(
       [item1, item2, item3, item4, item5, item6, item7, item8, item9, item10]) {
@@ -82,20 +87,26 @@ class AutoLayout {
   }
 
   Widget applyPadding(Widget widget) {
-    if (_padding == null &&
-        _margin == null &&
-        _backgroundColor == null &&
-        _borderRadius == null) {
-      return widget;
-    }
-    return Container(
+    if (_padding != null ||
+        _margin != null ||
+        _height != null ||
+        _width != null ||
+        _backgroundColor != null ||
+        _borderRadius != null) {
+      return Container(
         padding: _padding,
         margin: _margin,
+        height: _height,
+        width: _width,
         decoration: _borderRadius == null && _backgroundColor == null
             ? null
             : BoxDecoration(
                 color: _backgroundColor, borderRadius: _borderRadius),
-        child: widget);
+        child: widget,
+      );
+    } else {
+      return widget;
+    }
   }
 
   Widget autoWidget(final dynamic item) {
@@ -460,6 +471,14 @@ extension AutoLayoutBuilderExt on AutoLayout {
     return this.._padding = _paddingOrCreate.copyWith(left: num);
   }
 
+  AutoLayout height(double height) {
+    return this.._height = height;
+  }
+
+  AutoLayout width(double width) {
+    return this.._width = width;
+  }
+
   AutoLayout padRight(double num) {
     return this.._padding = _paddingOrCreate.copyWith(right: num);
   }
@@ -572,6 +591,8 @@ extension AutoLayoutBuilderExt on AutoLayout {
       _borderRadius,
       _wrappers,
       _centerEach,
+      _height,
+      _width,
     );
   }
 

@@ -1,0 +1,12 @@
+targets:
+  $default:
+    sources:
+      exclude:
+        - .direnv
+        - .idea
+        - fastlane
+        - current
+        - fvm
+        - fvm/**/*.dart
+        - lib/sdk/**/mixins
+        - .flutter/**/*.dart

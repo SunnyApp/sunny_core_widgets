@@ -579,20 +579,21 @@ typedef RichTextBuild = void Function(RichTextBuilder builder);
 Widget richTextBuilder(BuildContext context, RichTextBuild build) {
   final b = RichTextBuilder(context);
   build(b);
-  return b.build();
+  return b.buildText();
 }
 
 Widget richTextInvertedBuilder(
     BuildContext context, void build(RichTextBuilder builder)) {
   final b = RichTextBuilder.inverted(context);
   build(b);
-  return b.build();
+  return b.buildText();
 }
 
 /**
  * Allows for building rich text using the known styles
  */
-class RichTextBuilder {
+// ignore: must_be_immutable
+class RichTextBuilder extends StatelessWidget {
   final BuildContext context;
   final TextTheme textTheme;
   final TextStyle lightStyle1;
@@ -638,6 +639,11 @@ class RichTextBuilder {
             color: lightColor ??
                 _lightColor ??
                 textTheme.bodyText1.color.withOpacity(0.7));
+
+  Widget call(RichTextBuild builder) {
+    builder(this);
+    return buildText();
+  }
 
   RichTextBuilder space([int count = 1]) {
     children.add(TextSpan(text: ' '.repeat(count)));
@@ -838,7 +844,12 @@ class RichTextBuilder {
     return applyChild(text, baseStyle: lightStyle1);
   }
 
-  Widget build() {
+  @override
+  Widget build(BuildContext context) {
+    return buildText();
+  }
+
+  Widget buildText() {
     TextStyle ts = null;
     if (_height != null) {
       ts = TextStyle(height: _height);
@@ -860,8 +871,8 @@ class RichTextBuilder {
 }
 
 extension BuildContextRichText on BuildContext {
-  Widget richText(RichTextBuild builder) {
-    return richTextBuilder(this, builder);
+  RichTextBuilder get richText {
+    return RichTextBuilder(this);
   }
 
   Widget richTextInverted(RichTextBuild builder) {

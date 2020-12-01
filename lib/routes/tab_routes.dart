@@ -15,7 +15,7 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
       final ar = this as AppPageRoute<R, P>;
       return nestedModal<R>(context, (context) {
         return ar.handleAny(context, args);
-      });
+      }, settings: null);
     }
     return go(context, args: args);
   }
@@ -109,7 +109,7 @@ extension TabPageExt on FRouter {
 typedef ModalArgsBuilder<P extends RouteParams> = P Function(
     ScrollController controller);
 
-class TabRouteArgs extends DefaultRouteParams {
+class TabRouteArgs extends DefaultRouteParams implements InternalArgs {
   final ScrollController scroller;
 
   static TabRouteArgs of(final args) {
