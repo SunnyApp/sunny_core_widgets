@@ -32,6 +32,8 @@ fastlane/report.xml
 .pub/
 build/
 
+**/*.degen.g.part
+
 .direnv/
 # Android related
 **/android/**/gradle-wrapper.jar
