@@ -247,9 +247,10 @@ extension WidgetSpacingExt on Widget {
     );
   }
 
-  Widget listItemTallPad() {
+  Widget listItemTallPad({Key key}) {
     final x2 = SunnySpacing().spaceUnit * 2;
     return Padding(
+      key: key,
       padding: EdgeInsets.only(
           left: x2, right: x2, bottom: SunnySpacing().spaceUnit * 5),
       child: this,

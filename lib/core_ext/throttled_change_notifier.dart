@@ -32,12 +32,15 @@ mixin ThrottledChangeNotifier on ChangeNotifier {
   }
 
   void notifyWithLimit() {
-    limiter.limit(notifyIfActive);
+    notifyIfActive();
   }
 
   void notifyIfActive() {
     if (this._isActive) {
       notifyListeners();
+    } else {
+      assert(false, "NOT ACTIVE");
+      _log.warning("NOT ACTIVE!!");
     }
   }
 }

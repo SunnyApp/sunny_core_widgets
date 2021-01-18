@@ -1,7 +1,7 @@
 // ignore_for_file: unused_field
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sunny_dart/helpers.dart';
+import 'package:sunny_dart/sunny_dart.dart';
 
 SunnyColors _sunnyColors;
 
@@ -326,7 +326,7 @@ class _DefaultSunnyColors with SunnyColorMixin {
 
   CupertinoDynamicColor get separator => g400;
 
-  Color get barrierColor => isIOS
+  Color get barrierColor => infoX.isIOS
       ? CupertinoDynamicColor.withBrightness(
           color: Color(0x33000000),
           darkColor: Color(0x7A000000),

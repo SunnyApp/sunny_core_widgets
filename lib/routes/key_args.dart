@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter/widgets.dart';
 import 'package:sunny_dart/helpers/functions.dart';
 import 'package:sunny_sdk_core/model_exports.dart';
 import 'package:sunny_sdk_core/sunny_sdk_core.dart';
@@ -151,6 +152,16 @@ abstract class ScrollerArgs extends DefaultRouteParams {
   ScrollController get scroller;
 
   ScrollerArgs(Map<String, dynamic> args) : super(args);
+  factory ScrollerArgs.from(dynamic of) {
+    if (of == null) return null;
+    if (of is ScrollerArgs) return of;
+    if (of is Map<String, dynamic>)
+      return ScrollerArgs.of(of["scroller"] as ScrollController);
+    if (of is ScrollController) return ScrollerArgs.of(of);
+    if (of is RouteParams)
+      return ScrollerArgs.of(of["scroller"] as ScrollController);
+    return ScrollerArgs.of(null);
+  }
 
   static ScrollerArgs of(ScrollController scroller) {
     return _ScrollerArgs(scroller);

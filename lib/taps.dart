@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -45,12 +46,14 @@ class Tappable extends StatefulWidget {
   final double pressScale;
   final FutureTappableCallback onTap;
   final FutureTappableCallback onLongPress;
+  final HitTestBehavior behavior;
   final Widget child;
   final Duration duration;
 
   Tappable.link(
     String s, {
     this.onTap,
+    this.behavior = HitTestBehavior.opaque,
     this.onLongPress,
     TextStyle style,
   })  : duration = const Duration(milliseconds: 300),
@@ -62,6 +65,7 @@ class Tappable extends StatefulWidget {
       {Key key,
       this.pressOpacity = 0.7,
       this.pressScale,
+      this.behavior = HitTestBehavior.opaque,
       this.onLongPress,
       this.duration = const Duration(milliseconds: 300),
       this.onTap,
@@ -99,12 +103,16 @@ class _TappableState extends State<Tappable>
     super.dispose();
   }
 
+  var elevation = 4.0;
+  var scale = 1.0;
+  var translate = Offset(0, 0);
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
+        behavior: widget.behavior ?? HitTestBehavior.opaque,
         onSecondaryTap: widget.onLongPress == null
             ? null
             : () {
@@ -147,6 +155,42 @@ class _TappableState extends State<Tappable>
           ),
         ),
       ),
+    );
+  }
+}
+
+typedef HoverBuilder = Widget Function(bool isHover);
+
+class HoverEffect extends StatefulWidget {
+  final HoverBuilder builder;
+
+  const HoverEffect({Key key, @required this.builder}) : super(key: key);
+
+  @override
+  _HoverEffectState createState() => _HoverEffectState();
+}
+
+class _HoverEffectState extends State<HoverEffect> {
+  bool isHover = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) {
+        if (isHover != true) {
+          setState(() {
+            isHover = true;
+          });
+        }
+      },
+      onExit: (_) {
+        if (isHover == true) {
+          setState(() {
+            isHover = false;
+          });
+        }
+      },
+      child: widget.builder(isHover),
     );
   }
 }

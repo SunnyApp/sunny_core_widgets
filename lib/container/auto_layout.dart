@@ -23,7 +23,7 @@ class AutoLayout {
   Layout _layout;
   TextStyle _style;
   double _spacing = 8;
-  double _radius = 24;
+  double _radius = 12;
   bool _softWrap = true;
   Color _color;
   TextAlign _textAlign;
@@ -111,8 +111,12 @@ class AutoLayout {
 
   Widget autoWidget(final dynamic item) {
     Widget w;
-    if (item is Widget) {
-      w = item;
+    if (item is Icon) {
+      w = Icon(
+        item.icon,
+        size: _radius?.times(2) ?? item.size,
+        color: _color ?? item.color,
+      );
     } else if (item is IconData) {
       w = Icon(
         item,
@@ -121,6 +125,24 @@ class AutoLayout {
       );
     } else if (item is Uri) {
       w = PlatformNetworkImage("$item", height: _radius?.times(2));
+    } else if (item is Text) {
+      w = Text(
+        item.data,
+        key: item.key,
+        style: (item.style ?? TextStyle())
+            .copyWith(color: _color ?? item.style?.color),
+        textAlign: item.textAlign,
+        locale: item.locale,
+        softWrap: item.softWrap,
+        overflow: item.overflow,
+        textScaleFactor: item.textScaleFactor,
+        maxLines: item.maxLines,
+        semanticsLabel: item.semanticsLabel,
+        textWidthBasis: item.textWidthBasis,
+        textHeightBehavior: item.textHeightBehavior,
+      );
+    } else if (item is Widget) {
+      w = item;
     } else {
       w = Text(item?.toString(),
           softWrap: _softWrap,

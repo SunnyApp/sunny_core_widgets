@@ -50,6 +50,19 @@ extension FRouterExtensions on FRouter {
     return completable;
   }
 
+  /// Creates a [CompletableAppRoute] definition.
+  CompletableAppRoute<R, P> completableWithArgs<R, P extends RouteParams>(
+    String routePath, {
+    @required CompletableHandler<R, P> handler,
+    @required ParameterConverter<P> converter,
+    String name,
+  }) {
+    final completable =
+        CompletableAppRoute<R, P>(routePath, handler, converter, name: name);
+    this.register(completable);
+    return completable;
+  }
+
   /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
   UriTemplateAppPageRoute<R, IdArgs<E>> idPage<R, E>(
       String routePath, Widget handler(BuildContext context, IdArgs<E> args),
@@ -191,80 +204,80 @@ extension FRouterExtensions on FRouter {
     return route;
   }
 
-  // /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
-  // UriTemplateAppPageRoute<R, P> page<R, P extends RouteParams>(
-  //     String routePath, WidgetHandler<R, P> handler,
-  //     {ParameterConverter<P> paramConverter,
-  //     String title,
-  //     ToRouteTitle<P> toRouteTitle,
-  //     TransitionType transitionType}) {
-  //   if (P == RouteParams || P == dynamic) {
-  //     paramConverter ??= (args) => defaultConverter(args) as P;
-  //   }
-  //   final route = UriTemplateAppPageRoute<R, P>(
-  //     UriTemplate(routePath),
-  //     handler,
-  //     paramConverter,
-  //     name: title,
-  //     toRouteTitle: toRouteTitle,
-  //     transitionType: transitionType,
-  //   );
-  //   this.register(
-  //     route,
-  //   );
-  //   return route;
-  // }
+// /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
+// UriTemplateAppPageRoute<R, P> page<R, P extends RouteParams>(
+//     String routePath, WidgetHandler<R, P> handler,
+//     {ParameterConverter<P> paramConverter,
+//     String title,
+//     ToRouteTitle<P> toRouteTitle,
+//     TransitionType transitionType}) {
+//   if (P == RouteParams || P == dynamic) {
+//     paramConverter ??= (args) => defaultConverter(args) as P;
+//   }
+//   final route = UriTemplateAppPageRoute<R, P>(
+//     UriTemplate(routePath),
+//     handler,
+//     paramConverter,
+//     name: title,
+//     toRouteTitle: toRouteTitle,
+//     transitionType: transitionType,
+//   );
+//   this.register(
+//     route,
+//   );
+//   return route;
+// }
 
-  // /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
-  // UriTemplateAppPageRoute<R, KeyArgs> view<R>(
-  //   MSchemaRef ref,
-  //   WidgetHandler<R, KeyArgs> handler, {
-  //   String title,
-  //   ToRouteTitle<KeyArgs> toRouteTitle,
-  // }) {
-  //   return page<R, KeyArgs>(
-  //     ref.toPath("/{id}"),
-  //     handler,
-  //     paramConverter: ref.toConverter(),
-  //     transitionType: TransitionType.native,
-  //     title: title,
-  //     toRouteTitle: toRouteTitle,
-  //   );
-  // }
-
-  /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
-  // UriTemplateAppPageRoute<EditResult, KeyArgs> edit(
-  //   MSchemaRef ref,
-  //   WidgetHandler<EditResult, KeyArgs> handler, {
-  //   String title,
-  //   ToRouteTitle<KeyArgs> toRouteTitle,
-  // }) {
-  //   return page<EditResult, KeyArgs>(
-  //     ref.toPath("/{id}/edit"),
-  //     handler,
-  //     paramConverter: ref.toConverter(),
-  //     transitionType: TransitionType.native,
-  //     name: title,
-  //     toRouteTitle: toRouteTitle,
-  //   );
-  // }
+// /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
+// UriTemplateAppPageRoute<R, KeyArgs> view<R>(
+//   MSchemaRef ref,
+//   WidgetHandler<R, KeyArgs> handler, {
+//   String title,
+//   ToRouteTitle<KeyArgs> toRouteTitle,
+// }) {
+//   return page<R, KeyArgs>(
+//     ref.toPath("/{id}"),
+//     handler,
+//     paramConverter: ref.toConverter(),
+//     transitionType: TransitionType.native,
+//     title: title,
+//     toRouteTitle: toRouteTitle,
+//   );
+// }
 
   /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
-  // UriTemplateAppPageRoute<R, RouteParams> create<R>(
-  //   MSchemaRef ref,
-  //   WidgetHandler<R, RouteParams> handler, {
-  //   String title,
-  //   ToRouteTitle<RouteParams> toRouteTitle,
-  // }) {
-  //   return page<R, RouteParams>(
-  //     ref.toPath("/create"),
-  //     handler,
-  //     paramConverter: defaultConverter,
-  //     transitionType: TransitionType.native,
-  //     name: title,
-  //     toRouteTitle: toRouteTitle,
-  //   );
-  // }
+// UriTemplateAppPageRoute<EditResult, KeyArgs> edit(
+//   MSchemaRef ref,
+//   WidgetHandler<EditResult, KeyArgs> handler, {
+//   String title,
+//   ToRouteTitle<KeyArgs> toRouteTitle,
+// }) {
+//   return page<EditResult, KeyArgs>(
+//     ref.toPath("/{id}/edit"),
+//     handler,
+//     paramConverter: ref.toConverter(),
+//     transitionType: TransitionType.native,
+//     name: title,
+//     toRouteTitle: toRouteTitle,
+//   );
+// }
+
+  /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
+// UriTemplateAppPageRoute<R, RouteParams> create<R>(
+//   MSchemaRef ref,
+//   WidgetHandler<R, RouteParams> handler, {
+//   String title,
+//   ToRouteTitle<RouteParams> toRouteTitle,
+// }) {
+//   return page<R, RouteParams>(
+//     ref.toPath("/create"),
+//     handler,
+//     paramConverter: defaultConverter,
+//     transitionType: TransitionType.native,
+//     name: title,
+//     toRouteTitle: toRouteTitle,
+//   );
+// }
 }
 
 extension MSchemaRefExt on MSchemaRef {

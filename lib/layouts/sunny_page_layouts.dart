@@ -11,14 +11,15 @@ import 'package:sunny_core_widgets/routes.dart';
 import 'package:sunny_core_widgets/text/app_bar_title.dart';
 import 'package:sunny_core_widgets/theme/sunny_colors.dart';
 import 'package:sunny_core_widgets/theme/sunny_spacing.dart';
-import 'package:sunny_dart/helpers/functions.dart';
+import 'package:sunny_dart/sunny_dart.dart';
 
 import 'desktop_layout.dart';
 import 'mobile_layout.dart';
+import 'sunny_page.dart';
 import 'sunny_responsive_page.dart';
 
 class ResponsivePageLayout extends SunnyPageLayout {
-  final SunnyResponsivePageState state;
+  final SunnyPageState state;
   final DesktopPageLayout desktop;
   final MobilePageLayout mobile;
 
@@ -28,21 +29,14 @@ class ResponsivePageLayout extends SunnyPageLayout {
 
   @override
   Widget build(BuildContext context, PlatformLayoutInfo layoutInfo) {
-    return isIOS
+    return infoX.isIOS
         ? mobile.build(context, layoutInfo)
         : desktop.build(context, layoutInfo);
-    // switch (layoutInfo.deviceInfo) {
-    //   case DeviceScreenType.desktop:
-    //   case DeviceScreenType.Desktop:
-    //     return desktop.build(context, layoutInfo);
-    //   default:
-    //     return mobile.build(context, layoutInfo);
-    // }
   }
 }
 
-typedef SunnyPageLayoutFactory = SunnyPageLayout Function(
-    SunnyResponsivePageState state);
+typedef SliverWrapper = Widget Function(Widget widget);
+typedef SunnyPageLayoutFactory = SunnyPageLayout Function(SunnyPageState state);
 
 final _log = Logger("sunnyLayout");
 
@@ -58,9 +52,27 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
   }
 
   Widget buildScrollView(BuildContext context, final dynamic scrollables,
-      Widget headerSliver, PlatformLayoutInfo layoutInfo) {
-    var scroller = ModalScrollController.of(context) ??
-        PrimaryScrollController.of(context);
+      Widget headerSliver, PlatformLayoutInfo layoutInfo,
+      {@required bool shrinkWrap}) {
+    return buildScrollViewWithWrapper(
+      context,
+      scrollables,
+      headerSliver,
+      layoutInfo,
+      shrinkWrap: shrinkWrap,
+    );
+  }
+
+  Widget buildScrollViewWithWrapper(
+      BuildContext context,
+      final dynamic scrollables,
+      Widget headerSliver,
+      PlatformLayoutInfo layoutInfo,
+      {SliverWrapper sliverWrapper = sameWidget,
+      bool shrinkWrap = false}) {
+    var psc = PrimaryScrollController.of(context);
+    var msc = ModalScrollController.of(context);
+    var scroller = msc ?? psc;
     if (scrollables is CustomScrollView ||
         scrollables is NestedScrollView ||
         widget.useBody == true) {
@@ -74,6 +86,7 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
       }
       return CustomScrollView(
         controller: widget.scroller ?? scroller,
+        shrinkWrap: shrinkWrap,
         physics: scroller == null
             ? AlwaysScrollableScrollPhysics()
             : ModalScrollPhysics(),
@@ -88,12 +101,14 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
       }
       return CustomScrollView(
         controller: widget.scroller ?? scroller,
+        shrinkWrap: shrinkWrap,
         physics: scroller == null
             ? AlwaysScrollableScrollPhysics()
             : ModalScrollPhysics(),
         slivers: [
           if (headerSliver != null) headerSliver,
-          if (scrollables is List<Widget>) ...scrollables,
+          if (scrollables is List<Widget>)
+            for (var sliver in scrollables) sliverWrapper(sliver),
         ],
       );
     }
@@ -108,16 +123,21 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
   @mustCallSuper
   void dispose() {}
 
-  SunnyResponsivePage get widget => state.widget;
+  SunnyPage get widget => state.widget;
 
   Widget build(BuildContext context, PlatformLayoutInfo info) {
     return wrapInScaffold(context, info);
   }
 
-  Widget buildPageGuts(BuildContext context, PlatformLayoutInfo layoutInfo) {
-    final scrollables = buildScrollables(context, layoutInfo);
-    final sliverHeader = buildHeader(context, layoutInfo);
-    return buildScrollView(context, scrollables, sliverHeader, layoutInfo);
+  Widget buildPageGuts(BuildContext context, PlatformLayoutInfo layoutInfo,
+      {bool shrinkWrap = false}) {
+    return Builder(builder: (scaffoldCtx) {
+      final scrollables = buildScrollables(scaffoldCtx, layoutInfo, shrinkWrap);
+      final sliverHeader = buildHeader(scaffoldCtx, layoutInfo);
+
+      return buildScrollView(scaffoldCtx, scrollables, sliverHeader, layoutInfo,
+          shrinkWrap: shrinkWrap);
+    });
   }
 
   List<Widget> expandScrollables(final dynamic scrollables) {
@@ -160,8 +180,12 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
   }
 
   /// Returns either a single widget (may be a CustomScrollView) or a List of widgets
-  dynamic buildScrollables(BuildContext context, PlatformLayoutInfo layoutInfo,
-      [dynamic _body]) {
+  dynamic buildScrollables(
+    BuildContext context,
+    PlatformLayoutInfo layoutInfo,
+    bool shrinkWrap, [
+    dynamic _body,
+  ]) {
     _body ??= _body ?? widget.body;
 
     if (_body is Stream<Widget>) {
@@ -176,8 +200,13 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
       return StreamBuilder<List<Widget>>(
         stream: _body,
         builder: (context, snap) {
-          return buildScrollView(context, snap.data ?? <Widget>[],
-              buildHeader(context, layoutInfo), layoutInfo);
+          return buildScrollView(
+            context,
+            snap.data ?? <Widget>[],
+            buildHeader(context, layoutInfo),
+            layoutInfo,
+            shrinkWrap: shrinkWrap,
+          );
         },
       );
     } else if (_body is Function) {
@@ -202,9 +231,9 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
 }
 
 abstract class SunnyPageLayout {
-  SunnyResponsivePageState get state;
+  SunnyPageState get state;
 
-  SunnyResponsivePage get widget => state.widget;
+  SunnyPage get widget => state.widget;
 
   const SunnyPageLayout();
 
@@ -256,3 +285,5 @@ abstract class SunnyPageLayout {
     );
   }
 }
+
+Widget sameWidget(Widget input) => input;

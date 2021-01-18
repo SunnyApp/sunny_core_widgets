@@ -12,7 +12,7 @@ import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 import 'package:sunny_core_widgets/routes/route_extensions.dart';
 import 'package:sunny_core_widgets/theme/sunny_colors.dart';
 import 'package:sunny_core_widgets/theme/sunny_spacing.dart';
-import 'package:sunny_dart/helpers/functions.dart';
+import 'package:sunny_dart/info_x.dart';
 
 final nestedGlobalKey =
     GlobalKey<NavigatorState>(debugLabel: "nestedGlobalKey");
@@ -136,7 +136,7 @@ Future<T> modal<T>(
   //         : (_p ??= builder(context)),
   //   );
   // }
-  if (isIOS == false) {
+  if (infoX.isIOS == false) {
     width ??= 600.px;
     height ??= 570.px;
     return showPlatformDialog<T>(

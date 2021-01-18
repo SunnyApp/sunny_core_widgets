@@ -5,6 +5,7 @@ import 'package:flutter/src/cupertino/text_theme.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 import 'package:sunny_core_widgets/text/text_widgets.dart';
 import 'package:sunny_dart/helpers.dart';
+import 'package:sunny_dart/is_x.dart';
 import 'package:sunny_dart/sunny_dart.dart';
 
 import 'sunny_colors.dart';
@@ -407,7 +408,7 @@ class SunnyTextTheme {
 
 extension TextStylePlatformExt on TextStyle {
   TextStyle get selected {
-    return isIOS ? this : this.copyWith(color: sunnyColors.white);
+    return infoX.isIOS ? this : this.copyWith(color: sunnyColors.white);
   }
 
   TextStyle get light {

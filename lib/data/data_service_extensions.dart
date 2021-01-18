@@ -9,11 +9,11 @@ typedef DataServiceWidgetBuilder<X> = Widget Function(
 typedef DataServiceWidgetBuilderWithContext<X> = Widget Function(
     BuildContext context, X data, DataService<X> service);
 
-typedef RecordDataServiceWidgetBuilder<X> = Widget Function(
-    X data, RecordDataService<X> service);
+typedef RecordDataServiceWidgetBuilder<X, KType> = Widget Function(
+    X data, RecordDataService<X, KType> service);
 
-typedef RecordDataServiceWidgetBuilderWithContext<X> = Widget Function(
-    BuildContext context, X data, RecordDataService<X> service);
+typedef RecordDataServiceWidgetBuilderWithContext<X, KType> = Widget Function(
+    BuildContext context, X data, RecordDataService<X, KType> service);
 
 extension DataServiceBuilder<X> on DataService<X> {
   Widget buildFromStream(
@@ -66,9 +66,9 @@ extension DataServiceBuilder<X> on DataService<X> {
   }
 }
 
-extension RecordDataServiceBuilder<X> on RecordDataService<X> {
-  Widget buildFromRecordStream(String recordId,
-      {RecordDataServiceWidgetBuilder<X> builder,
+extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
+  Widget buildFromRecordStream(KType recordId,
+      {RecordDataServiceWidgetBuilder<X, KType> builder,
       String key,
       X initialValue,
       SimpleWidgetBuilder loadingFn}) {
@@ -89,8 +89,8 @@ extension RecordDataServiceBuilder<X> on RecordDataService<X> {
   }
 
   Widget builder(
-    String recordId, {
-    RecordDataServiceWidgetBuilderWithContext<X> builder,
+    KType recordId, {
+    RecordDataServiceWidgetBuilderWithContext<X, KType> builder,
     String key,
     bool allowNull = false,
 
@@ -100,9 +100,12 @@ extension RecordDataServiceBuilder<X> on RecordDataService<X> {
     X initialValue,
   }) {
     final service = this;
-    assert(recordId != null || initialValue != null);
+    assert(allowNull == true || (recordId != null || initialValue != null));
+    if (recordId == null && initialValue == null) {
+      return Builder(builder: (context) => builder(context, null, this));
+    }
     final _initialValue = service.isLoaded(recordId) ? null : initialValue;
-    if (Sunny.get<IAuthState>().isNotLoggedIn) {
+    if (sunny.get<IAuthState>().isNotLoggedIn) {
       return emptyBox;
     }
     return StreamBuilder<X>(

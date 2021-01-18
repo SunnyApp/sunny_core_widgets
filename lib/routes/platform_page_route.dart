@@ -33,7 +33,7 @@ PageRoute<T> PlatformPageRoute<T>({
       settings: settings,
       maintainState: maintainState,
     );
-  } else if (isIOS) {
+  } else if (infoX.isIOS) {
     return NonOpaqueCupertinoPageRoute<T>(
         builder: builder,
         settings: settings,

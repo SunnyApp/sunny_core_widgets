@@ -57,6 +57,8 @@ abstract class _PlatformListTile extends StatelessWidget
   @override
   Widget build(BuildContext context) {
     final tile = ListTile(
+      onTap: () => this.onTap?.call(context),
+      onLongPress: () => this.onLongPress?.call(context),
       title: title,
       leading: leading,
       trailing: trailing,
@@ -66,10 +68,10 @@ abstract class _PlatformListTile extends StatelessWidget
       args: this,
       child: bottom == null
           ? tile
-          : Layout.column().build(
-              tile,
-              bottom,
-            ),
+          : Layout.column().noFlex.crossAxisStretch.build(
+                tile,
+                bottom,
+              ),
     );
   }
 

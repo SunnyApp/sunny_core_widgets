@@ -4,22 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
-import 'package:sunny_core_widgets/layouts/sunny_page.dart';
+import 'package:sunny_core_widgets/layouts/layout_factory.dart';
 import 'package:sunny_core_widgets/layouts/sunny_page_layouts.dart';
 import 'package:sunny_core_widgets/provided.dart';
 
-typedef WidgetFactory = Widget Function();
-typedef WidgetContextFactory = Widget Function(BuildContext context);
-typedef DynamicContextFactory = dynamic Function(BuildContext context);
-typedef WidgetScrollerContextFactory = Widget Function(
-    BuildContext context, ScrollController controller);
-typedef WidgetListFactory = List<Widget> Function();
-typedef WidgetListContextFactory = List<Widget> Function(BuildContext context);
-typedef WidgetListScrollerContextFactory = List<Widget> Function(
-    BuildContext context, ScrollController controller);
-
-@deprecated
-class SunnyResponsivePage extends SunnyPage {
+class SunnyPage extends StatefulWidget {
   final dynamic body;
 
   final dynamic pageTitle;
@@ -44,7 +33,7 @@ class SunnyResponsivePage extends SunnyPage {
   final SunnyPageLayoutFactory layout;
   final bool useBody;
 
-  const SunnyResponsivePage(
+  const SunnyPage(
       {Key key,
       this.body,
       this.expanded,
@@ -73,17 +62,17 @@ class SunnyResponsivePage extends SunnyPage {
         super(key: key);
 
   @override
-  SunnyResponsivePageState createState() => SunnyResponsivePageState();
+  SunnyPageState createState() => SunnyPageState();
 }
 
-class SunnyResponsivePageState extends SunnyPageState {
+class SunnyPageState extends State<SunnyPage> {
   SunnyPageLayout _layout;
 
   @override
   void initState() {
     super.initState();
     _layout =
-        (widget.layout ?? (state) => ResponsivePageLayout(state)).call(this);
+        (widget.layout ?? LayoutFactory.of(context).calculateLayout).call(this);
   }
 
   @override

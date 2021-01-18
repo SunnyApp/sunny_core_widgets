@@ -608,6 +608,7 @@ class RichTextBuilder extends StatelessWidget {
   bool _preserveGestures = false;
   bool _preserveStyles = false;
 
+  FontStyle _fontStyle;
   int _maxLines;
   TextAlign _textAlign = TextAlign.start;
   TextAlignVertical _textAlignVertical = TextAlignVertical.center;
@@ -640,6 +641,9 @@ class RichTextBuilder extends StatelessWidget {
                 _lightColor ??
                 textTheme.bodyText1.color.withOpacity(0.7));
 
+  RichTextBuilder get italic =>
+      this.._temp = _tmpStyle.copyWith(fontStyle: FontStyle.italic);
+
   Widget call(RichTextBuild builder) {
     builder(this);
     return buildText();
@@ -652,6 +656,14 @@ class RichTextBuilder extends StatelessWidget {
 
   RichTextBuilder body2(String text) {
     return applyChild(text, baseStyle: textTheme.bodyText2);
+  }
+
+  RichTextBuilder body3(String text) {
+    return applyChild(text, baseStyle: sunnyText.body3Light);
+  }
+
+  RichTextBuilder caption(String text) {
+    return applyChild(text, baseStyle: sunnyText.body3Light);
   }
 
   RichTextBuilder icon(IconData data,
@@ -731,6 +743,10 @@ class RichTextBuilder extends StatelessWidget {
     return this.._textAlign = TextAlign.center;
   }
 
+  RichTextBuilder alignRight() {
+    return this.._textAlign = TextAlign.right;
+  }
+
   RichTextBuilder align(TextAlign align) {
     return this.._textAlign = align;
   }
@@ -752,6 +768,10 @@ class RichTextBuilder extends StatelessWidget {
 
   RichTextBuilder fontSize(double size) {
     return this.._temp = _tmpStyle.copyWith(fontSize: size);
+  }
+
+  RichTextBuilder weight(FontWeight weight) {
+    return this.._temp = _tmpStyle.copyWith(fontWeight: weight);
   }
 
   RichTextBuilder style(TextStyle style) {
@@ -796,8 +816,8 @@ class RichTextBuilder extends StatelessWidget {
     return _temp ??= const TextStyle();
   }
 
-  RichTextBuilder text(String text) {
-    return applyChild(text, baseStyle: textTheme.bodyText2);
+  RichTextBuilder text(String text, {TextStyle style}) {
+    return applyChild(text, baseStyle: style ?? textTheme.bodyText2);
   }
 
   RichTextBuilder bold2(String text) {
@@ -838,6 +858,25 @@ class RichTextBuilder extends StatelessWidget {
 
   RichTextBuilder h4(String text) {
     return applyChild(text, baseStyle: textTheme.headline4);
+  }
+
+  RichTextBuilder h4black(String text) {
+    return applyChild(text,
+        baseStyle: textTheme.headline4.copyWith(
+          fontWeight: FontWeight.w900,
+        ));
+  }
+
+  RichTextBuilder h3(String text) {
+    return applyChild(text, baseStyle: textTheme.headline3);
+  }
+
+  RichTextBuilder h3black(String text) {
+    return applyChild(text,
+        baseStyle: textTheme.headline3.copyWith(
+          fontWeight: FontWeight.w900,
+          letterSpacing: 0.0,
+        ));
   }
 
   RichTextBuilder light1(String text) {

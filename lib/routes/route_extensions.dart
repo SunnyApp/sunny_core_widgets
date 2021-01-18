@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:fluro/fluro.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
@@ -5,7 +6,7 @@ import 'package:sunny_core_widgets/provided.dart';
 import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 import 'package:sunny_core_widgets/routes/routing.dart';
 import 'package:sunny_sdk_core/api_exports.dart';
-import 'package:sunny_sdk_core/model.dart';
+import 'package:sunny_dart/sunny_get.dart';
 
 class RouteExtensions {}
 
@@ -30,11 +31,13 @@ extension AppRouteMatchExtensions on AppRouteMatch {
 }
 
 extension BuildContextDeviceScreenTypeExt on BuildContext {
-  LayoutInfo get layoutInfo => Provided.get(this);
+  LayoutInfo get layoutInfo => sunny.get(context: this);
   rb.DeviceScreenType get screenType => layoutInfo.screenType;
-  Future<T> page<T>(WidgetBuilder builder) =>
-      Navigator.of(this).push<T>(PlatformPageRoute(
-        builder: builder,
-        maintainState: true,
-      ));
+  Future<T> page<T>(WidgetBuilder builder) {
+    var navigatorState = Navigator.of(this);
+    return navigatorState.push<T>(PlatformPageRoute(
+      builder: builder,
+      maintainState: true,
+    ));
+  }
 }

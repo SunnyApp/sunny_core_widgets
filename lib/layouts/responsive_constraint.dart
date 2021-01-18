@@ -25,7 +25,7 @@ class ResponsiveConstraint extends StatelessWidget {
         return ResponsiveBuilder(
             builder: (context, size) => Center(
                   child: Layout.row().noFlex.spaceAround.crossAxisStart.build([
-                    SizedBox(width: 880, child: child),
+                    SizedBox(width: maxWidth ?? 880, child: child),
                   ]),
                 ));
     }

@@ -97,7 +97,7 @@ extension TabPageExt on FRouter {
       @required WidgetHandler<R, ScrollerArgs> handler,
       TransitionType transitionType}) {
     return register<R, ScrollerArgs>(
-      AppPageRoute(routePath, handler, (_) => _ as ScrollerArgs,
+      AppPageRoute(routePath, handler, (_) => ScrollerArgs.from(_),
           name: name,
           transitionType: transitionType,
           toRouteUri: (settings) => routePath),

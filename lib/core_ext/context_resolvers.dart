@@ -1,11 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:sunny_dart/helpers.dart';
 import 'package:sunny_sdk_core/services.dart';
 import 'package:sunny_sdk_core/services/sunny.dart';
 
 class ProviderBuildContextResolver with SplitRegistrationResolver {
   @override
   T resolve<T>(BuildContext context) {
+    if (context == null) {
+      return illegalState("No build context registered resolving $T");
+    }
     return Provider.of(context, listen: false);
   }
 

@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_degen/annotations.dart';
 import 'package:sunny_core_widgets/platform_card_theme.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
-import 'package:sunny_dart/helpers/functions.dart';
+import 'package:sunny_dart/sunny_dart.dart';
 
 part 'platform_card.g.dart';
 
@@ -68,7 +68,7 @@ class PlatformCard extends StatelessWidget with _PlatformCardArgsMixin {
   Widget build(BuildContext context) {
     final theme = this.theme ?? PlatformCardTheme.of(context);
     Widget widget;
-    if (kIsWeb || isIOS == true) {
+    if (kIsWeb || infoX.isIOS == true) {
       final inner = shouldClip == true
           ? ClipRRect(
               borderRadius: borderRadius ?? theme.borderRadius, child: child)
@@ -97,6 +97,7 @@ class PlatformCard extends StatelessWidget with _PlatformCardArgsMixin {
         pressOpacity: pressOpacity,
         pressScale: pressScale,
         onTap: onTap,
+        behavior: HitTestBehavior.deferToChild,
         onLongPress: onLongPress,
         child: widget,
       );
