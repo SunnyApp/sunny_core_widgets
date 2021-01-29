@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:fluro/fluro.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/provided.dart';

@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';

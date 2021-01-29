@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sunny_core_widgets/routes/routing.dart';

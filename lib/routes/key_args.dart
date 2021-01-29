@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:fluro/fluro.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sunny_dart/helpers/functions.dart';
 import 'package:sunny_sdk_core/model_exports.dart';

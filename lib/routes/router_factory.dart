@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:sunny_core_widgets/provided.dart';

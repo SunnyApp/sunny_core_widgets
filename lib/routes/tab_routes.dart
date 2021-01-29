@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:sunny_core_widgets/routes/nested_navigation.dart';
 import 'package:sunny_core_widgets/routes/route_extensions.dart';
@@ -96,7 +96,7 @@ extension TabPageExt on FRouter {
       {String name,
       @required WidgetHandler<R, ScrollerArgs> handler,
       TransitionType transitionType}) {
-    return register<R, ScrollerArgs>(
+    return register<R, ScrollerArgs, AppPageRoute<R, ScrollerArgs>>(
       AppPageRoute(routePath, handler, (_) => ScrollerArgs.from(_),
           name: name,
           transitionType: transitionType,

@@ -1,4 +1,4 @@
-import 'package:fluro/fluro.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:sunny_dart/helpers.dart';
 
 FRouter _router;
