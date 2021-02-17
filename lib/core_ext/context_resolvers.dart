@@ -46,7 +46,7 @@ mixin SplitRegistrationResolver implements BuildContextResolver {
       } else if (input is Inst) {
         return [input];
       } else {
-        return [Inst.instance(input.runtimeType)];
+        return [Inst.instance(input)];
       }
     }
 

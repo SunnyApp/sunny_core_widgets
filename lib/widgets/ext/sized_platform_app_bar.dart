@@ -4,7 +4,8 @@
  * See LICENSE for distribution and usage details.
  */
 
-import 'package:flutter/cupertino.dart' show CupertinoNavigationBar, ObstructingPreferredSizeWidget;
+import 'package:flutter/cupertino.dart'
+    show CupertinoNavigationBar, ObstructingPreferredSizeWidget;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'sized_cupertino_nav_bar.dart';
@@ -57,13 +58,14 @@ class SizedPlatformAppBar extends PlatformAppBar {
   ObstructingPreferredSizeWidget createCupertinoWidget(BuildContext context) {
     final data = _wrapped.cupertino?.call(context, platform(context));
 
-    var trailing = _wrapped.trailingActions == null || _wrapped.trailingActions.isEmpty
-        ? null
-        : new Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: _wrapped.trailingActions,
-          );
+    var trailing =
+        _wrapped.trailingActions == null || _wrapped.trailingActions.isEmpty
+            ? null
+            : new Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: _wrapped.trailingActions,
+              );
 
     if (data?.heroTag != null) {
       return SizedCupertinoNavigationBar(
@@ -71,8 +73,10 @@ class SizedPlatformAppBar extends PlatformAppBar {
         key: data?.widgetKey ?? _wrapped.widgetKey,
         middle: data?.title ?? _wrapped.title,
         backgroundColor: data?.backgroundColor ?? _wrapped.backgroundColor,
-        actionsForegroundColor: data?.actionsForegroundColor,
-        automaticallyImplyLeading: data?.automaticallyImplyLeading ?? _wrapped.automaticallyImplyLeading ?? true,
+        // actionsForegroundColor: data?.actionsForegroundColor,
+        automaticallyImplyLeading: data?.automaticallyImplyLeading ??
+            _wrapped.automaticallyImplyLeading ??
+            true,
         automaticallyImplyMiddle: data?.automaticallyImplyMiddle ?? true,
         previousPageTitle: data?.previousPageTitle,
         padding: data?.padding,
@@ -90,8 +94,10 @@ class SizedPlatformAppBar extends PlatformAppBar {
       key: data?.widgetKey ?? _wrapped.widgetKey,
       middle: data?.title ?? _wrapped.title,
       backgroundColor: data?.backgroundColor ?? _wrapped.backgroundColor,
-      actionsForegroundColor: data?.actionsForegroundColor,
-      automaticallyImplyLeading: data?.automaticallyImplyLeading ?? _wrapped.automaticallyImplyLeading ?? true,
+      // actionsForegroundColor: data?.actionsForegroundColor,
+      automaticallyImplyLeading: data?.automaticallyImplyLeading ??
+          _wrapped.automaticallyImplyLeading ??
+          true,
       automaticallyImplyMiddle: data?.automaticallyImplyMiddle ?? true,
       previousPageTitle: data?.previousPageTitle,
       padding: data?.padding,
