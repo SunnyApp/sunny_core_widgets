@@ -1,21 +1,16 @@
 name: sunny_core_widgets
-version: 0.1.1+11
-publish_to: none
+version: 0.1.1+12
 homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
 environment: 
   sdk: '>=2.12.0 <3.0.0'
   flutter: '>=1.17.0 <2.0.0'
-dependencies:
-  flutter:
-    sdk: flutter
-#  badges: ^2.0.0-nullsafety.1
+dependencies: 
   cached_network_image: ^3.0.0-nullsafety
   equatable: ^2.0.0
   expanding_cards: ^0.5.1-nullsafety.7
   sunny_fluro: ^1.8.0-nullsafe.2
   flexidate: ^0.4.5-nullsafety.2
-#  flutter_degen: ^0.5.1-nullsafety.2
   flutter_platform_widgets: ^1.0.1-nullsafety.2
   flutter_screen_scaling: ^3.3.2+1
   logging: ^1.0.0
@@ -28,38 +23,9 @@ dependencies:
   provider: ^5.0.0
   responsive_builder: ^0.4.0-nullsafety.1
   sunny_sdk_core: ^2.0.0-nullsafe.16
-#  timeago: ^3.0.2
   uri: ^1.0.0
-dependency_overrides:
-#  flutter_degen:
-#    path: ../flutter_degen
-#  flutter_screen_scaling:
-#    path: ../flutter_screen_scaling
-#  flutter_platform_widgets:
-#    path: ../flutter_platform_widgets
-#  sunny:
-#    path: ../sunny_entities/sunny
-#  waypoints:
-#    path: ../sunny_entities/waypoints
-#  sunny_fluro:
-#    path: ../sunny_fluro
-#  facts:
-#    path: ../sunny_entities/facts
-#  m_entity:
-#    path: ../sunny_entities/m_entity
-#  contact_v2:
-#    path: ../sunny_entities/contact_v2
-#  reliveit:
-#    path: ../sunny_entities/reliveit
-#  fact_schemas:
-#    path: ../sunny_entities/fact_schemas
-#  sunny_data:
-#    path: ../sunny_data
-#
-#  modal_bottom_sheet:
-#    path: ../modal_bottom_sheet
-#  expanding_cards:
-#    path: ../expanding_cards
-dev_dependencies:
-  flutter_test:
+  flutter: 
+    sdk: flutter
+dev_dependencies: 
+  flutter_test: 
     sdk: flutter

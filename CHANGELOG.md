@@ -1,3 +1,10 @@
+## [0.1.1+12]
+ * Gemfile
+Updated fastlane
+Getting null-safe expanding_cards
+Upgrading null-safety version
+Pre-migrate
+
 ## [0.1.1+11]
  * CHANGELOG manual commit
 
