@@ -3,10 +3,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:logging/logging.dart';
 import 'package:sunny_dart/sunny_dart.dart';
 
-import 'container/auto_layout.dart';
-import 'theme/sunny_colors.dart';
-import 'theme/sunny_spacing.dart';
-import 'text/text_widgets.dart';
+import 'package:sunny_essentials/container/auto_layout.dart';
+import 'package:sunny_essentials/theme.dart';
+import 'package:sunny_essentials/text.dart';
 
 typedef WidgetDataBuilder<I> = Widget Function(I input);
 typedef WidgetContextDataBuilder<I> = Widget Function(

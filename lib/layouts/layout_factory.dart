@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:sunny_core_widgets/layouts.dart';
-
-import '../provided.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 /// Factory pattern that takes in a page state, and resolves the default layout
 /// to be used.

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:sunny_core_widgets/sunny_core_widgets.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 class ChipButton extends StatefulWidget {
   final String label;

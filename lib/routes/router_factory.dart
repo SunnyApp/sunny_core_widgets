@@ -1,7 +1,7 @@
 import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:sunny_core_widgets/provided.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 import 'package:sunny_core_widgets/routes/nested_navigation.dart';
 import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 

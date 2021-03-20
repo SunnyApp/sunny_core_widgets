@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
-import 'package:sunny_core_widgets/container/spaced.dart';
-import 'package:sunny_core_widgets/theme/sunny_colors.dart';
-import 'package:sunny_core_widgets/theme/sunny_text_theme.dart';
+import 'package:sunny_essentials/container.dart';
+import 'package:sunny_essentials/theme.dart';
 import 'package:sunny_dart/sunny_dart.dart';
 import 'package:flutter_screen_scaling/size_extension.dart';
 

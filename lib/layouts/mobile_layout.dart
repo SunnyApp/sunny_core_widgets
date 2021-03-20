@@ -3,10 +3,9 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/layouts/sunny_page.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
-import 'package:sunny_core_widgets/theme/sunny_colors.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 import 'sunny_page_layouts.dart';
-import 'sunny_responsive_page.dart';
 
 class MobilePageLayout with SunnyPageLayoutMixin {
   final SunnyPageState state;

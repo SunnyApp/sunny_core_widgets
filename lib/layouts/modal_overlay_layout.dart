@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
-import 'package:sunny_core_widgets/sunny_core_widgets.dart';
-import 'package:sunny_core_widgets/theme/sunny_colors.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 import 'sunny_page.dart';
 import 'sunny_page_layouts.dart';

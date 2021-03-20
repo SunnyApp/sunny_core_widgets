@@ -5,13 +5,11 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
-import 'package:sunny_core_widgets/container/auto_layout.dart';
-import 'package:sunny_core_widgets/provided.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
+
 import 'package:sunny_core_widgets/routes/handle_sheet.dart';
 import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 import 'package:sunny_core_widgets/routes/route_extensions.dart';
-import 'package:sunny_core_widgets/theme/sunny_colors.dart';
-import 'package:sunny_core_widgets/theme/sunny_spacing.dart';
 import 'package:sunny_dart/info_x.dart';
 
 final nestedGlobalKey =

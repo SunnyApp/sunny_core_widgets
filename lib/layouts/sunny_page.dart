@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/layouts/layout_factory.dart';
 import 'package:sunny_core_widgets/layouts/sunny_page_layouts.dart';
-import 'package:sunny_core_widgets/provided.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 class SunnyPage extends StatefulWidget {
   final dynamic body;

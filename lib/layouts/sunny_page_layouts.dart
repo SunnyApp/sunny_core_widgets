@@ -4,14 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:logging/logging.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sunny_core_widgets/container/dividing_line.dart';
-import 'package:sunny_core_widgets/container/spaced.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/routes.dart';
-import 'package:sunny_core_widgets/text/app_bar_title.dart';
-import 'package:sunny_core_widgets/theme/sunny_colors.dart';
-import 'package:sunny_core_widgets/theme/sunny_spacing.dart';
 import 'package:sunny_dart/sunny_dart.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 import 'desktop_layout.dart';
 import 'mobile_layout.dart';

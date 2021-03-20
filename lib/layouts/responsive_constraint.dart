@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:sunny_core_widgets/container/auto_layout.dart';
-import 'package:sunny_core_widgets/container/slivers.dart';
 import 'package:sunny_core_widgets/core_ext.dart';
-import 'package:sunny_core_widgets/provided.dart';
+
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 class ResponsiveConstraint extends StatelessWidget {
   final Widget child;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
-import 'package:sunny_core_widgets/theme/sunny_colors.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 import 'responsive_constraint.dart';
 import 'sunny_page.dart';
@@ -23,7 +23,7 @@ class DesktopPageLayout with SunnyPageLayoutMixin {
       scrollables,
       headerSliver,
       layoutInfo,
-      sliverWrapper: (sliver) => ResponsiveSliverConstraint(sliver: sliver),
+      sliverWrapper: (slivers) => ResponsiveSliverConstraint(sliver: slivers),
       shrinkWrap: shrinkWrap,
     );
   }

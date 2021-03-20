@@ -507,7 +507,7 @@ class _SizedCupertinoNavigationBarState
 
 /// An iOS-styled navigation bar with iOS-11-style large titles using slivers.
 ///
-/// The [CupertinoSliverNavigationBar] must be placed in a sliver group such
+/// The [CupertinoSliverNavigationBar] must be placed in a slivers group such
 /// as the [CustomScrollView].
 ///
 /// This navigation bar consists of two sections, a pinned static section on top
@@ -517,11 +517,11 @@ class _SizedCupertinoNavigationBarState
 /// the iOS status bar.
 ///
 /// Minimally, a [largeTitle] widget will appear in the middle of the app bar
-/// when the sliver is collapsed and transfer to the area below in larger font
-/// when the sliver is expanded.
+/// when the slivers is collapsed and transfer to the area below in larger font
+/// when the slivers is expanded.
 ///
 /// For advanced uses, an optional [middle] widget can be supplied to show a
-/// different widget in the middle of the navigation bar when the sliver is collapsed.
+/// different widget in the middle of the navigation bar when the slivers is collapsed.
 ///
 /// Like [CupertinoNavigationBar], it also supports a [leading] and [trailing]
 /// widget on the static section on top that remains while scrolling.
@@ -801,7 +801,7 @@ class _LargeTitleNavigationBarSliverDelegate
       components: components,
       padding: padding,
       // If a user specified middle exists, always show it. Otherwise, show
-      // title when sliver is collapsed.
+      // title when slivers is collapsed.
       middleVisible: alwaysShowMiddle ? null : !showLargeTitle,
     );
 

@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sunny_core_widgets/container/spaced.dart';
-import 'package:sunny_core_widgets/platform_card.dart';
-import 'package:sunny_core_widgets/platform_list_tile.dart';
+import 'package:sunny_essentials/cards.dart';
+import 'package:sunny_essentials/container.dart';
 
 enum DeniedBehavior { openSettings, hideWidget }
 
@@ -38,7 +37,7 @@ class _PermissionSuggestCardState extends State<PermissionSuggestCard> {
       return emptyBox;
     }
     switch (status) {
-      case PermissionStatus.undetermined:
+      case PermissionStatus.limited:
         return _requestPermissionWidget();
       case PermissionStatus.permanentlyDenied:
       case PermissionStatus.denied:

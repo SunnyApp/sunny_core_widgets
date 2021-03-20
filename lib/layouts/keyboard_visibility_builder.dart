@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sunny_core_widgets/container/spaced.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 typedef KeyboardVisibilityBuilder = Widget Function(
     BuildContext context, Widget child, bool isKeyboardVisible);

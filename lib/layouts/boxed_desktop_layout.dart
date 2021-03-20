@@ -1,17 +1,14 @@
 import 'package:expanding_cards/expanding_cards.dart';
-import 'package:expanding_cards/resizing_pinned_header.dart';
 import 'package:flutter/material.dart';
-import 'package:sunny_core_widgets/container/auto_layout.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
-import 'package:sunny_core_widgets/platform_card.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
-import 'package:sunny_core_widgets/theme/sunny_colors.dart';
 import 'package:sunny_dart/sunny_dart.dart';
+import 'package:sunny_essentials/slivers/resizing_pinned_header.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 import 'responsive_constraint.dart';
 import 'sunny_page.dart';
 import 'sunny_page_layouts.dart';
-import 'sunny_responsive_page.dart';
 
 class BoxedDesktopPageLayout with SunnyPageLayoutMixin {
   final SunnyPageState state;

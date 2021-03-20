@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
-import 'package:sunny_core_widgets/provided.dart';
 import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 import 'package:sunny_core_widgets/routes/routing.dart';
 import 'package:sunny_sdk_core/api_exports.dart';
