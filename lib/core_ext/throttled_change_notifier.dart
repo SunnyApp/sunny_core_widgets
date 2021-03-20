@@ -1,6 +1,6 @@
+import 'package:dartxx/throttle_debounce.dart';
 import 'package:flutter/widgets.dart';
 import 'package:logging/logging.dart';
-import 'package:sunny_dart/streams/throttle_debounce.dart';
 
 final _log = Logger("throttledNotifier");
 mixin ThrottledChangeNotifier on ChangeNotifier {

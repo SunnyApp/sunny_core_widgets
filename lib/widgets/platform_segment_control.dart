@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:sunny_essentials/container.dart';
 import 'package:sunny_essentials/theme.dart';
-import 'package:sunny_dart/sunny_dart.dart';
 import 'package:flutter_screen_scaling/size_extension.dart';
 
 import 'ext/sliding_segmented_control.dart';
@@ -179,7 +178,7 @@ class SlidingTab extends StatelessWidget {
         if (icon != null) Icon(icon, size: 18.px),
         if (icon != null) horizontalSpace,
         AnimatedDefaultTextStyle(
-            duration: 200.ms,
+            duration: const Duration(milliseconds: 200),
             style: sunnyText.body2Medium,
             child: Text(
               label,

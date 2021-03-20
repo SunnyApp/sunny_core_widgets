@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:logging/logging.dart';
-import 'package:sunny_dart/sunny_dart.dart';
 
 import 'package:sunny_essentials/container/auto_layout.dart';
 import 'package:sunny_essentials/theme.dart';
@@ -71,7 +70,8 @@ extension SnapshotExtensions<X> on AsyncSnapshot<X> {
     }
     return (crossFade != true || isSliver == true)
         ? widget
-        : AnimatedSwitcher(duration: 300.ms, child: widget);
+        : AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300), child: widget);
   }
 }
 

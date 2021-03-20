@@ -207,10 +207,10 @@ packages:
   dartxx:
     dependency: "direct main"
     description:
-      name: dartxx
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.5-nullsafety.4"
+      path: "../dartxx"
+      relative: true
+    source: path
+    version: "0.4.5-nullsafety.5"
   dio2:
     dependency: transitive
     description:
@@ -416,7 +416,7 @@ packages:
     source: hosted
     version: "0.4.4-nullsafety.1"
   intl:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: intl
       url: "https://pub.dartlang.org"

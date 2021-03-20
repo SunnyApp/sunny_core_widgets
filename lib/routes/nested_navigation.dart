@@ -10,7 +10,7 @@ import 'package:sunny_essentials/sunny_essentials.dart';
 import 'package:sunny_core_widgets/routes/handle_sheet.dart';
 import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 import 'package:sunny_core_widgets/routes/route_extensions.dart';
-import 'package:sunny_dart/info_x.dart';
+import 'package:info_x/info_x.dart';
 
 final nestedGlobalKey =
     GlobalKey<NavigatorState>(debugLabel: "nestedGlobalKey");

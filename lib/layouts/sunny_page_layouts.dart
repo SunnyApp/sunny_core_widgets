@@ -6,8 +6,8 @@ import 'package:logging/logging.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/routes.dart';
-import 'package:sunny_dart/sunny_dart.dart';
 import 'package:sunny_essentials/sunny_essentials.dart';
+import 'package:info_x/info_x.dart';
 
 import 'desktop_layout.dart';
 import 'mobile_layout.dart';

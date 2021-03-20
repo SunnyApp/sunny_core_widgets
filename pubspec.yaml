@@ -1,13 +1,13 @@
 name: sunny_core_widgets
-version: 0.1.1+12
+version: 0.1.1+13
 homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
 environment: 
   sdk: '>=2.12.0 <3.0.0'
-  flutter: '>=1.17.0 <2.0.0'
-dependencies: 
+dependencies:
   cached_network_image: ^3.0.0-nullsafety
   equatable: ^2.0.0
+  intl: ^0.17.0
   expanding_cards: ^0.5.1-nullsafety.7
   sunny_fluro: ^1.8.0-nullsafe.2
   flexidate: ^0.4.5-nullsafety.2
@@ -16,7 +16,7 @@ dependencies:
   logging: ^1.0.0
   info_x: ^0.4.4-nullsafety.1
   material_segmented_control: ^3.0.0-nullsafety.1
-  dartxx: ^0.4.5-nullsafety.4
+  dartxx: ^0.4.5-nullsafety.5
   sunny_essentials: ^0.4.4-nullsafety.4
   modal_bottom_sheet: ^2.0.0
   permission_handler: ^6.1.1
@@ -26,6 +26,6 @@ dependencies:
   uri: ^1.0.0
   flutter: 
     sdk: flutter
-dev_dependencies: 
+dev_dependencies:
   flutter_test: 
     sdk: flutter
