@@ -36,13 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.0"
-  background_app_bar:
-    dependency: transitive
-    description:
-      name: background_app_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -238,7 +231,7 @@ packages:
       name: expanding_cards
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4+1"
+    version: "0.5.1-nullsafety.7"
   fake_async:
     dependency: transitive
     description:

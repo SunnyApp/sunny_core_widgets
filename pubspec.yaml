@@ -12,7 +12,7 @@ dependencies:
 #  badges: ^2.0.0-nullsafety.1
   cached_network_image: ^3.0.0-nullsafety
   equatable: ^2.0.0
-  expanding_cards: ^0.4.4+1
+  expanding_cards: ^0.5.1-nullsafety.7
   sunny_fluro: ^1.8.0-nullsafe.2
   flexidate: ^0.4.5-nullsafety.2
 #  flutter_degen: ^0.5.1-nullsafety.2
