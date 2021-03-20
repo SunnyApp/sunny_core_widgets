@@ -17,7 +17,7 @@ class BoxedDesktopPageLayout with SunnyPageLayoutMixin {
 
   @override
   Widget buildScrollView(BuildContext context, dynamic scrollables,
-      Widget headerSliver, PlatformLayoutInfo layoutInfo,
+      Widget? headerSliver, PlatformLayoutInfo layoutInfo,
       {bool shrinkWrap = false}) {
     return CustomScrollView(
       controller: widget.scroller,
@@ -58,7 +58,7 @@ class BoxedDesktopPageLayout with SunnyPageLayoutMixin {
                             child: ClipRRect(
                               borderRadius: SunnySpacing.sixteenPxRadiusLeft,
                               child:
-                                  widget.expanded.buildUnconstrained(context),
+                                  widget.expanded!.buildUnconstrained(context),
                             ),
                           ),
                         Flexible(
@@ -82,7 +82,7 @@ class BoxedDesktopPageLayout with SunnyPageLayoutMixin {
 
   /// On web, the top header is replaced by a static bar, and the "regular" header
   /// is placed down within the card
-  Widget buildHeader(
+  Widget? buildHeader(
     BuildContext context,
     PlatformLayoutInfo layoutInfo,
   ) {

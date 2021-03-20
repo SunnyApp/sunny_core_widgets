@@ -10,7 +10,7 @@ import 'package:sunny_essentials/text.dart';
 typedef WidgetDataBuilder<I> = Widget Function(I input);
 typedef WidgetContextDataBuilder<I> = Widget Function(
     BuildContext context, I input);
-typedef WidgetErrorBuilder = Widget Function(Object err, StackTrace stack);
+typedef WidgetErrorBuilder = Widget Function(Object err, StackTrace? stack);
 typedef SimpleWidgetBuilder = Widget Function();
 
 //typedef WidgetBuilder = Widget Function();
@@ -30,12 +30,12 @@ final sliverLoadingIndicator = SliverToBoxAdapter(
 extension SnapshotExtensions<X> on AsyncSnapshot<X> {
   Widget render(
     BuildContext context, {
-    @required WidgetDataBuilder<X> successFn,
-    WidgetErrorBuilder errorFn,
+    required WidgetDataBuilder<X>? successFn,
+    WidgetErrorBuilder? errorFn,
     bool isSliver = false,
-    SimpleWidgetBuilder loadingFn,
+    SimpleWidgetBuilder? loadingFn,
     bool allowNull = false,
-    bool crossFade = true,
+    bool? crossFade = true,
   }) {
     loadingFn ??= () => loadingIndicator;
     if (isSliver == true) {
@@ -43,7 +43,7 @@ extension SnapshotExtensions<X> on AsyncSnapshot<X> {
       loadingFn = () => SliverToBoxAdapter(child: (_oldFn()));
     }
 
-    errorFn ??= (Object err, StackTrace stack) {
+    errorFn ??= (Object? err, StackTrace? stack) {
       _log.severe(
           "Error rendering snapshot!: $err", err, stack ?? StackTrace.current);
       // analytics.encounteredError(err, stack, "Rendering snapshot ${X}");
@@ -63,9 +63,9 @@ extension SnapshotExtensions<X> on AsyncSnapshot<X> {
     }
     Widget widget;
     if (hasError) {
-      widget = errorFn(this.error, null);
+      widget = errorFn(this.error!, null);
     } else if (hasData || allowNull == true) {
-      widget = successFn(data);
+      widget = successFn!(data!);
     } else {
       widget = loadingFn();
     }
@@ -77,14 +77,14 @@ extension SnapshotExtensions<X> on AsyncSnapshot<X> {
 
 extension StreamWidgetBuilder<T> on Stream<T> {
   Widget build(
-      {WidgetDataBuilder<T> builder,
+      {WidgetDataBuilder<T>? builder,
       bool allowNull = false,
       bool isSliver = false,
-      WidgetBuilder loadingBuilder,
-      SimpleWidgetBuilder simpleLoader,
-      T initial,
-      bool crossFade,
-      Key key}) {
+      WidgetBuilder? loadingBuilder,
+      SimpleWidgetBuilder? simpleLoader,
+      T? initial,
+      bool? crossFade,
+      Key? key}) {
     return StreamBuilder<T>(
       key: key,
       stream: this,
@@ -93,7 +93,7 @@ extension StreamWidgetBuilder<T> on Stream<T> {
           context,
           isSliver: isSliver,
           crossFade: crossFade,
-          successFn: builder,
+          successFn: builder as Widget Function(T?)?,
           loadingFn: simpleLoader ??
               (loadingBuilder == null ? null : () => loadingBuilder(context)),
           allowNull: allowNull,
@@ -106,7 +106,7 @@ extension StreamWidgetBuilder<T> on Stream<T> {
 
 extension FutureWidgetExt<T> on Future<T> {
   Widget build(WidgetDataBuilder<T> builder,
-      {Key key, SimpleWidgetBuilder loading, bool crossFade = true}) {
+      {Key? key, SimpleWidgetBuilder? loading, bool crossFade = true}) {
     return FutureBuilder<T>(
       future: this,
       key: key,
@@ -115,20 +115,20 @@ extension FutureWidgetExt<T> on Future<T> {
           context,
           crossFade: crossFade,
           loadingFn: loading,
-          successFn: builder,
+          successFn: builder as Widget Function(T?)?,
         );
       },
     );
   }
 
   Widget buildContext(
-      {WidgetContextDataBuilder<T> builder, T initialValue, Key key}) {
+      {WidgetContextDataBuilder<T>? builder, T? initialValue, Key? key}) {
     return StreamBuilder<T>(
       key: key,
       stream: Stream.fromFuture(this),
       initialData: initialValue,
       builder: (context, snap) =>
-          snap.render(context, successFn: (data) => builder(context, data)),
+          snap.render(context, successFn: ((data) => builder!(context, data))),
     );
   }
 }

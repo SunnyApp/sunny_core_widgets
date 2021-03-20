@@ -19,7 +19,7 @@ class SunnyIntl with ValidationIntl {
     return SunnyIntl();
   }
 
-  static SunnyIntl of(BuildContext context) {
+  static SunnyIntl? of(BuildContext context) {
     return consume<SunnyIntl>(context);
 //    return Localizations.of<SunnyIntl>(context, SunnyIntl);
   }
@@ -50,7 +50,7 @@ class SunnyIntl with ValidationIntl {
       name: "defaultEmptyStateMessage");
 
   String deleteConfirmTitle(String item) => Intl.message(
-        "Are you sure you want to delete ${item ?? 'this item'} from Trippi?",
+        "Are you sure you want to delete ${item} from Trippi?",
         name: "deleteConfirmTitle",
       );
 
@@ -71,15 +71,14 @@ class SunnyIntl with ValidationIntl {
   String date(DateTime date) => DateFormat.yMMMd().format(date);
 
   String reachOutTo(String label) {
-    return Intl.message("Reach out to ${label ?? "Unknown"}",
-        name: "reachOutTo");
+    return Intl.message("Reach out to ${label}", name: "reachOutTo");
   }
 
   String month(int month) {
     return DateFormat.MMMM().format(DateTime(2000, month, 1));
   }
 
-  String flexiDate(
+  String? flexiDate(
     input, {
     bool withYear = true,
     bool withMonth = true,

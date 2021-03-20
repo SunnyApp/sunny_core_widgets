@@ -35,7 +35,7 @@ bool initializeMessages(String localeName) {
   return true;
 }
 
-MessageLookupByLibrary _findGeneratedMessagesFor(String locale) {
+MessageLookupByLibrary? _findGeneratedMessagesFor(String locale) {
   var actualLocale = Intl.verifiedLocale(
     locale,
     (locale) => _messageByLocale.containsKey(locale),

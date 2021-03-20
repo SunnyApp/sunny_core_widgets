@@ -15,7 +15,7 @@ class DesktopPageLayout with SunnyPageLayoutMixin {
 
   @override
   Widget buildScrollView(BuildContext context, dynamic scrollables,
-      Widget headerSliver, PlatformLayoutInfo layoutInfo,
+      Widget? headerSliver, PlatformLayoutInfo layoutInfo,
       {bool shrinkWrap = false}) {
     var psc = PrimaryScrollController.of(context);
     return super.buildScrollViewWithWrapper(
@@ -29,7 +29,7 @@ class DesktopPageLayout with SunnyPageLayoutMixin {
   }
 
   @override
-  Widget buildHeader(BuildContext context, PlatformLayoutInfo layoutInfo) {
+  Widget? buildHeader(BuildContext context, PlatformLayoutInfo layoutInfo) {
     final overrideBg = widget.isWhiteBg ? sunnyColors.white : null;
     return pageTitle == null
         ? null

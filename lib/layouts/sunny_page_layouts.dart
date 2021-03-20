@@ -37,9 +37,9 @@ typedef SunnyPageLayoutFactory = SunnyPageLayout Function(SunnyPageState state);
 final _log = Logger("sunnyLayout");
 
 mixin SunnyPageLayoutMixin implements SunnyPageLayout {
-  Widget buildHeader(BuildContext context, PlatformLayoutInfo layoutInfo);
+  Widget? buildHeader(BuildContext context, PlatformLayoutInfo layoutInfo);
 
-  void _verifyNoHeader(Widget headerSliver) {
+  void _verifyNoHeader(Widget? headerSliver) {
     if (headerSliver != null) {
       _log.warning(
           "Potential loss of header!  If your body is a CustomScrollView, you shouldn't also"
@@ -48,8 +48,8 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
   }
 
   Widget buildScrollView(BuildContext context, final dynamic scrollables,
-      Widget headerSliver, PlatformLayoutInfo layoutInfo,
-      {@required bool shrinkWrap}) {
+      Widget? headerSliver, PlatformLayoutInfo layoutInfo,
+      {required bool shrinkWrap}) {
     return buildScrollViewWithWrapper(
       context,
       scrollables,
@@ -62,7 +62,7 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
   Widget buildScrollViewWithWrapper(
       BuildContext context,
       final dynamic scrollables,
-      Widget headerSliver,
+      Widget? headerSliver,
       PlatformLayoutInfo layoutInfo,
       {SliverWrapper sliverWrapper = sameWidget,
       bool shrinkWrap = false}) {
@@ -110,10 +110,10 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
     }
   }
 
-  Widget get pageTitle {
+  Widget? get pageTitle {
     return (widget.pageTitle is String)
         ? AppBarTitle(widget.pageTitle as String)
-        : widget.pageTitle as Widget;
+        : widget.pageTitle as Widget?;
   }
 
   @mustCallSuper
@@ -145,7 +145,7 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
   }
 
   Widget wrapInScaffold(BuildContext context, PlatformLayoutInfo info) {
-    final widget = state.widget;
+    final SunnyPage widget = state.widget;
     final overrideBg = widget.isWhiteBg ? sunnyColors.white : null;
     return CupertinoScaffold(
       body: PlatformScaffold(
@@ -164,10 +164,10 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
             ? Stack(
                 fit: StackFit.expand,
                 children: [
-                  if (widget.underlay != null) widget.underlay,
+                  if (widget.underlay != null) widget.underlay!,
                   buildPageGuts(context, info),
-                  if (widget.fab != null) widget.fab(context),
-                  if (widget.overlay != null) widget.overlay,
+                  if (widget.fab != null) widget.fab!(context),
+                  if (widget.overlay != null) widget.overlay!,
                 ],
               )
             : buildPageGuts(context, info),
@@ -186,7 +186,7 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
 
     if (_body is Stream<Widget>) {
       final sb = StreamBuilder<Widget>(
-        stream: _body as Stream<Widget>,
+        stream: _body,
         builder: (context, snap) {
           return snap.data ?? sliverEmptyBox;
         },
@@ -206,7 +206,7 @@ mixin SunnyPageLayoutMixin implements SunnyPageLayout {
         },
       );
     } else if (_body is Function) {
-      DynamicContextFactory producer;
+      late DynamicContextFactory producer;
       if (_body is WidgetFactory || _body is WidgetListFactory) {
         producer = (_) => _body();
       } else if (_body is WidgetContextFactory ||
@@ -240,19 +240,19 @@ abstract class SunnyPageLayout {
 
   static SliverAppBar buildAppBar(
     BuildContext context, {
-    double headerHeight,
-    bool centerTitle,
-    Widget pageTitle,
-    Widget leading,
+    double? headerHeight,
+    bool? centerTitle,
+    Widget? pageTitle,
+    Widget? leading,
     bool pinned = true,
     bool floating = false,
-    List<Widget> actions,
-    Color appBarColor,
-    Color pageBackground,
-    AsyncCallback onStretch,
-    bool showAppBarDivider,
-    HeroBar expanded,
-    bool isImpliedLeading,
+    List<Widget>? actions,
+    Color? appBarColor,
+    Color? pageBackground,
+    AsyncCallback? onStretch,
+    bool? showAppBarDivider,
+    HeroBar? expanded,
+    bool? isImpliedLeading,
   }) {
     return SliverAppBar(
       toolbarHeight: headerHeight ?? sunnySpacing.appBarHeight,

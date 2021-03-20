@@ -48,8 +48,8 @@ const Color _kDefaultTabBarInactiveColor = CupertinoColors.inactiveGray;
 class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
   /// Creates a tab bar in the iOS style.
   const SizedCupertinoTabBar({
-    Key key,
-    @required this.items,
+    Key? key,
+    required this.items,
     this.height,
     this.onTap,
     this.currentIndex = 0,
@@ -75,7 +75,7 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
         assert(inactiveColor != null),
         super(key: key);
 
-  final double height;
+  final double? height;
 
   /// The interactive items laid out within the bottom navigation bar.
   ///
@@ -87,7 +87,7 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
   /// The widget creating the bottom navigation bar needs to keep track of the
   /// current index and call `setState` to rebuild it with the newly provided
   /// index.
-  final ValueChanged<int> onTap;
+  final ValueChanged<int>? onTap;
 
   /// The index into [items] of the current active item.
   ///
@@ -100,13 +100,13 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
   /// behind it.
   ///
   /// Defaults to [CupertinoTheme]'s `barBackgroundColor` when null.
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   /// The foreground color of the icon and title for the [BottomNavigationBarItem]
   /// of the selected tab.
   ///
   /// Defaults to [CupertinoTheme]'s `primaryColor` if null.
-  final Color activeColor;
+  final Color? activeColor;
 
   /// The foreground color of the icon and title for the [BottomNavigationBarItem]s
   /// in the unselected state.
@@ -131,7 +131,7 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
 
   @override
   Size get preferredSize => height != null
-      ? Size.fromHeight(height)
+      ? Size.fromHeight(height!)
       : const Size.fromHeight(kTabBarHeight);
 
   /// Indicates whether the tab bar is fully opaque or can have contents behind
@@ -244,13 +244,13 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
                 onTap: onTap == null
                     ? null
                     : () {
-                        onTap(index);
+                        onTap!(index);
                       },
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 4.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: _buildSingleTabItem(items[index], active),
+                    children: _buildSingleTabItem(items[index], active) as List<Widget>,
                   ),
                 ),
               ),
@@ -264,8 +264,8 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
     return result;
   }
 
-  List<Widget> _buildSingleTabItem(BottomNavigationBarItem item, bool active) {
-    return <Widget>[
+  List<Widget?> _buildSingleTabItem(BottomNavigationBarItem item, bool active) {
+    return <Widget?>[
       Expanded(
         child: Center(child: active ? item.activeIcon : item.icon),
       ),
@@ -275,7 +275,7 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
 
   /// Change the active tab item's icon and title colors to active.
   Widget _wrapActiveItem(BuildContext context, Widget item,
-      {@required bool active}) {
+      {required bool active}) {
     if (!active) return item;
 
     final Color activeColor = CupertinoDynamicColor.resolve(
@@ -294,16 +294,16 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
   /// Create a clone of the current [CupertinoTabBar] but with provided
   /// parameters overridden.
   SizedCupertinoTabBar copyWith({
-    Key key,
-    List<BottomNavigationBarItem> items,
-    double height,
-    Color backgroundColor,
-    Color activeColor,
-    Color inactiveColor,
-    double iconSize,
-    Border border,
-    int currentIndex,
-    ValueChanged<int> onTap,
+    Key? key,
+    List<BottomNavigationBarItem>? items,
+    double? height,
+    Color? backgroundColor,
+    Color? activeColor,
+    Color? inactiveColor,
+    double? iconSize,
+    Border? border,
+    int? currentIndex,
+    ValueChanged<int>? onTap,
   }) {
     return SizedCupertinoTabBar(
       key: key ?? this.key,

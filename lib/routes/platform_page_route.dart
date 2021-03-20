@@ -8,9 +8,9 @@ extension TypeToRouteExt on dynamic {
   String toSimpleRoute() {
     final self = this;
     if (self is Type) {
-      return "/${self.simpleName?.uncapitalize()}";
+      return "/${self.simpleName.uncapitalize()}";
     } else {
-      return "/${this?.toString()?.uncapitalize()}";
+      return "/${this?.toString().uncapitalize()}";
     }
   }
 }
@@ -18,8 +18,8 @@ extension TypeToRouteExt on dynamic {
 /// Creates a platform-appropriate page route.
 // ignore: non_constant_identifier_names
 PageRoute<T> PlatformPageRoute<T>({
-  WidgetBuilder builder,
-  RouteSettings settings,
+  WidgetBuilder? builder,
+  RouteSettings? settings,
   bool maintainState = true,
   bool fullscreenDialog = false,
   bool inPageRoute = false,
@@ -28,20 +28,20 @@ PageRoute<T> PlatformPageRoute<T>({
     return PageRouteBuilder<T>(
       pageBuilder: (BuildContext context, Animation<double> animation,
           Animation<double> secondaryAnimation) {
-        return builder(context);
+        return builder!(context);
       },
       settings: settings,
       maintainState: maintainState,
     );
   } else if (infoX.isIOS) {
     return NonOpaqueCupertinoPageRoute<T>(
-        builder: builder,
+        builder: builder!,
         settings: settings,
         maintainState: maintainState,
         fullscreenDialog: fullscreenDialog);
   } else {
     return MaterialPageRoute<T>(
-      builder: builder,
+      builder: builder!,
       settings: settings,
       maintainState: maintainState,
       fullscreenDialog: fullscreenDialog,
@@ -108,8 +108,8 @@ class NonOpaqueCupertinoPageRoute<T> extends CupertinoPageRoute<T> {
   }
 
   NonOpaqueCupertinoPageRoute({
-    @required WidgetBuilder builder,
-    RouteSettings settings,
+    required WidgetBuilder builder,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) : super(
@@ -121,13 +121,13 @@ class NonOpaqueCupertinoPageRoute<T> extends CupertinoPageRoute<T> {
 }
 
 class AdvancedRouteSettings extends RouteSettings {
-  final Type widgetType;
-  final String title;
+  final Type? widgetType;
+  final String? title;
 
   /// Creates data used to construct routes.
   AdvancedRouteSettings.fromSettings({
-    RouteSettings other,
-    String nameOverride,
+    RouteSettings? other,
+    String? nameOverride,
     this.widgetType,
     this.title,
   }) : super(
@@ -140,7 +140,7 @@ class AdvancedRouteSettings extends RouteSettings {
 
   /// Creates data used to construct routes.
   AdvancedRouteSettings({
-    String name,
+    String? name,
     this.title,
     this.widgetType,
     bool isInitialRoute = false,
@@ -153,7 +153,8 @@ class AdvancedRouteSettings extends RouteSettings {
             arguments: arguments);
 }
 
-String _calculateRouteName({String title, String routeName, Type widgetType}) {
+String? _calculateRouteName(
+    {String? title, String? routeName, Type? widgetType}) {
   return routeName?.toSnakeCase() ??
       widgetType?.simpleName ??
       title?.toSnakeCase();

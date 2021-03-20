@@ -5,12 +5,12 @@ import 'package:sunny_essentials/sunny_essentials.dart';
 
 class ChipButton extends StatefulWidget {
   final String label;
-  final AsyncCallback onPressed;
+  final AsyncCallback? onPressed;
   final bool dense;
 
   const ChipButton({
-    Key key,
-    @required this.label,
+    Key? key,
+    required this.label,
     this.onPressed,
     this.dense = false,
   }) : super(key: key);
@@ -21,7 +21,7 @@ class ChipButton extends StatefulWidget {
 
 class _ChipButtonState extends State<ChipButton> {
   bool _processing = false;
-  EdgeInsets _padding;
+  EdgeInsets? _padding;
 
   void _doTap() {
     if (widget.onPressed == null) return;
@@ -30,7 +30,7 @@ class _ChipButtonState extends State<ChipButton> {
       _processing = true;
     });
 
-    widget.onPressed().whenComplete(() {
+    widget.onPressed!().whenComplete(() {
       if (mounted) {
         setState(() {
           _processing = false;

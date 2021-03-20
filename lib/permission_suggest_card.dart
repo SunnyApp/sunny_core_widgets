@@ -7,16 +7,16 @@ import 'package:sunny_essentials/container.dart';
 enum DeniedBehavior { openSettings, hideWidget }
 
 class PermissionSuggestCard extends StatefulWidget {
-  final PlatformListTile requestArgs;
-  final PlatformListTile openSettingsArgs;
-  final WidgetBuilder grantedBuilder;
-  final AsyncValueSetter<PermissionStatus> onStatusChanged;
+  final PlatformListTile? requestArgs;
+  final PlatformListTile? openSettingsArgs;
+  final WidgetBuilder? grantedBuilder;
+  final AsyncValueSetter<PermissionStatus>? onStatusChanged;
   final Permission permission;
   final DeniedBehavior deniedBehavior;
 
   const PermissionSuggestCard(
-      {Key key,
-      @required this.permission,
+      {Key? key,
+      required this.permission,
       this.deniedBehavior = DeniedBehavior.openSettings,
       this.requestArgs,
       this.openSettingsArgs,
@@ -29,7 +29,7 @@ class PermissionSuggestCard extends StatefulWidget {
 }
 
 class _PermissionSuggestCardState extends State<PermissionSuggestCard> {
-  PermissionStatus status;
+  PermissionStatus? status;
 
   @override
   Widget build(BuildContext context) {

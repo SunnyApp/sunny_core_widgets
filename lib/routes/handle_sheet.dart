@@ -4,9 +4,9 @@ import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 import 'package:sunny_essentials/sunny_essentials.dart';
 
 class HandleSheet extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
 
-  const HandleSheet({Key key, this.child}) : super(key: key);
+  const HandleSheet({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +22,16 @@ class HandleSheet extends StatelessWidget {
               child: const DragHandle(),
             ),
             SizedBox(height: 8),
-            child,
+            child!,
           ]),
     );
   }
 }
 
 class DragHandle extends StatelessWidget {
-  final double width;
+  final double? width;
 
-  const DragHandle({Key key, this.width}) : super(key: key);
+  const DragHandle({Key? key, this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

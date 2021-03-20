@@ -16,15 +16,15 @@ final nestedGlobalKey =
     GlobalKey<NavigatorState>(debugLabel: "nestedGlobalKey");
 
 class NestedNavigatorContainer extends StatelessWidget {
-  final Navigator child;
-  final ScrollController scroller;
+  final Navigator? child;
+  final ScrollController? scroller;
 
-  const NestedNavigatorContainer({Key key, @required this.child, this.scroller})
+  const NestedNavigatorContainer({Key? key, required this.child, this.scroller})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return child;
+    return child!;
   }
 }
 
@@ -36,7 +36,7 @@ extension BuildContextNestedNavigator on BuildContext {
 
 typedef OnGenerateRoute<T> = Route<T> Function(RouteSettings settings);
 
-Future<T> bottomSheetModal<T>(
+Future<T?> bottomSheetModal<T>(
   BuildContext context,
   WidgetBuilder scrollBuilder, {
   bool displayDragHandle = true,
@@ -78,39 +78,39 @@ Future<T> bottomSheetModal<T>(
 }
 
 WidgetBuilder memoizeScrollBuild(WidgetBuilder builder) {
-  Widget _memoized;
+  Widget? _memoized;
   return (context) => _memoized ??= builder(context);
 }
 
 WidgetBuilder memoizeWidgetBuilder(WidgetBuilder builder) {
-  Widget _memoized;
+  Widget? _memoized;
   return (context) => _memoized ??= builder(context);
 }
 
 WidgetBuilder memoizeScrollToNon(WidgetBuilder builder) {
-  Widget _memoized;
+  Widget? _memoized;
   return (context) => _memoized ??= builder(context);
 }
 
-Future<T> nestedModal<T>(
+Future<T?> nestedModal<T>(
   BuildContext context,
   WidgetBuilder scrollBuilder, {
   bool displayDragHandle = true,
-  @required PathRouteSettings settings,
+  required PathRouteSettings? settings,
 }) {
-  Widget w;
+  Widget? w;
   return context.page<T>((context) {
     return w ??= scrollBuilder(context);
   });
 }
 
-Future<T> modal<T>(
+Future<T?> modal<T>(
   BuildContext context, {
-  @required WidgetBuilder builder,
+  required WidgetBuilder builder,
   bool displayDragHandle = true,
-  @required PathRouteSettings settings,
-  double width,
-  double height,
+  required PathRouteSettings settings,
+  double? width,
+  double? height,
   bool expand = true,
   bool nestModals = false,
 }) {
@@ -165,7 +165,7 @@ Future<T> modal<T>(
     /// Previous behavior
     final nn = Provided.find<NestedNavigatorContainer>(context);
     final navState = nestedGlobalKey.currentState;
-    Widget _p;
+    Widget? _p;
     if (navState != null && nestModals == true) {
       return navState.push<T>(
         PlatformPageRoute(
@@ -191,7 +191,7 @@ Future<T> modal<T>(
           settings: settings,
           isDismissible: true,
           builder: (context) {
-            Widget w;
+            Widget? w;
             return w ??= Provider(
                 create: (_) => NestedNavigatorContainer(child: null),
                 child: displayDragHandle
@@ -200,7 +200,7 @@ Future<T> modal<T>(
           },
         );
       } else {
-        Widget w;
+        Widget? w;
 
         return showCupertinoModalBottomSheet<T>(
           context: context,
@@ -226,17 +226,16 @@ Future<T> modal<T>(
 
 extension WidgetDragHandle on Widget {
   Widget withDragHandle() {
-    if (this == null) return null;
     return widgetWithDragHandle(child: this);
   }
 }
 
-Widget widgetWithDragHandle({Widget child}) {
+Widget widgetWithDragHandle({Widget? child}) {
   return Stack(
     alignment: Alignment.topCenter,
     fit: StackFit.loose,
     children: [
-      child,
+      child!,
       SizedBox(
         height: 18,
         child: const Center(child: const DragHandle()),

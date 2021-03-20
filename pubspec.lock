@@ -416,7 +416,7 @@ packages:
     source: hosted
     version: "0.5.3+2"
   info_x:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: info_x
       url: "https://pub.dartlang.org"

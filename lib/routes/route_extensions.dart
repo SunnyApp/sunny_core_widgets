@@ -10,11 +10,11 @@ import 'package:sunny_dart/sunny_get.dart';
 class RouteExtensions {}
 
 extension AppRouteExtension on AppRoute {
-  String routeUriForId(key) {
+  String? routeUriForId(key) {
     if (key is MKey) {
-      key = (key as MKey).mxid;
+      key = key.mxid;
     } else if (key is RecordKey) {
-      key = (key as RecordKey).mxid;
+      key = key.mxid;
     } else {
       key = "$key";
     }
@@ -32,7 +32,7 @@ extension AppRouteMatchExtensions on AppRouteMatch {
 extension BuildContextDeviceScreenTypeExt on BuildContext {
   LayoutInfo get layoutInfo => sunny.get(context: this);
   rb.DeviceScreenType get screenType => layoutInfo.screenType;
-  Future<T> page<T>(WidgetBuilder builder) {
+  Future<T?> page<T>(WidgetBuilder builder) {
     var navigatorState = Navigator.of(this);
     return navigatorState.push<T>(PlatformPageRoute(
       builder: builder,

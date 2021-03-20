@@ -18,24 +18,24 @@ typedef RecordDataServiceWidgetBuilderWithContext<X, KType> = Widget Function(
 
 extension DataServiceBuilder<X> on DataService<X> {
   Widget buildFromStream(
-      {DataServiceWidgetBuilder<X> builder,
+      {DataServiceWidgetBuilder<X>? builder,
       key,
       bool isSliver = false,
       bool crossFade = true,
       bool allowNull = false,
-      SimpleWidgetBuilder loading}) {
+      SimpleWidgetBuilder? loading}) {
     final service = this;
     return StreamBuilder<X>(
       key: key is Key ? key : Key("${X}${key ?? 'StreamBuilder'}"),
-      stream: service.stream,
+      stream: service.stream.where((event) => event != null).cast(),
       builder: (context, snapshot) => snapshot.render(
         context,
         isSliver: isSliver,
         crossFade: crossFade,
         allowNull: allowNull,
-        successFn: (data) {
-          return builder(data, service);
-        },
+        successFn: (X data) {
+          return builder!(data, service);
+        } as Widget Function(X?)?,
         loadingFn: loading,
       ),
       initialData: this.currentValue,
@@ -43,25 +43,25 @@ extension DataServiceBuilder<X> on DataService<X> {
   }
 
   Widget buildWithContext(
-      {DataServiceWidgetBuilderWithContext<X> builder,
-      String key,
+      {DataServiceWidgetBuilderWithContext<X>? builder,
+      String? key,
       bool allowNull = false,
       bool isSliver = false,
       bool crossFade = true,
-      SimpleWidgetBuilder loading}) {
+      SimpleWidgetBuilder? loading}) {
     final service = this;
     return StreamBuilder<X>(
       key: Key("${X}${key ?? 'StreamBuilder'}"),
-      stream: service.stream,
+      stream: service.stream.where((event) => event != null).cast(),
       initialData: service.currentValue,
       builder: (context, snapshot) => snapshot.render(
         context,
         allowNull: allowNull,
         crossFade: crossFade,
         isSliver: isSliver,
-        successFn: (data) {
-          return builder(context, data, service);
-        },
+        successFn: (X data) {
+          return builder!(context, data, service);
+        } as Widget Function(X?)?,
       ),
     );
   }
@@ -69,21 +69,24 @@ extension DataServiceBuilder<X> on DataService<X> {
 
 extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
   Widget buildFromRecordStream(KType recordId,
-      {RecordDataServiceWidgetBuilder<X, KType> builder,
-      String key,
-      X initialValue,
-      SimpleWidgetBuilder loadingFn}) {
+      {RecordDataServiceWidgetBuilder<X, KType>? builder,
+      String? key,
+      X? initialValue,
+      SimpleWidgetBuilder? loadingFn}) {
     final service = this;
     assert(recordId != null);
     return StreamBuilder<X>(
       key: Key("${X}${key ?? recordId}"),
-      stream: service.recordStream(recordId),
+      stream: service
+          .recordStream(recordId)!
+          .where((event) => event != null)
+          .cast(),
       initialData: initialValue,
       builder: (context, snapshot) => snapshot.render(
         context,
         loadingFn: loadingFn,
         successFn: (data) {
-          return builder(data, service);
+          return builder!(data, service);
         },
       ),
     );
@@ -91,19 +94,19 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
 
   Widget builder(
     KType recordId, {
-    RecordDataServiceWidgetBuilderWithContext<X, KType> builder,
-    String key,
+    RecordDataServiceWidgetBuilderWithContext<X?, KType>? builder,
+    String? key,
     bool allowNull = false,
 
     /// This is useful when the record you want hasn't been loaded by this data
     /// service, but was loaded embedded into another object.  You can use that
     /// local version while you fetch the real one
-    X initialValue,
+    X? initialValue,
   }) {
     final service = this;
     assert(allowNull == true || (recordId != null || initialValue != null));
     if (recordId == null && initialValue == null) {
-      return Builder(builder: (context) => builder(context, null, this));
+      return Builder(builder: (context) => builder!(context, null, this));
     }
     final _initialValue = service.isLoaded(recordId) ? null : initialValue;
     if (sunny.get<IAuthState>().isNotLoggedIn) {
@@ -111,14 +114,17 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
     }
     return StreamBuilder<X>(
       key: Key("${X}${key ?? recordId}"),
-      stream: service.recordStream(recordId),
+      stream: service
+          .recordStream(recordId)!
+          .where((event) => event != null)
+          .cast(),
       initialData: _initialValue,
       builder: (context, snapshot) => snapshot.render(
         context,
         allowNull: allowNull,
-        successFn: (data) {
-          return builder(context, data, service);
-        },
+        successFn: (X data) {
+          return builder!(context, data, service);
+        } as Widget Function(X?)?,
       ),
     );
   }

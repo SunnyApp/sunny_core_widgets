@@ -33,8 +33,6 @@ extension FlexiDateFormatters on FlexiDate {
   }) {
     final flexiDate = this;
     final parts = <String>[];
-    if (flexiDate == null) return null;
-
     if (flexiDate.hasYear) {
       final dt = flexiDate.toDateTime();
       String formatted = timeago.format(dt, allowFromNow: true);
@@ -44,7 +42,7 @@ extension FlexiDateFormatters on FlexiDate {
     }
     if (flexiDate.hasMonth && flexiDate.hasDay) {
       parts.add((dateLabel.isNotEmpty ? "$dateLabel " : "") +
-          formatFlexiDate(flexiDate, withYear: withYear));
+          formatFlexiDate(flexiDate, withYear: withYear)!);
     }
 
     return parts.join(" - ");

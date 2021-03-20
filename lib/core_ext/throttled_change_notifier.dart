@@ -5,7 +5,7 @@ import 'package:sunny_dart/streams/throttle_debounce.dart';
 final _log = Logger("throttledNotifier");
 mixin ThrottledChangeNotifier on ChangeNotifier {
   bool _isActive = true;
-  Limiter _limiter;
+  Limiter? _limiter;
 
   Limiter get limiter => _limiter ??=
       Debouncer(delay: const Duration(milliseconds: 300), atBegin: true);
@@ -21,7 +21,7 @@ mixin ThrottledChangeNotifier on ChangeNotifier {
     }
   }
 
-  R ifActive<R>(R exec()) {
+  R? ifActive<R>(R exec()) {
     if (_isActive) {
       return exec();
     } else {

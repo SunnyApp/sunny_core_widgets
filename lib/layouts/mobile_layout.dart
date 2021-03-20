@@ -13,7 +13,7 @@ class MobilePageLayout with SunnyPageLayoutMixin {
   MobilePageLayout(this.state);
 
   @override
-  Widget buildHeader(BuildContext context, PlatformLayoutInfo layoutInfo) {
+  Widget? buildHeader(BuildContext context, PlatformLayoutInfo layoutInfo) {
     final overrideBg = widget.isWhiteBg ? sunnyColors.white : null;
     return pageTitle == null
         ? null

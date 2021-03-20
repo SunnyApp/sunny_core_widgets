@@ -12,29 +12,29 @@ class SunnyPage extends StatefulWidget {
   final dynamic body;
 
   final dynamic pageTitle;
-  final WidgetBuilder fab;
-  final Widget leading;
-  final AsyncCallback onStretch;
-  final List<Widget> actions;
+  final WidgetBuilder? fab;
+  final Widget? leading;
+  final AsyncCallback? onStretch;
+  final List<Widget>? actions;
   final bool hideAppBar;
   final bool cachePage;
-  final HeroBar expanded;
+  final HeroBar? expanded;
   final bool showTabBarWithKeyboard;
-  final DecorationImage bgImage;
-  final Widget underlay;
-  final Widget overlay;
-  final Color appBarColor;
+  final DecorationImage? bgImage;
+  final Widget? underlay;
+  final Widget? overlay;
+  final Color? appBarColor;
   final bool isWhiteBg;
-  final double headerHeight;
-  final ScrollController scroller;
+  final double? headerHeight;
+  final ScrollController? scroller;
   final bool isImpliedLeading;
   final bool showAppBarDivider;
   final bool isContentPadding;
-  final SunnyPageLayoutFactory layout;
+  final SunnyPageLayoutFactory? layout;
   final bool useBody;
 
   const SunnyPage(
-      {Key key,
+      {Key? key,
       this.body,
       this.expanded,
       this.useBody = false,
@@ -66,7 +66,7 @@ class SunnyPage extends StatefulWidget {
 }
 
 class SunnyPageState extends State<SunnyPage> {
-  SunnyPageLayout _layout;
+  late SunnyPageLayout _layout;
 
   @override
   void initState() {
@@ -95,7 +95,7 @@ class SunnyPageState extends State<SunnyPage> {
     return Provider.value(
       value: platformLayoutInfo,
       child: _layout.build(context, platformLayoutInfo),
-      updateShouldNotify: (a, b) => a != b,
+      updateShouldNotify: (dynamic a, dynamic b) => a != b,
     );
   }
 }

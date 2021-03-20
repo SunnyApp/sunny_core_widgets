@@ -8,10 +8,11 @@ import 'package:uri/uri.dart';
 import 'key_args.dart';
 
 extension AppRouteTypedExtension<R, P extends RouteParams> on AppRoute<R, P> {
-  Route<R> toRoute([P params]) {
+  Route<R?> toRoute([P? params]) {
     final AppRoute<R, P> self = this;
-    final creator =
-        SunnyRouting.router.routeFactory.generate<R, P>(self, null, null, null);
+    final Route<R?> Function(String, P?) creator = SunnyRouting
+        .router.routeFactory
+        .generate<R, P>(self, null, const Duration(milliseconds: 300), null);
     return creator(self.route, params);
   }
 }
@@ -19,9 +20,9 @@ extension AppRouteTypedExtension<R, P extends RouteParams> on AppRoute<R, P> {
 extension FRouterExtensions on FRouter {
   UriTemplateAppPageRoute<R, IdArgs<U>> userPage<U, R>(
       String routePath, WidgetHandler<R, IdArgs<U>> handler,
-      {String name,
-      ToRouteTitle<IdArgs<U>> toRouteTitle,
-      TransitionType transitionType}) {
+      {String? name,
+      ToRouteTitle<IdArgs<U>>? toRouteTitle,
+      TransitionType? transitionType}) {
     final route = UriTemplateAppPageRoute<R, IdArgs<U>>(
       UriTemplate(routePath),
       handler,
@@ -40,8 +41,8 @@ extension FRouterExtensions on FRouter {
   CompletableAppRoute<R, IdArgs<E>> completable<R, E>(
     String routePath,
     MSchemaRef ref, {
-    @required CompletableHandler<R, IdArgs<E>> handler,
-    String name,
+    required CompletableHandler<R, IdArgs<E>> handler,
+    String? name,
   }) {
     final completable = CompletableAppRoute<R, IdArgs<E>>(
         routePath, handler, (_) => IdArgs.of(_),
@@ -53,9 +54,9 @@ extension FRouterExtensions on FRouter {
   /// Creates a [CompletableAppRoute] definition.
   CompletableAppRoute<R, P> completableWithArgs<R, P extends RouteParams>(
     String routePath, {
-    @required CompletableHandler<R, P> handler,
-    @required ParameterConverter<P> converter,
-    String name,
+    required CompletableHandler<R, P> handler,
+    required ParameterConverter<P> converter,
+    String? name,
   }) {
     final completable =
         CompletableAppRoute<R, P>(routePath, handler, converter, name: name);
@@ -65,8 +66,8 @@ extension FRouterExtensions on FRouter {
 
   /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
   UriTemplateAppPageRoute<R, IdArgs<E>> idPage<R, E>(
-      String routePath, Widget handler(BuildContext context, IdArgs<E> args),
-      {String name, TransitionType transitionType}) {
+      String routePath, Widget handler(BuildContext context, IdArgs<E>? args),
+      {String? name, TransitionType? transitionType}) {
     final route = UriTemplateAppPageRoute<R, IdArgs<E>>(
       UriTemplate(routePath),
       (context, args) => handler(context, args),
@@ -79,16 +80,16 @@ extension FRouterExtensions on FRouter {
   }
 
   /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
-  UriTemplateCompletableAppRoute<R, RouteParams> idModal<R>(
+  UriTemplateCompletableAppRoute<R?, RouteParams> idModal<R>(
       String routePath,
-      Widget handler(BuildContext context, RouteParams args,
-          [ScrollController scroller]),
-      {String name,
-      TransitionType transitionType}) {
-    final route = UriTemplateCompletableAppRoute<R, RouteParams>(
+      Widget handler(BuildContext context, RouteParams? args,
+          [ScrollController? scroller]),
+      {String? name,
+      TransitionType? transitionType}) {
+    final route = UriTemplateCompletableAppRoute<R?, RouteParams>(
       UriTemplate(routePath),
-      ((BuildContext context, RouteParams args, _) async {
-        final R r = await CupertinoScaffold.showCupertinoModalBottomSheet<R>(
+      ((BuildContext context, RouteParams? args, _) async {
+        final R? r = await CupertinoScaffold.showCupertinoModalBottomSheet<R>(
             context: context, builder: (context) => handler(context, args));
         return r;
       }),
@@ -103,9 +104,9 @@ extension FRouterExtensions on FRouter {
   UriTemplateAppPageRoute<R, P> modal<R, P extends RouteParams>(
     String routePath,
     WidgetHandler<R, P> handler, {
-    ParameterConverter<P> paramConverter,
-    String name,
-    ToRouteTitle<P> toRouteTitle,
+    ParameterConverter<P>? paramConverter,
+    String? name,
+    ToRouteTitle<P>? toRouteTitle,
   }) {
     return page<R, P>(
       routePath,
@@ -121,8 +122,8 @@ extension FRouterExtensions on FRouter {
   UriTemplateAppPageRoute<R, KeyArgs> modalView<R>(
     MSchemaRef ref,
     WidgetHandler<R, KeyArgs> handler, {
-    String name,
-    ToRouteTitle<KeyArgs> toRouteTitle,
+    String? name,
+    ToRouteTitle<KeyArgs>? toRouteTitle,
   }) {
     return page<R, KeyArgs>(
       ref.toPath("/{id}"),
@@ -138,8 +139,8 @@ extension FRouterExtensions on FRouter {
   UriTemplateAppPageRoute<R, KeyArgs> view<R>(
     MSchemaRef ref,
     WidgetHandler<R, KeyArgs> handler, {
-    String name,
-    ToRouteTitle<KeyArgs> toRouteTitle,
+    String? name,
+    ToRouteTitle<KeyArgs>? toRouteTitle,
   }) {
     return page<R, KeyArgs>(
       ref.toPath("/{id}"),
@@ -155,8 +156,8 @@ extension FRouterExtensions on FRouter {
   UriTemplateAppPageRoute<R, RouteParams> create<R>(
     MSchemaRef ref,
     WidgetHandler<R, RouteParams> handler, {
-    String name,
-    ToRouteTitle<RouteParams> toRouteTitle,
+    String? name,
+    ToRouteTitle<RouteParams>? toRouteTitle,
   }) {
     return page<R, RouteParams>(
       ref.toPath("/create"),
@@ -171,8 +172,8 @@ extension FRouterExtensions on FRouter {
   UriTemplateAppPageRoute<R, RouteParams> list<R>(
     MSchemaRef ref,
     WidgetHandler<R, RouteParams> handler, {
-    String name,
-    ToRouteTitle<RouteParams> toRouteTitle,
+    String? name,
+    ToRouteTitle<RouteParams>? toRouteTitle,
     bool isModal = false,
   }) {
     return page<R, RouteParams>(
@@ -190,8 +191,8 @@ extension FRouterExtensions on FRouter {
   AppRoute<R, RouteParams> function<R>(
     String routePath,
     CompletableHandler<R, RouteParams> handler, {
-    String name,
-    ToRouteTitle toRouteTitle,
+    String? name,
+    ToRouteTitle? toRouteTitle,
   }) {
     final route = UriTemplateCompletableAppRoute<R, RouteParams>(
       UriTemplate(routePath),
@@ -290,6 +291,6 @@ extension MSchemaRefExt on MSchemaRef {
   }
 
   String toPath(String childPath) {
-    return "/${artifactId.pluralize()}${childPath ?? ''}";
+    return "/${artifactId!.pluralize()}${childPath}";
   }
 }

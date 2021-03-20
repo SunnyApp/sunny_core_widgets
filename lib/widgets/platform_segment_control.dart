@@ -13,21 +13,21 @@ const kSegmentControlHeight = 64.0;
 const kSegmentControlHeightMaterial = 74.0;
 
 abstract class PlatformSegmentControl implements Widget, PreferredSizeWidget {
-  int get currentTab;
+  int? get currentTab;
 
   Map<int, SlidingTab> get tabs;
 
-  TabChanged get onTabChange;
+  TabChanged? get onTabChange;
 
-  String get name;
+  String? get name;
 
   factory PlatformSegmentControl.stateless(
-          {Key key,
-          @required String name,
+          {Key? key,
+          required String name,
           int currentTab = 0,
-          @required Map<int, SlidingTab> tabs,
-          Color backgroundColor,
-          TabChanged onTabChange}) =>
+          required Map<int, SlidingTab> tabs,
+          Color? backgroundColor,
+          TabChanged? onTabChange}) =>
       _StatelessPlatformSegmentControl(
           name: name,
           currentTab: currentTab,
@@ -36,12 +36,12 @@ abstract class PlatformSegmentControl implements Widget, PreferredSizeWidget {
           onTabChange: onTabChange);
 
   factory PlatformSegmentControl.stateful(
-          {Key key,
-          @required String name,
+          {Key? key,
+          required String name,
           int currentTab = 0,
-          Color backgroundColor,
-          @required Map<int, SlidingTab> tabs,
-          TabChanged onTabChange}) =>
+          Color? backgroundColor,
+          required Map<int, SlidingTab> tabs,
+          TabChanged? onTabChange}) =>
       _StatefulPlatformSegmentControl(
           name: name,
           currentTab: currentTab,
@@ -53,7 +53,7 @@ abstract class PlatformSegmentControl implements Widget, PreferredSizeWidget {
 mixin PlatformSegmentControlMixin on Widget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(kSegmentControlHeight.px);
-  Color get backgroundColor;
+  Color? get backgroundColor;
 
   Widget withPadding() {
     return Container(
@@ -71,19 +71,19 @@ mixin PlatformSegmentControlMixin on Widget implements PreferredSizeWidget {
 class _StatelessPlatformSegmentControl extends StatelessWidget
     with PlatformSegmentControlMixin
     implements PlatformSegmentControl {
-  final int currentTab;
+  final int? currentTab;
   final Map<int, SlidingTab> tabs;
-  final TabChanged onTabChange;
+  final TabChanged? onTabChange;
   final String name;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
   _StatelessPlatformSegmentControl(
-      {Key key,
-      @required this.name,
+      {Key? key,
+      required this.name,
       this.currentTab,
-      @required this.tabs,
+      required this.tabs,
       this.onTabChange,
-      @required this.backgroundColor})
+      required this.backgroundColor})
       : super(key: key);
 
   @override
@@ -98,19 +98,19 @@ class _StatelessPlatformSegmentControl extends StatelessWidget
 class _StatefulPlatformSegmentControl extends StatefulWidget
     with PlatformSegmentControlMixin
     implements PlatformSegmentControl {
-  final int currentTab;
+  final int? currentTab;
   final Map<int, SlidingTab> tabs;
-  final TabChanged onTabChange;
-  final String name;
-  final Color backgroundColor;
+  final TabChanged? onTabChange;
+  final String? name;
+  final Color? backgroundColor;
 
   _StatefulPlatformSegmentControl(
-      {Key key,
+      {Key? key,
       this.currentTab,
-      @required this.tabs,
+      required this.tabs,
       this.onTabChange,
       this.name,
-      @required this.backgroundColor})
+      required this.backgroundColor})
       : super(key: key);
 
   @override
@@ -121,7 +121,7 @@ class _StatefulPlatformSegmentControl extends StatefulWidget
 
 class _PlatformSegmentControlState
     extends State<_StatefulPlatformSegmentControl> {
-  int _currentTab;
+  int? _currentTab;
 
   @override
   void initState() {
@@ -164,10 +164,10 @@ extension PlatformSegmentControlExt on PlatformSegmentControl {
 class SlidingTab extends StatelessWidget {
   final bool isSelected;
   final String label;
-  final IconData icon;
+  final IconData? icon;
 
   const SlidingTab(
-      {Key key, @required this.label, this.icon, this.isSelected = false})
+      {Key? key, required this.label, this.icon, this.isSelected = false})
       : super(key: key);
 
   @override
@@ -199,8 +199,8 @@ class SlidingTab extends StatelessWidget {
 }
 
 Widget _buildSegment(
-    BuildContext context, PlatformSegmentControl widget, int currentTab,
-    {TabChanged extraTabChange, @required Color backgroundColor}) {
+    BuildContext context, PlatformSegmentControl widget, int? currentTab,
+    {TabChanged? extraTabChange, required Color? backgroundColor}) {
   return Container(
       color: backgroundColor ?? sunnyColors.appBarBackground,
       child: true

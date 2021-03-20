@@ -13,7 +13,7 @@ class ModalOverlayLayout with SunnyPageLayoutMixin implements SunnyPageLayout {
 
   @override
   Widget buildScrollView(BuildContext context, dynamic scrollables,
-      Widget headerSliver, PlatformLayoutInfo layoutInfo,
+      Widget? headerSliver, PlatformLayoutInfo layoutInfo,
       {bool shrinkWrap = false}) {
     return CustomScrollView(
       controller: widget.scroller,
@@ -28,17 +28,17 @@ class ModalOverlayLayout with SunnyPageLayoutMixin implements SunnyPageLayout {
   /// A modal page doesn't need a scaffold, and doesn't take up as much space as possible
   @override
   Widget wrapInScaffold(BuildContext context, PlatformLayoutInfo info) {
-    final widget = state.widget;
+    final SunnyPage widget = state.widget;
     final overrideBg = widget.isWhiteBg ? sunnyColors.white : null;
     var pageGuts = (widget.fab != null ||
             widget.underlay != null ||
             widget.overlay != null)
         ? Stack(
             children: [
-              if (widget.underlay != null) widget.underlay,
+              if (widget.underlay != null) widget.underlay!,
               buildPageGuts(context, info),
-              if (widget.fab != null) widget.fab(context),
-              if (widget.overlay != null) widget.overlay,
+              if (widget.fab != null) widget.fab!(context),
+              if (widget.overlay != null) widget.overlay!,
             ],
           )
         : buildPageGuts(context, info, shrinkWrap: shrinkWrap);
@@ -50,7 +50,7 @@ class ModalOverlayLayout with SunnyPageLayoutMixin implements SunnyPageLayout {
 
   /// On web, the top header is replaced by a static bar, and the "regular" header
   /// is placed down within the card
-  Widget buildHeader(
+  Widget? buildHeader(
     BuildContext context,
     PlatformLayoutInfo layoutInfo,
   ) {
