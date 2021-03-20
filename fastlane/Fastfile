@@ -20,21 +20,11 @@ fastlane_require 'open3'
 p $VERBOSE
 
 lane :publish do |options|
-  ensure_git_status_clean
+  pub_release options
+end
 
-
-  old_version = curr_semver
-
-  increase_version
-
-  # Whatever happened with the incrementing, this is the build number we're
-  # going with
-  version = curr_semver
-  changes = release_notes options
-  puts(changes)
-
-  pub_publish
-  finalize_version
+lane :build_runner do |options|
+  sunny_build_runner options
 end
 
 lane :icons do
