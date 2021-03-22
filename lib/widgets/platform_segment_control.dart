@@ -200,9 +200,10 @@ class SlidingTab extends StatelessWidget {
 Widget _buildSegment(
     BuildContext context, PlatformSegmentControl widget, int? currentTab,
     {TabChanged? extraTabChange, required Color? backgroundColor}) {
+  final isTrue = 1 == 1;
   return Container(
       color: backgroundColor ?? sunnyColors.appBarBackground,
-      child: true
+      child: isTrue
           ? CupertinoSlidingSegmentedControl2<int>(
               key: Key("${widget.name}-tabs"),
               children: widget.tabs.map((k, v) {
