@@ -9,21 +9,21 @@ dependencies:
   equatable: ^2.0.0
   intl: ^0.17.0
   expanding_cards: ^0.5.1-nullsafety.7
-  sunny_fluro: ^1.8.0-nullsafe.2
-  flexidate: ^0.4.5-nullsafety.2
+  sunny_fluro: ^1.8.0-nullsafe.3
+  flexidate: ^0.4.5-nullsafety.3
   flutter_platform_widgets: ^1.0.1-nullsafety.2
   flutter_screen_scaling: ^3.3.2+1
   logging: ^1.0.0
-  info_x: ^0.4.4-nullsafety.1
+  info_x: ^0.4.4-nullsafety.2
   material_segmented_control: ^3.0.0-nullsafety.1
-  dartxx: ^0.4.5-nullsafety.5
-  sunny_essentials: ^0.4.4-nullsafety.4
+  dartxx: ^0.4.5-nullsafety.8
+  sunny_essentials: ^0.4.4-nullsafety.7
   modal_bottom_sheet: ^2.0.0
   permission_handler: ^6.1.1
   provider: ^5.0.0
   responsive_builder: ^0.4.0-nullsafety.1
   timeago: ^3.0.2
-  sunny_sdk_core: ^2.0.0-nullsafe.16
+  sunny_sdk_core: ^2.0.0-nullsafe.20
   uri: ^1.0.0
   flutter: 
     sdk: flutter

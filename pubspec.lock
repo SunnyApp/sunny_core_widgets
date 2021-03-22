@@ -203,14 +203,14 @@ packages:
       name: dartx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.0"
+    version: "0.7.1"
   dartxx:
     dependency: "direct main"
     description:
       name: dartxx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.5-nullsafety.5"
+    version: "0.4.5-nullsafety.8"
   dio2:
     dependency: transitive
     description:
@@ -308,7 +308,7 @@ packages:
       name: flexidate
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.5-nullsafety.2"
+    version: "0.4.5-nullsafety.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -414,7 +414,7 @@ packages:
       name: info_x
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4-nullsafety.1"
+    version: "0.4.4-nullsafety.2"
   intl:
     dependency: "direct main"
     description:
@@ -762,28 +762,28 @@ packages:
       name: sunny_dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.3+2"
+    version: "0.8.3+3"
   sunny_essentials:
     dependency: "direct main"
     description:
       name: sunny_essentials
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4-nullsafety.4"
+    version: "0.4.4-nullsafety.7"
   sunny_fluro:
     dependency: "direct main"
     description:
       name: sunny_fluro
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0-nullsafe.2"
+    version: "1.8.0-nullsafe.3"
   sunny_sdk_core:
     dependency: "direct main"
     description:
       name: sunny_sdk_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0-nullsafe.16"
+    version: "2.0.0-nullsafe.20"
   synchronized:
     dependency: transitive
     description:
@@ -853,7 +853,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "3.0.2"
   vector_math:
     dependency: transitive
     description:
