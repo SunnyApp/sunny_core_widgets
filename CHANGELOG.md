@@ -1,3 +1,6 @@
+## [0.2.0+1]
+ * Minor bump
+
 ## [0.1.2-nullsafety.3]
  * Updated to match sunny_sdk_core
 
