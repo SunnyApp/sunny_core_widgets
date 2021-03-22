@@ -1,3 +1,6 @@
+## [0.1.2-nullsafety.3]
+ * Updated to match sunny_sdk_core
+
 ## [0.1.1+12]
  * Gemfile
 Updated fastlane
