@@ -48,7 +48,6 @@ Future<T?> bottomSheetModal<T>(
       return showPlatformDialog<T>(
         context: context,
         useRootNavigator: true,
-        androidBarrierDismissible: true,
         barrierDismissible: true,
         builder: memoizeWidgetBuilder(
           (context) => Center(
@@ -142,7 +141,6 @@ Future<T?> modal<T>(
     return showPlatformDialog<T>(
         context: context,
         useRootNavigator: true,
-        androidBarrierDismissible: true,
         barrierDismissible: true,
         routeSettings: settings,
         builder: memoizeWidgetBuilder(

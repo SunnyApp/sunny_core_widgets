@@ -175,7 +175,7 @@ packages:
       name: collection_diff
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3+5"
+    version: "2.0.3+6"
   convert:
     dependency: transitive
     description:
@@ -210,7 +210,7 @@ packages:
       name: dartxx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.5-nullsafety.8"
+    version: "0.5.0+2"
   dio2:
     dependency: transitive
     description:
@@ -231,7 +231,7 @@ packages:
       name: expanding_cards
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1-nullsafety.7"
+    version: "0.6.0+2"
   fake_async:
     dependency: transitive
     description:
@@ -308,7 +308,7 @@ packages:
       name: flexidate
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.5-nullsafety.3"
+    version: "0.5.0+1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -334,21 +334,21 @@ packages:
       name: flutter_degen
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1-nullsafety.2"
+    version: "0.6.0+3"
   flutter_platform_widgets:
     dependency: "direct main"
     description:
       name: flutter_platform_widgets
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1-nullsafety.2"
+    version: "1.1.0"
   flutter_screen_scaling:
     dependency: "direct main"
     description:
       name: flutter_screen_scaling
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.2+1"
+    version: "3.3.2+2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -414,7 +414,7 @@ packages:
       name: info_x
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4-nullsafety.2"
+    version: "0.5.0+1"
   intl:
     dependency: "direct main"
     description:
@@ -596,7 +596,7 @@ packages:
       name: pfile
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1-nullsafety.3"
+    version: "2.1.0+2"
   platform:
     dependency: transitive
     description:
@@ -762,28 +762,28 @@ packages:
       name: sunny_dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.3+3"
+    version: "0.9.0+1"
   sunny_essentials:
     dependency: "direct main"
     description:
       name: sunny_essentials
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4-nullsafety.7"
+    version: "0.5.0+1"
   sunny_fluro:
     dependency: "direct main"
     description:
       name: sunny_fluro
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.0-nullsafe.3"
+    version: "1.8.0+1"
   sunny_sdk_core:
     dependency: "direct main"
     description:
       name: sunny_sdk_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0-nullsafe.20"
+    version: "2.0.0+2"
   synchronized:
     dependency: transitive
     description:
