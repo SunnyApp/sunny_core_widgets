@@ -216,14 +216,7 @@ class SizedCupertinoNavigationBar extends StatefulWidget
     this.actionsForegroundColor,
     this.transitionBetweenRoutes = true,
     this.heroTag = _defaultHeroTag,
-  })  : assert(automaticallyImplyLeading != null),
-        assert(automaticallyImplyMiddle != null),
-        assert(transitionBetweenRoutes != null),
-        assert(
-            heroTag != null,
-            'heroTag cannot be null. Use transitionBetweenRoutes = false to '
-            'disable Hero transition on this navigation bar.'),
-        assert(
+  })  : assert(
             !transitionBetweenRoutes || identical(heroTag, _defaultHeroTag),
             'Cannot specify a heroTag override if this navigation bar does not '
             'transition due to transitionBetweenRoutes = false.'),

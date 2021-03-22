@@ -108,7 +108,7 @@ Future<T?> modal<T>(
   BuildContext context, {
   required WidgetBuilder builder,
   bool displayDragHandle = true,
-  required PathRouteSettings settings,
+  PathRouteSettings? settings,
   double? width,
   double? height,
   bool expand = true,

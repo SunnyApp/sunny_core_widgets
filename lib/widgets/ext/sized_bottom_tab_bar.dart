@@ -160,7 +160,7 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
     }
 
     // Return the border as is when it's a subclass.
-    final Border resolvedBorder = border == null || border.runtimeType != Border
+    final Border resolvedBorder = border.runtimeType != Border
         ? border
         : Border(
             top: resolveBorderSide(border.top),
@@ -220,13 +220,6 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
     final List<Widget> result = <Widget>[];
     final CupertinoLocalizations localizations =
         CupertinoLocalizations.of(context);
-    assert(
-        localizations != null,
-        'CupertinoTabBar requires a Localizations parent in order to provide an '
-        'appropriate Semantics hint for tab indexing. A CupertinoApp will '
-        'provide the DefaultCupertinoLocalizations, or you can instantiate your '
-        'own Localizations.');
-
     for (int index = 0; index < items.length; index += 1) {
       final bool active = index == currentIndex;
       result.add(
@@ -250,7 +243,8 @@ class SizedCupertinoTabBar extends StatelessWidget implements CupertinoTabBar {
                   padding: const EdgeInsets.only(bottom: 4.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: _buildSingleTabItem(items[index], active) as List<Widget>,
+                    children: _buildSingleTabItem(items[index], active)
+                        as List<Widget>,
                   ),
                 ),
               ),

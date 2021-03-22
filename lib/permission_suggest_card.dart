@@ -44,7 +44,6 @@ class _PermissionSuggestCardState extends State<PermissionSuggestCard> {
         return _openAppSettingsWidget();
       case PermissionStatus.granted:
         return widget.grantedBuilder?.call(context) ?? emptyBox;
-        return emptyBox;
       case PermissionStatus.restricted:
         return emptyBox;
       default:
