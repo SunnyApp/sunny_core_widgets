@@ -1,3 +1,6 @@
+## [0.2.0+2]
+ * Dep updates
+
 ## [0.2.0+1]
  * Minor bump
 
