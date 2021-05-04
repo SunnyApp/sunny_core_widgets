@@ -231,7 +231,7 @@ packages:
       name: expanding_cards
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0+2"
+    version: "0.6.0+3"
   fake_async:
     dependency: transitive
     description:
@@ -769,7 +769,7 @@ packages:
       name: sunny_essentials
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0+1"
+    version: "0.6.0+1"
   sunny_fluro:
     dependency: "direct main"
     description:
