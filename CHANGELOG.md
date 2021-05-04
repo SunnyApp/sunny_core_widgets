@@ -1,3 +1,6 @@
+## [0.2.0+3]
+ * Bump essentials
+
 ## [0.2.0+2]
  * Dep updates
 
