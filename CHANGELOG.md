@@ -1,3 +1,6 @@
+## [0.2.0+4]
+ * Updating color resolution
+
 ## [0.2.0+3]
  * Bump essentials
 
