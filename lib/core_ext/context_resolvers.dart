@@ -54,16 +54,16 @@ mixin SplitRegistrationResolver implements BuildContextResolver {
   }
 }
 
-extension ResolverInitToProviderExt<T> on Inst<T> {
+extension ResolverInitToProviderExt<T extends Object> on Inst<T> {
   Provider toProvider() {
-    Provider<X?> _toProvider<X>(Inst<X?> inst) {
+    Provider<X> _toProvider<X extends Object>(Inst<X> inst) {
       return isFactory
-          ? Provider<X?>(
+          ? Provider<X>(
               create: inst.factory!,
               dispose: ((_, _inst) => inst.dispose?.call(_inst)),
             )
-          : Provider<X?>.value(
-              value: inst.instance,
+          : Provider<X>.value(
+              value: inst.instance!,
               updateShouldNotify: inst.shouldUpdate,
             );
     }

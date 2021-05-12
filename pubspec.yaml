@@ -27,6 +27,9 @@ dependencies:
   uri: ^1.0.0
   flutter: 
     sdk: flutter
-dev_dependencies: 
+dependency_overrides:
+  sunny_sdk_core:
+    path: ../sunny_sdk_core
+dev_dependencies:
   flutter_test: 
     sdk: flutter
