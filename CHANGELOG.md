@@ -1,3 +1,6 @@
+## [0.2.0+5]
+ * Fixing resolvers
+
 ## [0.2.0+4]
  * Updating color resolution
 
