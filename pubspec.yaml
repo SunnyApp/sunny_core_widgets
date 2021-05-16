@@ -5,23 +5,23 @@ description: Core widgets used by Sunny
 environment: 
   sdk: '>=2.12.0 <3.0.0'
 dependencies: 
-  cached_network_image: ^3.0.0-nullsafety
+  cached_network_image: ^3.0.0
   dartxx: ^0.5.0+2
   equatable: ^2.0.0
   expanding_cards: ^0.6.0+3
   flexidate: ^0.5.0+1
-  flutter_platform_widgets: ^1.0.1-nullsafety.2
+  flutter_platform_widgets: ^1.7.1
   flutter_screen_scaling: ^3.3.2+2
   info_x: ^0.5.0+1
   intl: ^0.17.0
-  logging: ^1.0.0
-  material_segmented_control: ^3.0.0-nullsafety.1
+  logging: ^1.0.1
+  material_segmented_control: ^3.1.2
   modal_bottom_sheet: ^2.0.0
-  permission_handler: ^6.1.1
+  permission_handler: ^7.1.0
   provider: ^5.0.0
-  responsive_builder: ^0.4.0-nullsafety.1
+  responsive_builder: ^0.4.1
   sunny_essentials: ^0.6.0+1
-  sunny_fluro: ^1.8.0+1
+  sunny_fluro: ^1.8.0+3
   sunny_sdk_core: ^2.0.0+4
   timeago: ^3.0.2
   uri: ^1.0.0
