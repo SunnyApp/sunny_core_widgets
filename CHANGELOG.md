@@ -1,3 +1,6 @@
+## [0.2.0+7]
+ * Updated dependencies
+
 ## [0.2.0+5]
  * Fixing resolvers
 
