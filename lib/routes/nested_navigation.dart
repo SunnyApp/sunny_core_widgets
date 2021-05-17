@@ -163,7 +163,7 @@ Future<T?> modal<T>(
         ));
   } else {
     /// Previous behavior
-    final nn = Provided.find<NestedNavigatorContainer>(context);
+    Provided.find<NestedNavigatorContainer>(context);
     final navState = nestedGlobalKey.currentState;
     Widget? _p;
     if (navState != null && nestModals == true) {

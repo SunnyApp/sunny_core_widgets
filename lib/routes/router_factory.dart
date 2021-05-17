@@ -47,7 +47,6 @@ class SunnyRouterFactory implements RouterFactory {
             if (allowNestedModals) {
               /// Previous behavior
               final nn = Provided.find<NestedNavigatorContainer>(context);
-              final navState = nestedGlobalKey.currentState;
               Widget? _p;
               if (nn != null) {
                 return _p ??= appRoute.handle(context, params!);

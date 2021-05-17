@@ -65,7 +65,7 @@ class _PermissionSuggestCardState extends State<PermissionSuggestCard> {
 
   Widget _openAppSettingsWidget() {
     var cardArgs = PlatformCardArgs(onTap: (context) async {
-      final result = await openAppSettings();
+      await openAppSettings();
     });
     return widget.requestArgs?.copyWith(args: cardArgs) ??
         PlatformListTile(title: Text("Open App Settings"));

@@ -17,6 +17,7 @@ class DesktopPageLayout with SunnyPageLayoutMixin {
   Widget buildScrollView(BuildContext context, dynamic scrollables,
       Widget? headerSliver, PlatformLayoutInfo layoutInfo,
       {bool shrinkWrap = false}) {
+    // ignore: unused_local_variable
     var psc = PrimaryScrollController.of(context);
     return super.buildScrollViewWithWrapper(
       context,
