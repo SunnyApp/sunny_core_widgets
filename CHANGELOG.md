@@ -1,3 +1,6 @@
+## [0.2.0+9]
+ * Fixing analyzer
+
 ## [0.2.0+8]
  * Updated dependencies
 Update Gemfile
