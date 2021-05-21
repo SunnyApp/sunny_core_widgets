@@ -1,3 +1,6 @@
+## [0.2.0+11]
+ * Updating modals
+
 ## [0.2.0+10]
  * Updated dependencies
 

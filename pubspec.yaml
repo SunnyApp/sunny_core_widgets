@@ -1,5 +1,5 @@
 name: sunny_core_widgets
-version: 0.2.0+10
+version: 0.2.0+11
 homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
 environment: 
@@ -20,16 +20,13 @@ dependencies:
   permission_handler: ^7.1.0
   provider: ^5.0.0
   responsive_builder: ^0.4.1
-  sunny_essentials: ^0.6.0+4
+  sunny_essentials: ^0.6.0+5
   sunny_fluro: ^1.9.0+1
   sunny_sdk_core: ^2.0.0+8
   timeago: ^3.0.2
   uri: ^1.0.0
   flutter: 
     sdk: flutter
-dependency_overrides:
-  sunny_essentials:
-    path: ../sunny_essentials
-dev_dependencies:
+dev_dependencies: 
   flutter_test: 
     sdk: flutter
