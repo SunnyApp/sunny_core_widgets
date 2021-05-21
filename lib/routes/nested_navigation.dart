@@ -1,27 +1,55 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
-import 'package:sunny_essentials/sunny_essentials.dart';
-
-import 'package:sunny_core_widgets/routes/handle_sheet.dart';
-import 'package:sunny_core_widgets/routes/platform_page_route.dart';
 import 'package:sunny_core_widgets/routes/route_extensions.dart';
-import 'package:info_x/info_x.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 
 final nestedGlobalKey =
     GlobalKey<NavigatorState>(debugLabel: "nestedGlobalKey");
 
 class NestedNavigatorContainer extends StatelessWidget {
+  static void popAll(
+    BuildContext context, {
+    bool rootNavigator = false,
+    Object? result,
+  }) {
+    final nested = Provided.find<NestedNavigatorContainer>(context);
+    if (nested?.parent != null) {
+      nested!.parent!.pop(result);
+    } else {
+      return Navigator.of(context, rootNavigator: rootNavigator).pop(result);
+    }
+  }
+
+  static void popSingle(
+    BuildContext context, {
+    bool rootNavigator = false,
+    Object? result,
+  }) {
+    final nested = Provided.find<NestedNavigatorContainer>(context);
+    if (nested?.navigatorKey != null) {
+      nested!.navigatorKey?.currentState?.pop(result);
+    } else {
+      return Navigator.of(context, rootNavigator: rootNavigator).pop(result);
+    }
+  }
+
   final Navigator? child;
+  final GlobalKey<NavigatorState>? navigatorKey;
+  final NavigatorState? parent;
   final ScrollController? scroller;
 
-  const NestedNavigatorContainer({Key? key, required this.child, this.scroller})
+  const NestedNavigatorContainer(
+      {Key? key,
+      this.navigatorKey,
+      required this.parent,
+      required this.child,
+      this.scroller})
       : super(key: key);
 
   @override
@@ -103,143 +131,4 @@ Future<T?> nestedModal<T>(
   return context.page<T>((context) {
     return w ??= scrollBuilder(context);
   });
-}
-
-Future<T?> modal<T>(
-  BuildContext context, {
-  required WidgetBuilder builder,
-  bool displayDragHandle = true,
-  PathRouteSettings? settings,
-  double? width,
-  double? height,
-  bool expand = true,
-  bool nestModals = false,
-}) {
-  // switch (context.screenType) {
-  //   case rs.DeviceScreenType.desktop:
-
-  // if (expand != true) {
-  //   Widget _p;
-  //
-  //   return showBarModalBottomSheet<T>(
-  //     context: context,
-  //     useRootNavigator: true,
-  //     expand: expand,
-  //     enableDrag: true,
-  //     bounce: true,
-  //     isDismissible: true,
-  //     // routeSettings: settings,
-  //
-  //     builder: (context) => displayDragHandle
-  //         ? (_p ??= builder(context).withDragHandle())
-  //         : (_p ??= builder(context)),
-  //   );
-  // }
-  if (infoX.isIOS == false) {
-    width ??= 600.px;
-    height ??= 570.px;
-    return showPlatformDialog<T>(
-        context: context,
-        useRootNavigator: true,
-        barrierDismissible: true,
-        routeSettings: settings,
-        builder: memoizeWidgetBuilder(
-          (context) => Center(
-            child: Layout.container()
-                .borderRadiusAll(16)
-                .backgroundColor(
-                    expand == false ? Colors.transparent : sunnyColors.white)
-                .single(
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    child: SizedBox(
-                      width: width,
-                      height: height,
-                      child: Center(child: builder(context)),
-                    ),
-                  ),
-                ),
-          ),
-        ));
-  } else {
-    /// Previous behavior
-    Provided.find<NestedNavigatorContainer>(context);
-    final navState = nestedGlobalKey.currentState;
-    Widget? _p;
-    if (navState != null && nestModals == true) {
-      return navState.push<T>(
-        PlatformPageRoute(
-          settings: settings,
-          builder: (context) {
-            if (displayDragHandle) {
-              return _p ??= builder(context).withDragHandle();
-            } else {
-              return _p ??= builder(context);
-            }
-          },
-        ),
-      );
-    } else {
-      final scaffold = CupertinoScaffold.of(context);
-      if (scaffold != null && expand) {
-        return CupertinoScaffold.showCupertinoModalBottomSheet<T>(
-          context: context,
-          useRootNavigator: true,
-          bounce: true,
-          enableDrag: true,
-          expand: expand,
-          settings: settings,
-          isDismissible: true,
-          builder: (context) {
-            Widget? w;
-            return w ??= Provider(
-                create: (_) => NestedNavigatorContainer(child: null),
-                child: displayDragHandle
-                    ? builder(context).withDragHandle()
-                    : builder(context));
-          },
-        );
-      } else {
-        Widget? w;
-
-        return showCupertinoModalBottomSheet<T>(
-          context: context,
-          useRootNavigator: true,
-          bounce: true,
-          expand: expand,
-          enableDrag: true,
-          settings: settings,
-          barrierColor: Colors.black54,
-          isDismissible: true,
-          builder: (context) {
-            return w ??= Provider(
-                create: (_) => NestedNavigatorContainer(child: null),
-                child: displayDragHandle
-                    ? builder(context).withDragHandle()
-                    : builder(context));
-          },
-        );
-      }
-    }
-  }
-}
-
-extension WidgetDragHandle on Widget {
-  Widget withDragHandle() {
-    return widgetWithDragHandle(child: this);
-  }
-}
-
-Widget widgetWithDragHandle({Widget? child}) {
-  return Stack(
-    alignment: Alignment.topCenter,
-    fit: StackFit.loose,
-    children: [
-      child!,
-      SizedBox(
-        height: 18,
-        child: const Center(child: const DragHandle()),
-      ),
-    ],
-  );
 }

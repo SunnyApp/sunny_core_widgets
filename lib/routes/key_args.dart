@@ -120,6 +120,8 @@ class IdArgs<R> with RouteParamsMixin {
 
 class AuthModalArgs extends ScrollerArgs with EquatableMixin {
   final bool showLogo;
+  final WidgetBuilder? topMessage;
+  final WidgetBuilder? bottomWidget;
 
   @override
   final ScrollController? scroller;
@@ -132,8 +134,15 @@ class AuthModalArgs extends ScrollerArgs with EquatableMixin {
 
   AuthModalArgs({
     this.showLogo = true,
+    this.topMessage,
+    this.bottomWidget,
     this.scroller,
-  }) : super({"showLogo": showLogo, "scroller": scroller});
+  }) : super({
+          "topMessage": topMessage,
+          "bottomWidget": bottomWidget,
+          "showLogo": showLogo,
+          "scroller": scroller
+        });
 
   /// Makes it easy to pass to builder arg
   static AuthModalArgs builder(ScrollController controller) {

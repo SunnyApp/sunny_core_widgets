@@ -4,6 +4,7 @@ import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:sunny_sdk_core/model_exports.dart';
 
 import 'key_args.dart';
+import 'modals.dart';
 import 'routing.dart';
 
 extension AppRouteNavigationExtension<R, P extends RouteParams>
@@ -24,29 +25,38 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
     ModalArgsBuilder<P>? argsBuilder,
     bool expand = true,
     bool showHandle = true,
+    bool dismissible = true,
     String? label,
     bool replace = false,
+    double? height,
+    double? width,
     bool nestModals = false,
+    bool useRootNavigator = true,
   }) async {
     final _args = args ?? argsBuilder?.call(null);
     if (this is AppPageRoute<R, P>) {
       final ar = this as AppPageRoute<R, P>;
-      return await modal<R>(
+      return await Modals.open<R>(
         context,
         displayDragHandle: showHandle,
+        dismissible: dismissible,
+        draggable: dismissible,
+        nestModals: nestModals,
+        height: height,
+        width: width,
+        useRootNavigator: useRootNavigator,
+        expand: expand,
+        settings: PathRouteSettings.ofAppRoute(ar, routeParams: _args),
         builder: memoizeScrollBuild(
           (context) {
             final _args = args ?? argsBuilder?.call(null);
             return ar.handleAny(context, _args);
           },
         ),
-        expand: expand,
-        settings: PathRouteSettings.ofAppRoute(ar, routeParams: _args),
-        nestModals: nestModals,
       );
+    } else {
+      return await go(context, args: _args);
     }
-
-    return await go(context, args: _args);
   }
 
   // Route<R> toRoute([P params]) {
@@ -62,7 +72,7 @@ extension RouteCast on Route {
 }
 
 extension AppRouteKeyNavExtension<R, T> on AppRoute<R, KeyArgs<T>> {
-  Future<R> goToRecord(BuildContext context, MSchemaRef ref, String id,
+  Future<R?> goToRecord(BuildContext context, MSchemaRef ref, String id,
       {Map<String, dynamic>? others, T? record}) async {
     return this.go(
       context,
@@ -137,7 +147,7 @@ extension AppRouteMatchGoExtension on AppRouteMatch {
 
 extension AppRouteGoNavigationExtension<R, P extends RouteParams>
     on AppRoute<R, P>? {
-  Future<R> go(
+  Future<R?> go(
     BuildContext context, {
     P? args,
     bool replace = false,
@@ -149,12 +159,10 @@ extension AppRouteGoNavigationExtension<R, P extends RouteParams>
       return (await routes.navigateToDynamicRoute(context, this,
           replace: replace,
           parameters: args,
-          rootNavigator: useRootNavigator)) as R;
+          rootNavigator: useRootNavigator)) as R?;
     } else {
-      return routes.navigateToRoute(context, this!,
-          replace: replace,
-          parameters: args,
-          rootNavigator: useRootNavigator) as R;
+      return routes.navigateToRoute<R, P>(context, this!,
+          replace: replace, parameters: args, rootNavigator: useRootNavigator);
     }
   }
 }

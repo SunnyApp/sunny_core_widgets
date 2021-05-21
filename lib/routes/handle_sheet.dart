@@ -10,21 +10,33 @@ class HandleSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
-      child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 12),
-            SafeArea(
-              bottom: false,
-              child: const DragHandle(),
-            ),
-            SizedBox(height: 8),
-            child!,
-          ]),
-    );
+    return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(height: 12),
+          SafeArea(
+            bottom: false,
+            child: const DragHandle(),
+          ),
+          SizedBox(height: 8),
+          child!,
+        ]);
+    // return AnnotatedRegion<SystemUiOverlayStyle>(
+    //   value: SystemUiOverlayStyle.light,
+    //   child: Column(
+    //       mainAxisSize: MainAxisSize.min,
+    //       crossAxisAlignment: CrossAxisAlignment.center,
+    //       children: [
+    //         SizedBox(height: 12),
+    //         SafeArea(
+    //           bottom: false,
+    //           child: const DragHandle(),
+    //         ),
+    //         SizedBox(height: 8),
+    //         child!,
+    //       ]),
+    // );
   }
 }
 

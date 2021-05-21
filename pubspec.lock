@@ -766,10 +766,10 @@ packages:
   sunny_essentials:
     dependency: "direct main"
     description:
-      name: sunny_essentials
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.0+3"
+      path: "../sunny_essentials"
+      relative: true
+    source: path
+    version: "0.6.0+4"
   sunny_fluro:
     dependency: "direct main"
     description:
