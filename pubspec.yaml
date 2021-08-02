@@ -20,9 +20,9 @@ dependencies:
   permission_handler: ^8.1.4+2
   provider: ^5.0.0
   responsive_builder: ^0.4.1
-  sunny_essentials: ^0.6.0+6
-  sunny_fluro: ^1.9.0+1
-  sunny_sdk_core: ^2.0.0+9
+  sunny_essentials: ^0.6.0+9
+  sunny_fluro: ^1.10.0
+  sunny_sdk_core: ^2.0.0+10
   timeago: ^3.1.0
   uri: ^1.0.0
   flutter: 
