@@ -1,3 +1,6 @@
+## [0.2.0+14]
+ * Upgraded fluro
+
 ## [0.2.0+13]
  * Updating deps
 
