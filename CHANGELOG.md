@@ -1,3 +1,6 @@
+## [0.2.0+13]
+ * Updating deps
+
 ## [0.2.0+11]
  * Updating modals
 
