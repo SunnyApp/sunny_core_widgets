@@ -112,7 +112,21 @@ packages:
       name: cached_network_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
+  cached_network_image_platform_interface:
+    dependency: transitive
+    description:
+      name: cached_network_image_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  cached_network_image_web:
+    dependency: transitive
+    description:
+      name: cached_network_image_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   characters:
     dependency: transitive
     description:
@@ -224,7 +238,7 @@ packages:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.3"
   expanding_cards:
     dependency: "direct main"
     description:
@@ -341,7 +355,7 @@ packages:
       name: flutter_platform_widgets
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.1"
+    version: "1.9.5"
   flutter_screen_scaling:
     dependency: "direct main"
     description:
@@ -575,14 +589,14 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.1.0"
+    version: "8.1.4+2"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.3.0"
+    version: "3.6.1"
   petitparser:
     dependency: transitive
     description:
@@ -769,7 +783,7 @@ packages:
       name: sunny_essentials
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0+5"
+    version: "0.6.0+6"
   sunny_fluro:
     dependency: "direct main"
     description:
@@ -783,7 +797,7 @@ packages:
       name: sunny_sdk_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+8"
+    version: "2.0.0+9"
   synchronized:
     dependency: transitive
     description:
@@ -818,7 +832,7 @@ packages:
       name: timeago
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.1.0"
   timezone:
     dependency: transitive
     description:
