@@ -35,7 +35,7 @@ extension DataServiceBuilder<X> on DataService<X> {
         allowNull: allowNull,
         successFn: (X data) {
           return builder!(data, service);
-        } as Widget Function(X?)?,
+        },
         loadingFn: loading,
       ),
       initialData: this.currentValue,
@@ -61,7 +61,7 @@ extension DataServiceBuilder<X> on DataService<X> {
         isSliver: isSliver,
         successFn: (X data) {
           return builder!(context, data, service);
-        } as Widget Function(X?)?,
+        },
       ),
     );
   }

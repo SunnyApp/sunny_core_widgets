@@ -22,6 +22,8 @@ PageRoute<T> PlatformPageRoute<T>({
   RouteSettings? settings,
   bool maintainState = true,
   bool fullscreenDialog = false,
+  bool nonOpaque = true,
+  bool forceMaterial = false,
   bool inPageRoute = false,
 }) {
   if (inPageRoute == true) {
@@ -33,8 +35,14 @@ PageRoute<T> PlatformPageRoute<T>({
       settings: settings,
       maintainState: maintainState,
     );
-  } else if (infoX.isIOS) {
+  } else if (infoX.isIOS && nonOpaque) {
     return NonOpaqueCupertinoPageRoute<T>(
+        builder: builder!,
+        settings: settings,
+        maintainState: maintainState,
+        fullscreenDialog: fullscreenDialog);
+  } else if (infoX.isIOS && !forceMaterial) {
+    return CupertinoPageRoute<T>(
         builder: builder!,
         settings: settings,
         maintainState: maintainState,

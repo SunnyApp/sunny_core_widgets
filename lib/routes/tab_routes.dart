@@ -153,16 +153,27 @@ extension AppRouteGoNavigationExtension<R, P extends RouteParams>
     bool replace = false,
     bool useRootNavigator = false,
     bool nestModals = false,
+    NavigatorState? navigator,
   }) async {
     final routes = SunnyRouting.router;
     if (R == dynamic) {
-      return (await routes.navigateToDynamicRoute(context, this,
-          replace: replace,
-          parameters: args,
-          rootNavigator: useRootNavigator)) as R?;
+      return (await routes.navigateToDynamicRoute(
+        context,
+        this,
+        replace: replace,
+        parameters: args,
+        rootNavigator: useRootNavigator,
+        navigator: navigator,
+      )) as R?;
     } else {
-      return routes.navigateToRoute<R, P>(context, this!,
-          replace: replace, parameters: args, rootNavigator: useRootNavigator);
+      return routes.navigateToRoute<R, P>(
+        context,
+        this!,
+        replace: replace,
+        parameters: args,
+        rootNavigator: useRootNavigator,
+        navigator: navigator,
+      );
     }
   }
 }

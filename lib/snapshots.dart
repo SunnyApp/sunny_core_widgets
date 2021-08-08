@@ -64,7 +64,7 @@ extension SnapshotExtensions<X> on AsyncSnapshot<X> {
     if (hasError) {
       widget = errorFn(this.error!, null);
     } else if (hasData || allowNull == true) {
-      widget = successFn!(data!);
+      widget = successFn!(data as X);
     } else {
       widget = loadingFn();
     }
