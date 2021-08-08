@@ -1,3 +1,6 @@
+## [0.2.0+15]
+ * Updating fluro routing to include navigator parameter
+
 ## [0.2.0+14]
  * Upgraded fluro
 
