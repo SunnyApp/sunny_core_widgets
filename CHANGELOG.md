@@ -1,3 +1,6 @@
+## [0.2.0+16]
+ * Updating sunny_fluro dependency
+
 ## [0.2.0+15]
  * Updating fluro routing to include navigator parameter
 
