@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:flutter/widgets.dart';
+import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:sunny_sdk_core/model_exports.dart';
 import 'package:sunny_sdk_core/sunny_sdk_core.dart';
 
@@ -32,8 +32,7 @@ class KeyArgs<R> with RouteParamsMixin {
   final R? record;
   final Map<String, dynamic> args;
 
-  KeyArgs(MKey this.id, {Map<String, dynamic>? args, this.record})
-      : args = {...?args, "id": id.mxid, "record": record};
+  KeyArgs(MKey this.id, {Map<String, dynamic>? args, this.record}) : args = {...?args, "id": id.mxid, "record": record};
 
   KeyArgs.fromArgs(MSchemaRef ref, this.args)
       : id = ref.mkey(args["id"] ?? illegalState("Missing id")),
@@ -46,8 +45,7 @@ class KeyArgs<R> with RouteParamsMixin {
     return illegalState("Can't extract keyArgs");
   }
 
-  KeyArgs.fromId(MSchemaRef ref, String id,
-      {R? record, Map<String, dynamic>? args})
+  KeyArgs.fromId(MSchemaRef ref, String id, {R? record, Map<String, dynamic>? args})
       : this(ref.mkey(id)!, record: record, args: args);
 
   operator [](key) {
@@ -78,8 +76,7 @@ class IdArgs<R> with RouteParamsMixin {
   final R? record;
   final Map<String, dynamic> args;
 
-  IdArgs(this.id, {Map<String, dynamic>? args, this.record})
-      : args = {...?args, "id": id, "record": record};
+  IdArgs(this.id, {Map<String, dynamic>? args, this.record}) : args = {...?args, "id": id, "record": record};
 
   IdArgs.fromArgs(this.args)
       : id = (args["id"] as String?) ?? illegalState("Missing id"),
@@ -92,8 +89,7 @@ class IdArgs<R> with RouteParamsMixin {
     return illegalState("Can't extract keyArgs");
   }
 
-  IdArgs.fromId(String id, {R? record, Map<String, dynamic>? args})
-      : this(id, record: record, args: args);
+  IdArgs.fromId(String id, {R? record, Map<String, dynamic>? args}) : this(id, record: record, args: args);
 
   operator [](key) {
     if (key == "id") return id;
@@ -137,12 +133,7 @@ class AuthModalArgs extends ScrollerArgs with EquatableMixin {
     this.topMessage,
     this.bottomWidget,
     this.scroller,
-  }) : super({
-          "topMessage": topMessage,
-          "bottomWidget": bottomWidget,
-          "showLogo": showLogo,
-          "scroller": scroller
-        });
+  }) : super({"topMessage": topMessage, "bottomWidget": bottomWidget, "showLogo": showLogo, "scroller": scroller});
 
   /// Makes it easy to pass to builder arg
   static AuthModalArgs builder(ScrollController controller) {
@@ -160,14 +151,12 @@ abstract class ScrollerArgs extends DefaultRouteParams {
   ScrollController? get scroller;
 
   ScrollerArgs(Map<String, dynamic> args) : super(args);
-  static ScrollerArgs? from(dynamic of) {
-    if (of == null) return null;
+  static ScrollerArgs from(dynamic of) {
+    if (of == null) return ScrollerArgs.of(null);
     if (of is ScrollerArgs) return of;
-    if (of is Map<String, dynamic>)
-      return ScrollerArgs.of(of["scroller"] as ScrollController?);
+    if (of is Map<String, dynamic>) return ScrollerArgs.of(of["scroller"] as ScrollController?);
     if (of is ScrollController) return ScrollerArgs.of(of);
-    if (of is RouteParams)
-      return ScrollerArgs.of(of["scroller"] as ScrollController?);
+    if (of is RouteParams) return ScrollerArgs.of(of["scroller"] as ScrollController?);
     return ScrollerArgs.of(null);
   }
 
@@ -184,6 +173,5 @@ class _ScrollerArgs extends ScrollerArgs {
 }
 
 extension MModelIdArgsExt<X extends MModel> on X {
-  IdArgs<X> idArgs({String? id, Map<String, dynamic>? args}) =>
-      IdArgs(id ?? this.id, args: args, record: this);
+  IdArgs<X> idArgs({String? id, Map<String, dynamic>? args}) => IdArgs(id ?? this.id, args: args, record: this);
 }

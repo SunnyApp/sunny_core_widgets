@@ -15,7 +15,7 @@ mixin ThrottledChangeNotifier on ChangeNotifier {
   @mustCallSuper
   @override
   void dispose() {
-    if (_isActive = true) {
+    if (_isActive == true) {
       _isActive = false;
       super.dispose();
     }

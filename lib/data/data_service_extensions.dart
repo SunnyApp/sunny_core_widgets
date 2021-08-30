@@ -124,7 +124,7 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
         allowNull: allowNull,
         successFn: (X data) {
           return builder!(context, data, service);
-        } as Widget Function(X?)?,
+        },
       ),
     );
   }

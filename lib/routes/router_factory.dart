@@ -13,22 +13,15 @@ class SunnyRouterFactory implements RouterFactory {
 
   @override
   RouteCreator<R, P> generate<R, P extends RouteParams>(
-      AppRoute<R, P> appRoute,
-      TransitionType? transition,
-      Duration? transitionDuration,
-      transitionsBuilder) {
+      AppRoute<R, P> appRoute, TransitionType? transition, Duration? transitionDuration, transitionsBuilder) {
     return (name, params) {
       _log.info("Creating route for ${appRoute} using ${params}");
       if (appRoute is CompletableAppRoute<R, P>) {
         _log.info(" [${appRoute.route}] is CompletableRoute");
         return CompletableRouteAdapter<R>((context) {
-          return appRoute.handleAny(context, params,
-              (context, appRoute, params) {
-            final Route<dynamic> Function(String?, RouteParams) c = generateAny(
-                appRoute,
-                TransitionType.native,
-                Duration(milliseconds: 300),
-                null);
+          return appRoute.handleAny(context, params, (context, appRoute, params) {
+            final Route<dynamic> Function(String?, RouteParams) c =
+                generateAny(appRoute, TransitionType.native, Duration(milliseconds: 300), null);
             final route = c(appRoute.routeTitle(params), params);
             return Navigator.of(context).push(route);
           }).then((_) => _ as R);
@@ -49,7 +42,7 @@ class SunnyRouterFactory implements RouterFactory {
               final nn = Provided.find<NestedNavigatorContainer>(context);
               Widget? _p;
               if (nn != null) {
-                return _p ??= appRoute.handle(context, params!);
+                return _p ??= appRoute.handle(context, params);
               }
             }
             return appRoute.handleAny(context, params);
@@ -63,9 +56,7 @@ class SunnyRouterFactory implements RouterFactory {
   }
 
   @override
-  RouteCreator generateAny(AppRoute appRoute, TransitionType? transition,
-      Duration? transitionDuration, transitionsBuilder) {
-    return generate<dynamic, RouteParams>(
-        appRoute, transition, transitionDuration, transitionsBuilder);
+  RouteCreator generateAny(AppRoute appRoute, TransitionType? transition, Duration? transitionDuration, transitionsBuilder) {
+    return generate<dynamic, RouteParams>(appRoute, transition, transitionDuration, transitionsBuilder);
   }
 }

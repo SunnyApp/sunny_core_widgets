@@ -21,7 +21,7 @@ dependencies:
   provider: ^5.0.0
   responsive_builder: ^0.4.1
   sunny_essentials: ^0.6.0+9
-  sunny_fluro: ^1.10.1+1
+  sunny_fluro: ^1.11.0+4
   sunny_sdk_core: ^2.0.0+10
   timeago: ^3.1.0
   uri: ^1.0.0

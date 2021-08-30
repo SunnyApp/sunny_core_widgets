@@ -7,8 +7,7 @@ import 'key_args.dart';
 import 'modals.dart';
 import 'routing.dart';
 
-extension AppRouteNavigationExtension<R, P extends RouteParams>
-    on AppRoute<R, P> {
+extension AppRouteNavigationExtension<R, P extends RouteParams> on AppRoute<R, P> {
   Future<R?> modalNested(BuildContext context, {P? args}) async {
     if (this is AppPageRoute<R, P>) {
       final ar = this as AppPageRoute<R, P>;
@@ -16,7 +15,7 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
         return ar.handleAny(context, args);
       }, settings: null);
     }
-    return go(context, args: args);
+    return go(context, args: args ?? const DefaultRouteParams() as P);
   }
 
   Future<R?> openModal(
@@ -72,8 +71,7 @@ extension RouteCast on Route {
 }
 
 extension AppRouteKeyNavExtension<R, T> on AppRoute<R, KeyArgs<T>> {
-  Future<R?> goToRecord(BuildContext context, MSchemaRef ref, String id,
-      {Map<String, dynamic>? others, T? record}) async {
+  Future<R?> goToRecord(BuildContext context, MSchemaRef ref, String id, {Map<String, dynamic>? others, T? record}) async {
     return this.go(
       context,
       args: KeyArgs<T>.fromId(ref, id, args: others, record: record),
@@ -101,27 +99,22 @@ extension TabPageExt on FRouter {
 
   /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
   AppRoute<R, ScrollerArgs> defineScroll<R>(String routePath,
-      {String? name,
-      required WidgetHandler<R, ScrollerArgs> handler,
-      TransitionType? transitionType}) {
+      {String? name, required WidgetHandler<R, ScrollerArgs> handler, TransitionType? transitionType}) {
     return register<R, ScrollerArgs, AppPageRoute<R, ScrollerArgs>>(
       AppPageRoute(routePath, handler, (_) => ScrollerArgs.from(_),
-          name: name,
-          transitionType: transitionType,
-          toRouteUri: (settings) => routePath),
+          name: name, transitionType: transitionType, toRouteUri: (settings) => routePath),
     );
   }
 }
 
 /// Passes the ScrollController to the route args
-typedef ModalArgsBuilder<P extends RouteParams> = P Function(
-    ScrollController? controller);
+typedef ModalArgsBuilder<P extends RouteParams> = P Function(ScrollController? controller);
 
 class TabRouteArgs extends DefaultRouteParams implements InternalArgs {
   final ScrollController? scroller;
 
-  static TabRouteArgs? of(final args) {
-    if (args == null) return null;
+  static TabRouteArgs of(final args) {
+    if (args == null) return TabRouteArgs(null);
     if (args is TabRouteArgs) {
       return args;
     } else if (args is RouteParams) {
@@ -139,14 +132,12 @@ class TabRouteArgs extends DefaultRouteParams implements InternalArgs {
 extension AppRouteMatchGoExtension on AppRouteMatch {
   Future<R?> go<R, P extends RouteParams>(BuildContext context,
       {P? args, bool replace = false, bool useRootNavigator = false}) async {
-    final dynamic rtn = await this.route.go(context,
-        args: args, replace: replace, useRootNavigator: useRootNavigator);
+    final dynamic rtn = await this.route.go(context, args: args, replace: replace, useRootNavigator: useRootNavigator);
     return rtn as R?;
   }
 }
 
-extension AppRouteGoNavigationExtension<R, P extends RouteParams>
-    on AppRoute<R, P>? {
+extension AppRouteGoNavigationExtension<R, P extends RouteParams> on AppRoute<R, P>? {
   Future<R?> go(
     BuildContext context, {
     P? args,
@@ -161,7 +152,7 @@ extension AppRouteGoNavigationExtension<R, P extends RouteParams>
         context,
         this,
         replace: replace,
-        parameters: args,
+        parameters: args ?? (const DefaultRouteParams()),
         rootNavigator: useRootNavigator,
         navigator: navigator,
       )) as R?;
@@ -170,7 +161,7 @@ extension AppRouteGoNavigationExtension<R, P extends RouteParams>
         context,
         this!,
         replace: replace,
-        parameters: args,
+        parameters: args ?? const DefaultRouteParams() as P,
         rootNavigator: useRootNavigator,
         navigator: navigator,
       );

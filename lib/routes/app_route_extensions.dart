@@ -8,21 +8,17 @@ import 'package:uri/uri.dart';
 import 'key_args.dart';
 
 extension AppRouteTypedExtension<R, P extends RouteParams> on AppRoute<R, P> {
-  Route<R?> toRoute([P? params]) {
+  Route<R?> toRoute(P params) {
     final AppRoute<R, P> self = this;
-    final Route<R?> Function(String, P?) creator = SunnyRouting
-        .router.routeFactory
-        .generate<R, P>(self, null, const Duration(milliseconds: 300), null);
+    final Route<R?> Function(String, P) creator =
+        SunnyRouting.router.routeFactory.generate<R, P>(self, null, const Duration(milliseconds: 300), null);
     return creator(self.route, params);
   }
 }
 
 extension FRouterExtensions on FRouter {
-  UriTemplateAppPageRoute<R, IdArgs<U>> userPage<U, R>(
-      String routePath, WidgetHandler<R, IdArgs<U>> handler,
-      {String? name,
-      ToRouteTitle<IdArgs<U>>? toRouteTitle,
-      TransitionType? transitionType}) {
+  UriTemplateAppPageRoute<R, IdArgs<U>> userPage<U, R>(String routePath, WidgetHandler<R, IdArgs<U>> handler,
+      {String? name, ToRouteTitle<IdArgs<U>>? toRouteTitle, TransitionType? transitionType}) {
     final route = UriTemplateAppPageRoute<R, IdArgs<U>>(
       UriTemplate(routePath),
       handler,
@@ -44,9 +40,7 @@ extension FRouterExtensions on FRouter {
     required CompletableHandler<R, IdArgs<E>> handler,
     String? name,
   }) {
-    final completable = CompletableAppRoute<R, IdArgs<E>>(
-        routePath, handler, (_) => IdArgs.of(_),
-        name: name);
+    final completable = CompletableAppRoute<R, IdArgs<E>>(routePath, handler, (_) => IdArgs.of(_), name: name);
     this.register(completable);
     return completable;
   }
@@ -58,15 +52,13 @@ extension FRouterExtensions on FRouter {
     required ParameterConverter<P> converter,
     String? name,
   }) {
-    final completable =
-        CompletableAppRoute<R, P>(routePath, handler, converter, name: name);
+    final completable = CompletableAppRoute<R, P>(routePath, handler, converter, name: name);
     this.register(completable);
     return completable;
   }
 
   /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
-  UriTemplateAppPageRoute<R, IdArgs<E>> idPage<R, E>(
-      String routePath, Widget handler(BuildContext context, IdArgs<E>? args),
+  UriTemplateAppPageRoute<R, IdArgs<E>> idPage<R, E>(String routePath, Widget handler(BuildContext context, IdArgs<E>? args),
       {String? name, TransitionType? transitionType}) {
     final route = UriTemplateAppPageRoute<R, IdArgs<E>>(
       UriTemplate(routePath),
@@ -81,11 +73,8 @@ extension FRouterExtensions on FRouter {
 
   /// Creates an [AppPageRoute] definition whose arguments are [Map<String, dynamic>]
   UriTemplateCompletableAppRoute<R?, RouteParams> idModal<R>(
-      String routePath,
-      Widget handler(BuildContext context, RouteParams? args,
-          [ScrollController? scroller]),
-      {String? name,
-      TransitionType? transitionType}) {
+      String routePath, Widget handler(BuildContext context, RouteParams? args, [ScrollController? scroller]),
+      {String? name, TransitionType? transitionType}) {
     final route = UriTemplateCompletableAppRoute<R?, RouteParams>(
       UriTemplate(routePath),
       ((BuildContext context, RouteParams? args, _) async {
@@ -180,8 +169,7 @@ extension FRouterExtensions on FRouter {
       ref.toPath(""),
       handler,
       paramConverter: defaultConverter,
-      transitionType:
-          isModal ? TransitionType.nativeModal : TransitionType.native,
+      transitionType: isModal ? TransitionType.nativeModal : TransitionType.native,
       name: name,
       toRouteTitle: toRouteTitle,
     );
