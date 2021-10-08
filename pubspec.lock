@@ -316,7 +316,7 @@ packages:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.0.2"
   matcher:
     dependency: transitive
     description:
@@ -442,7 +442,7 @@ packages:
       name: pfile
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0+3"
+    version: "2.1.0+4"
   platform:
     dependency: transitive
     description:
@@ -587,14 +587,14 @@ packages:
       name: sunny_fluro
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.11.0+4"
+    version: "1.11.0+5"
   sunny_sdk_core:
     dependency: "direct main"
     description:
       name: sunny_sdk_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+10"
+    version: "2.1.0+1"
   synchronized:
     dependency: transitive
     description:
@@ -687,5 +687,5 @@ packages:
     source: hosted
     version: "5.1.0"
 sdks:
-  dart: ">=2.12.0 <3.0.0"
+  dart: ">=2.13.0 <3.0.0"
   flutter: ">=2.0.0"
