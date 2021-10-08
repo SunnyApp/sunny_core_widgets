@@ -1,3 +1,6 @@
+## [0.3.0+17]
+ * Bump minor;
+
 ## [0.2.0+16]
  * Updating sunny_fluro dependency
 
