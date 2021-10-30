@@ -8,11 +8,11 @@ dependencies:
   cached_network_image: ^3.1.0
   dartxx: ^0.5.3+2
   equatable: ^2.0.3
-  expanding_cards: ^0.6.0+4
-  flexidate: ^0.6.0+2
+  expanding_cards: ^0.8.0+6
+  flexidate: ^0.8.0+3
   flutter_platform_widgets: ^1.9.5
   flutter_screen_scaling: ^3.3.2+3
-  info_x: ^0.7.0+1
+  info_x: ^0.8.0+3
   intl: ^0.17.0
   logging: ^1.0.2
   material_segmented_control: ^3.1.2
@@ -20,9 +20,9 @@ dependencies:
   permission_handler: ^8.2.5
   provider: ^6.0.1
   responsive_builder: ^0.4.1
-  sunny_essentials: ^0.6.0+12
+  sunny_essentials: ^0.8.0+13
   sunny_fluro: ^1.11.0+6
-  sunny_sdk_core: ^2.2.0+6
+  sunny_sdk_core: ^2.4.0+7
   timeago: ^3.1.0
   uri: ^1.0.0
   flutter: 
