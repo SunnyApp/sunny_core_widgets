@@ -1,3 +1,6 @@
+## [0.3.0+19]
+ * Updated deps
+
 ## [0.3.0+18]
  * Updated deps
 
