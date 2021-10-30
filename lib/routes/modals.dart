@@ -28,6 +28,9 @@ typedef OpenModal<T> = Future<T?> Function(BuildContext context,
     bool useRootNavigator,
     bool nestModals});
 
+
+typedef ModalOpenerOverride = ModalOpener? Function(BuildContext context, {bool useScaffold});
+
 class Modals {
   const Modals._();
 
@@ -36,9 +39,19 @@ class Modals {
       const CupertinoModalOpener(useScaffold: false);
   static const android = const AndroidModalOpener();
   static const desktop = const DesktopModalOpener();
+  static final _modalHandlers = <ModalOpenerOverride>[];
+  static void register(ModalOpenerOverride handler) {
+    if(!_modalHandlers.contains(handler)) {
+      _modalHandlers.add(handler);
+    }
+  }
 
   static ModalOpener of<T>(BuildContext context, {bool useScaffold = true}) {
     final layoutInfo = sunny.get<LayoutInfo>(context: context);
+    final ModalOpener? override = _modalHandlers.map((e) => e(context, useScaffold: useScaffold)).firstWhere((element) => element!=null, orElse: ()=> null);
+    if(override != null) {
+      return override;
+    }
     if (layoutInfo.screenType == DeviceScreenType.desktop) {
       return desktop;
     } else if (infoX.isAndroid) {

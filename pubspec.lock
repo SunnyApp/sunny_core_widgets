@@ -112,7 +112,7 @@ packages:
       name: dartxx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0+2"
+    version: "0.5.3+2"
   dio2:
     dependency: transitive
     description:
@@ -133,7 +133,7 @@ packages:
       name: expanding_cards
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0+3"
+    version: "0.6.0+4"
   fake_async:
     dependency: transitive
     description:
@@ -337,7 +337,7 @@ packages:
       name: matrix4_transform
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   meta:
     dependency: transitive
     description:
@@ -477,7 +477,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.1"
   pub_semver:
     dependency: transitive
     description:
@@ -573,28 +573,28 @@ packages:
       name: sunny_dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0+2"
+    version: "0.11.0+5"
   sunny_essentials:
     dependency: "direct main"
     description:
       name: sunny_essentials
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.0+9"
+    version: "0.6.0+12"
   sunny_fluro:
     dependency: "direct main"
     description:
       name: sunny_fluro
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.11.0+5"
+    version: "1.11.0+6"
   sunny_sdk_core:
     dependency: "direct main"
     description:
       name: sunny_sdk_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0+1"
+    version: "2.2.0+6"
   synchronized:
     dependency: transitive
     description:

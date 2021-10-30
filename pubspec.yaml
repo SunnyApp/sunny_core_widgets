@@ -3,26 +3,26 @@ version: 0.3.0+17
 homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
 environment: 
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.13.0 <3.0.0'
 dependencies: 
   cached_network_image: ^3.1.0
-  dartxx: ^0.5.0+2
+  dartxx: ^0.5.3+2
   equatable: ^2.0.3
-  expanding_cards: ^0.6.0+3
+  expanding_cards: ^0.6.0+4
   flexidate: ^0.6.0+2
   flutter_platform_widgets: ^1.9.5
   flutter_screen_scaling: ^3.3.2+3
   info_x: ^0.7.0+1
   intl: ^0.17.0
-  logging: ^1.0.1
+  logging: ^1.0.2
   material_segmented_control: ^3.1.2
   modal_bottom_sheet: ^2.0.0
-  permission_handler: ^8.1.4+2
-  provider: ^5.0.0
+  permission_handler: <8.2.0
+  provider: ^6.0.1
   responsive_builder: ^0.4.1
-  sunny_essentials: ^0.6.0+9
-  sunny_fluro: ^1.11.0+5
-  sunny_sdk_core: ^2.1.0+1
+  sunny_essentials: ^0.6.0+12
+  sunny_fluro: ^1.11.0+6
+  sunny_sdk_core: ^2.2.0+6
   timeago: ^3.1.0
   uri: ^1.0.0
   flutter: 

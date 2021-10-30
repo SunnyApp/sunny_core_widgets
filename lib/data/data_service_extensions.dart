@@ -68,6 +68,7 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
       {RecordDataServiceWidgetBuilder<X, KType>? builder,
       String? key,
       X? initialValue,
+      bool isSliver = false,
       SimpleWidgetBuilder loadingFn = kLoader}) {
     final service = this;
     assert(recordId != null);
@@ -77,6 +78,7 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
       initialData: initialValue,
       builder: (context, snapshot) => snapshot.render(
         context,
+        isSliver: isSliver,
         loadingFn: loadingFn,
         successFn: (data) {
           return builder!(data, service);

@@ -47,6 +47,17 @@ PageRoute<T> PlatformPageRoute<T>({
         settings: settings,
         maintainState: maintainState,
         fullscreenDialog: fullscreenDialog);
+  } else if (infoX.isMacOS) {
+    return PageRouteBuilder(
+      settings: settings,
+      transitionsBuilder: (context, a1, a2, page) {
+        var curveTween = CurveTween(curve: Curves.easeIn);
+        return FadeTransition(
+            opacity: a1.drive(curveTween),
+            child: page);
+      },
+      pageBuilder: (context, animation, animation2) => Builder(builder: builder!),
+    );
   } else {
     return MaterialPageRoute<T>(
       builder: builder!,
