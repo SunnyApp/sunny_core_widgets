@@ -1,5 +1,5 @@
 name: sunny_core_widgets
-version: 0.3.0+17
+version: 0.3.0+18
 homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
 environment: 
@@ -17,7 +17,7 @@ dependencies:
   logging: ^1.0.2
   material_segmented_control: ^3.1.2
   modal_bottom_sheet: ^2.0.0
-  permission_handler: <8.2.0
+  permission_handler: '<8.2.0'
   provider: ^6.0.1
   responsive_builder: ^0.4.1
   sunny_essentials: ^0.6.0+12

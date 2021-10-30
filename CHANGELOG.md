@@ -1,3 +1,6 @@
+## [0.3.0+18]
+ * Updated deps
+
 ## [0.3.0+17]
  * Bump minor;
 
