@@ -3,7 +3,7 @@ version: 0.3.0+18
 homepage: https://github.com/SunnyApp/sunny_core_widgets
 description: Core widgets used by Sunny
 environment: 
-  sdk: '>=2.13.0 <3.0.0'
+  sdk: '>=2.14.0 <3.0.0'
 dependencies: 
   cached_network_image: ^3.1.0
   dartxx: ^0.5.3+2
@@ -17,7 +17,7 @@ dependencies:
   logging: ^1.0.2
   material_segmented_control: ^3.1.2
   modal_bottom_sheet: ^2.0.0
-  permission_handler: '<8.2.0'
+  permission_handler: ^8.2.5
   provider: ^6.0.1
   responsive_builder: ^0.4.1
   sunny_essentials: ^0.6.0+12
