@@ -39,7 +39,7 @@ extension DataServiceBuilder<X> on DataService<X> {
   }
 
   Widget buildWithContext(
-      {DataServiceWidgetBuilderWithContext<X>? builder,
+      {DataServiceWidgetBuilderWithContext<X?>? builder,
       String? key,
       bool allowNull = false,
       bool isSliver = false,
@@ -55,9 +55,16 @@ extension DataServiceBuilder<X> on DataService<X> {
         allowNull: allowNull,
         crossFade: crossFade,
         isSliver: isSliver,
-        successFn: (X data) {
-          return builder!(context, data, service);
+        builder: (input, loader) {
+          if (input != null || allowNull) {
+            return builder!(context, input, service);
+          } else {
+            return loader();
+          }
         },
+        // successFn: (X data) {
+        //   return builder!(context, data, service);
+        // },
       ),
     );
   }

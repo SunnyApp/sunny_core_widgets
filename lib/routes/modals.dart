@@ -91,6 +91,8 @@ class Modals {
   }
 }
 
+/// Describes how to open modal windows on the various platforms.  A new modal
+/// opener can be registered by using [Modals.register]
 abstract class ModalOpener {
   Future<T?> open<T>(BuildContext context,
       {required WidgetBuilder builder,

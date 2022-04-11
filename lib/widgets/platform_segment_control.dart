@@ -210,7 +210,7 @@ Widget _buildSegment(
                 return MapEntry(
                     k, k == widget.currentTab ? v.selected() : v.unselected());
               }),
-              padding: EdgeInsets.all(2.px),
+              // padding: EdgeInsets.all(2.px),
               backgroundColor: sunnyColors.g200,
               groupValue: currentTab,
               onValueChanged: (i) {
