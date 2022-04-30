@@ -115,6 +115,7 @@ class IdArgs<R> with RouteParamsMixin {
 }
 
 class AuthModalArgs extends ScrollerArgs with EquatableMixin {
+  static final defaults = AuthModalArgs();
   final bool showLogo;
   final WidgetBuilder? topMessage;
   final WidgetBuilder? bottomWidget;

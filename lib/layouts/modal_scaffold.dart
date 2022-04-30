@@ -4,14 +4,14 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 import 'package:sunny_essentials/theme/sunny_colors.dart';
 
-class ModalScaffold extends StatelessWidget {
+class PlatformModalScaffold extends PlatformWidget {
   final bool dismissible;
   final Widget? title;
   final bool isScrolling;
   final bool automaticallyImplyLeading;
   final Widget body;
 
-  const ModalScaffold({
+  PlatformModalScaffold({
     Key? key,
     this.dismissible = true,
     this.isScrolling = false,
@@ -21,7 +21,16 @@ class ModalScaffold extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget createCupertinoWidget(BuildContext context) {
+    return createWidget(context);
+  }
+
+  @override
+  Widget createMaterialWidget(BuildContext context) {
+    return createWidget(context);
+  }
+
+  Widget createWidget(BuildContext context) {
     final appBar = title == null
         ? null
         : PlatformAppBar(

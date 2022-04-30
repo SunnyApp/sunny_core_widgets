@@ -3,11 +3,14 @@ import 'package:sunny_core_widgets/snapshots.dart';
 import 'package:sunny_essentials/sunny_essentials.dart';
 import 'package:sunny_sdk_core/sunny_sdk_core.dart';
 
-typedef DataServiceWidgetBuilder<X> = Widget Function(X data, DataService<X> service);
+typedef DataServiceWidgetBuilder<X> = Widget Function(
+    X data, DataService<X> service);
 
-typedef DataServiceWidgetBuilderWithContext<X> = Widget Function(BuildContext context, X data, DataService<X> service);
+typedef DataServiceWidgetBuilderWithContext<X> = Widget Function(
+    BuildContext context, X data, DataService<X> service);
 
-typedef RecordDataServiceWidgetBuilder<X, KType> = Widget Function(X data, RecordDataService<X, KType> service);
+typedef RecordDataServiceWidgetBuilder<X, KType> = Widget Function(
+    X data, RecordDataService<X, KType> service);
 
 typedef RecordDataServiceWidgetBuilderWithContext<X, KType> = Widget Function(
     BuildContext context, X data, RecordDataService<X, KType> service);
@@ -23,7 +26,10 @@ extension DataServiceBuilder<X> on DataService<X> {
     final service = this;
     return StreamBuilder<X>(
       key: key is Key ? key : Key("${X}${key ?? 'StreamBuilder'}"),
-      stream: service.stream.where((event) => event != null).cast(),
+      stream: service.stream
+          .asBroadcastStream()
+          .where((event) => event != null)
+          .cast(),
       builder: (context, snapshot) => snapshot.render(
         context,
         isSliver: isSliver,
@@ -81,7 +87,10 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
     assert(recordId != null);
     return StreamBuilder<X>(
       key: Key("${X}${key ?? recordId}"),
-      stream: service.recordStream(recordId)!.where((event) => event != null).cast(),
+      stream: service
+          .recordStream(recordId)!
+          .where((event) => event != null)
+          .cast(),
       initialData: initialValue,
       builder: (context, snapshot) => snapshot.render(
         context,
@@ -116,7 +125,8 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
     var isInitialized = service.isInitialized(recordId);
 
     /// If the record is loaded into memory, use that memory value to have an immediate rendering.
-    final _initialValue = isInitialized ? service.tryGet(recordId) : initialValue;
+    final _initialValue =
+        isInitialized ? service.tryGet(recordId) : initialValue;
 
     if (sunny.get<IAuthState>().isNotLoggedIn) {
       return isSliver ? emptyBox.sliverBox() : emptyBox;
@@ -135,7 +145,9 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
               context,
               isSliver: isSliver,
               builder: (X? data, loading) {
-                return data == null ? loading() : builder!(context, data, service);
+                return data == null
+                    ? loading()
+                    : builder!(context, data, service);
               },
             )
           : snapshot.render(

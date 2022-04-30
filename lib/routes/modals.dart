@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:info_x/info_x.dart';
@@ -28,8 +29,8 @@ typedef OpenModal<T> = Future<T?> Function(BuildContext context,
     bool useRootNavigator,
     bool nestModals});
 
-
-typedef ModalOpenerOverride = ModalOpener? Function(BuildContext context, {bool useScaffold});
+typedef ModalOpenerOverride = ModalOpener? Function(BuildContext context,
+    {bool useScaffold});
 
 class Modals {
   const Modals._();
@@ -41,15 +42,17 @@ class Modals {
   static const desktop = const DesktopModalOpener();
   static final _modalHandlers = <ModalOpenerOverride>[];
   static void register(ModalOpenerOverride handler) {
-    if(!_modalHandlers.contains(handler)) {
+    if (!_modalHandlers.contains(handler)) {
       _modalHandlers.add(handler);
     }
   }
 
   static ModalOpener of<T>(BuildContext context, {bool useScaffold = true}) {
     final layoutInfo = sunny.get<LayoutInfo>(context: context);
-    final ModalOpener? override = _modalHandlers.map((e) => e(context, useScaffold: useScaffold)).firstWhere((element) => element!=null, orElse: ()=> null);
-    if(override != null) {
+    final ModalOpener? override = _modalHandlers
+        .map((e) => e(context, useScaffold: useScaffold))
+        .firstWhere((element) => element != null, orElse: () => null);
+    if (override != null) {
       return override;
     }
     if (layoutInfo.screenType == DeviceScreenType.desktop) {
@@ -71,23 +74,27 @@ class Modals {
       bool displayDragHandle = true,
       bool dismissible = true,
       bool draggable = true,
+      Constraints? constraints,
       PathRouteSettings? settings,
       double? width,
       double? height,
       bool expand = false,
       bool useRootNavigator = true,
       bool nestModals = false}) {
-    return Modals.of(context, useScaffold: useScaffold).open(context,
-        builder: builder,
-        displayDragHandle: displayDragHandle,
-        dismissible: dismissible,
-        draggable: draggable,
-        settings: settings,
-        width: width,
-        useRootNavigator: useRootNavigator,
-        height: height,
-        expand: expand,
-        nestModals: nestModals);
+    return Modals.of(context, useScaffold: useScaffold).open(
+      context,
+      builder: builder,
+      displayDragHandle: displayDragHandle,
+      dismissible: dismissible,
+      draggable: draggable,
+      settings: settings,
+      width: width,
+      useRootNavigator: useRootNavigator,
+      height: height,
+      expand: expand,
+      nestModals: nestModals,
+      constraints: constraints,
+    );
   }
 }
 
@@ -104,22 +111,28 @@ abstract class ModalOpener {
       double? height,
       bool expand = false,
       bool useRootNavigator = true,
-      bool nestModals = false});
+      Constraints? constraints,
+      bool nestModals = false,
+      extraOptions});
 }
 
 class DesktopModalOpener implements ModalOpener {
   @override
-  Future<T?> open<T>(BuildContext context,
-      {required builder,
-      bool displayDragHandle = true,
-      bool dismissible = true,
-      bool draggable = true,
-      PathRouteSettings? settings,
-      double? width,
-      double? height,
-      bool useRootNavigator = true,
-      bool expand = false,
-      bool nestModals = false}) {
+  Future<T?> open<T>(
+    BuildContext context, {
+    required builder,
+    bool displayDragHandle = true,
+    bool dismissible = true,
+    bool draggable = true,
+    PathRouteSettings? settings,
+    double? width,
+    double? height,
+    bool useRootNavigator = true,
+    bool expand = false,
+    bool nestModals = false,
+    Constraints? constraints,
+    extraOptions,
+  }) {
     width ??= 600.px;
     height ??= 570.px;
     return showPlatformDialog<T>(
@@ -156,17 +169,21 @@ class CupertinoModalOpener<T> implements ModalOpener {
   const CupertinoModalOpener({this.useScaffold = true});
 
   @override
-  Future<T?> open<T>(BuildContext context,
-      {required builder,
-      bool displayDragHandle = true,
-      bool dismissible = true,
-      bool draggable = true,
-      PathRouteSettings? settings,
-      double? width,
-      double? height,
-      bool useRootNavigator = true,
-      bool expand = false,
-      bool nestModals = false}) {
+  Future<T?> open<T>(
+    BuildContext context, {
+    required builder,
+    bool displayDragHandle = true,
+    bool dismissible = true,
+    bool draggable = true,
+    PathRouteSettings? settings,
+    double? width,
+    double? height,
+    bool useRootNavigator = true,
+    bool expand = false,
+    bool nestModals = false,
+    Constraints? constraints,
+    extraOptions,
+  }) {
     final scaffold = CupertinoScaffold.of(context);
     final nested = Provided.find<NestedNavigatorContainer>(context);
     if (nested?.child != null &&
@@ -252,17 +269,21 @@ class CupertinoModalOpener<T> implements ModalOpener {
 
 class AndroidModalOpener<T> implements ModalOpener {
   @override
-  Future<T?> open<T>(BuildContext context,
-      {required builder,
-      bool displayDragHandle = true,
-      bool dismissible = true,
-      bool draggable = true,
-      PathRouteSettings? settings,
-      double? width,
-      double? height,
-      bool expand = false,
-      bool useRootNavigator = true,
-      bool nestModals = false}) {
+  Future<T?> open<T>(
+    BuildContext context, {
+    required builder,
+    bool displayDragHandle = true,
+    bool dismissible = true,
+    bool draggable = true,
+    PathRouteSettings? settings,
+    double? width,
+    double? height,
+    bool expand = false,
+    bool useRootNavigator = true,
+    bool nestModals = false,
+    Constraints? constraints,
+    extraOptions,
+  }) {
     Widget? w;
 
     return showMaterialModalBottomSheet<T>(
@@ -282,24 +303,4 @@ class AndroidModalOpener<T> implements ModalOpener {
   }
 
   const AndroidModalOpener();
-}
-
-extension WidgetDragHandle on Widget {
-  Widget withDragHandle() {
-    return widgetWithDragHandle(child: this);
-  }
-}
-
-Widget widgetWithDragHandle({Widget? child}) {
-  return Stack(
-    alignment: Alignment.topCenter,
-    fit: StackFit.loose,
-    children: [
-      child!,
-      SizedBox(
-        height: 18,
-        child: const Center(child: const DragHandle()),
-      ),
-    ],
-  );
 }

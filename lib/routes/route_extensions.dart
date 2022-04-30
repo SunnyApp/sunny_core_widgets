@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:info_x/info_x.dart';
 import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
@@ -27,6 +28,27 @@ extension AppRouteMatchExtensions on AppRouteMatch {
     return SunnyRouting.router.navigateToDynamicRoute(context, this.route,
         parameters: this.parameters);
   }
+
+  Widget build(BuildContext context) {
+    return this.route!.asPageRoute()!.handleAny(context, parameters);
+  }
+
+  Page toPage(
+    BuildContext context, {
+    bool maintainState = true,
+    LocalKey? key,
+    bool fullscreenDialog = false,
+  }) =>
+      platformPage(
+        context: context,
+        child: build(context),
+        maintainState: maintainState,
+        key: key,
+        fullscreenDialog: fullscreenDialog,
+        name: this.route!.route,
+        title: this.route!.routeTitle(this.parameters),
+        arguments: this.parameters,
+      );
 }
 
 extension BuildContextDeviceScreenTypeExt on BuildContext {

@@ -56,3 +56,23 @@ class DragHandle extends StatelessWidget {
     );
   }
 }
+
+extension WidgetDragHandleExt on Widget {
+  Widget withDragHandle() {
+    return widgetWithDragHandle(child: this);
+  }
+}
+
+Widget widgetWithDragHandle({Widget? child}) {
+  return Stack(
+    alignment: Alignment.topCenter,
+    fit: StackFit.loose,
+    children: [
+      child!,
+      SizedBox(
+        height: 18,
+        child: const Center(child: const DragHandle()),
+      ),
+    ],
+  );
+}
