@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 import 'package:info_x/info_x.dart';
 import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
