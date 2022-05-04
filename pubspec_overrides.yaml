@@ -1,4 +1,4 @@
-# melos_managed_dependency_overrides: dartxx,flutter_degen,sunny_platform_widgets,pfile,sunny_dart,sunny_essentials,sunny_fluro,sunny_sdk_core,flutter_degen_annotations,flutter_screen_scaling
+# melos_managed_dependency_overrides: dartxx,flutter_degen,sunny_platform_widgets,pfile,sunny_dart,sunny_essentials,sunny_fluro,sunny_sdk_core,flutter_degen_annotations,flutter_screen_scaling,flexidate
 dependency_overrides:
   dartxx:
     path: ../dartxx
@@ -20,3 +20,5 @@ dependency_overrides:
     path: ../flutter_degen_annotations
   flutter_screen_scaling:
     path: ../flutter_screen_scaling
+  flexidate:
+    path: ../flexidate
