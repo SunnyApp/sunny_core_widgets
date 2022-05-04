@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
-import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
-import 'package:sunny_essentials/sunny_essentials.dart';
 
-import 'responsive_constraint.dart';
-import 'sunny_page.dart';
-import 'sunny_page_layouts.dart';
 
 class DesktopPageLayout with SunnyPageLayoutMixin {
   final SunnyPageState state;

@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
-import 'package:sunny_essentials/theme/sunny_colors.dart';
 
 class PlatformModalScaffold extends PlatformWidget {
   final bool dismissible;

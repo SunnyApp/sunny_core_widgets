@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:material_segmented_control/material_segmented_control.dart';
 import 'package:sunny_essentials/container.dart';
 import 'package:sunny_essentials/theme.dart';
-import 'package:flutter_screen_scaling/size_extension.dart';
 
 import 'ext/sliding_segmented_control.dart';
 

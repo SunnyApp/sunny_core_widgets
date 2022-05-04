@@ -1,6 +1,5 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';

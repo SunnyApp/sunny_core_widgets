@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:sunny_core_widgets/layouts.dart';
 
 typedef OpenSettings = Future<bool?> Function(BuildContext context);
 typedef TypeaheadOptionBuilder = Widget Function(

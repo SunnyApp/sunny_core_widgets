@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:sunny_sdk_core/services.dart';
-import 'package:sunny_sdk_core/services/sunny.dart';
 
 class ProviderBuildContextResolver with SplitRegistrationResolver {
   @override

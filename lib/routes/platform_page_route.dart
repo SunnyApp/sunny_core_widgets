@@ -1,7 +1,6 @@
 import 'package:dartxx/dartxx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:info_x/info_x.dart';
 
 extension TypeToRouteExt on dynamic {

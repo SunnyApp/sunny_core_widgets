@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:sunny_sdk_core/model_exports.dart';
-import 'package:sunny_sdk_core/sunny_sdk_core.dart';
 
 mixin RouteParamsMixin implements RouteParams {
   @override
