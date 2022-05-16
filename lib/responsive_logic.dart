@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:info_x/sunny_get.dart';
 import 'package:responsive_builder/responsive_builder.dart' hide WidgetBuilder;
+import 'package:sunny_essentials/sunny_essentials.dart';
+import 'package:sunny_essentials/widget_wrapper.dart';
 
 import 'core_ext/layout_info.dart';
 
@@ -62,6 +64,59 @@ T ForScreenSize<T>(
 
     default:
       return defaultValue as T;
+  }
+}
+
+WidgetWrapper restOfScreen(BuildContext context) {
+  return (child) {
+    var size = MediaQuery.of(context).size;
+    return SizedBox(
+      height: size.height,
+      width: size.width,
+      child: child,
+    );
+  };
+}
+
+Widget returnChild(Widget child) => child;
+Widget ResponsiveWrap(
+  BuildContext context, {
+  required Widget child,
+  WrapWidget? mobile,
+  WrapWidget? tablet,
+  WrapWidget? desktop,
+  WrapWidget defaultValue = returnChild,
+}) {
+  var wrapper = ResponsiveWrapper(
+    context,
+    mobile: mobile,
+    tablet: tablet,
+    desktop: desktop,
+    defaultValue: defaultValue,
+  );
+  return wrapper(child);
+}
+
+WrapWidget ResponsiveWrapper(
+  BuildContext context, {
+  WrapWidget? mobile,
+  WrapWidget? tablet,
+  WrapWidget? desktop,
+  WrapWidget defaultValue = returnChild,
+}) {
+  final layoutInfo = sunny.get<LayoutInfo>(context: context);
+  switch (layoutInfo.screenType) {
+    case DeviceScreenType.mobile:
+      return mobile ?? defaultValue;
+    case DeviceScreenType.tablet:
+      return tablet ?? desktop ?? defaultValue;
+    case DeviceScreenType.desktop:
+      return desktop ?? defaultValue;
+    case DeviceScreenType.watch:
+      return defaultValue;
+
+    default:
+      return defaultValue;
   }
 }
 

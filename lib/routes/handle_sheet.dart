@@ -68,7 +68,7 @@ Widget widgetWithDragHandle({Widget? child}) {
     alignment: Alignment.topCenter,
     fit: StackFit.loose,
     children: [
-      child!,
+      Padding(padding: EdgeInsets.only(top: 6), child: child!),
       SizedBox(
         height: 18,
         child: const Center(child: const DragHandle()),

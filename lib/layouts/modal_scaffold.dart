@@ -5,16 +5,30 @@ import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 class PlatformModalScaffold extends PlatformWidget {
   final bool dismissible;
   final Widget? title;
-  final bool isScrolling;
+  final Widget? leading;
+  final bool hideAppBar;
+  final bool hasAppBar;
+  final EdgeInsets? padding;
+  final Color? backgroundColor;
   final bool automaticallyImplyLeading;
   final Widget body;
+  final List<Widget> actions;
+  final ModalConstraints? constraints;
+  final List<Widget> buttons;
 
   PlatformModalScaffold({
     Key? key,
     this.dismissible = true,
-    this.isScrolling = false,
+    this.hideAppBar = false,
+    this.actions = const [],
+    this.leading,
+    this.hasAppBar = true,
+    this.padding,
+    this.constraints,
+    this.backgroundColor,
     this.title,
-    this.automaticallyImplyLeading = true,
+    this.automaticallyImplyLeading = false,
+    this.buttons = const [],
     required this.body,
   }) : super(key: key);
 
@@ -29,10 +43,14 @@ class PlatformModalScaffold extends PlatformWidget {
   }
 
   Widget createWidget(BuildContext context) {
+    var backgroundColor = this.backgroundColor ??
+        ModalScaffoldInfo.backgroundColor(context) ??
+        sunnyColors.modalBackground;
+
     final appBar = title == null
         ? null
         : PlatformAppBar(
-            backgroundColor: sunnyColors.modalBackground,
+            backgroundColor: backgroundColor,
             title: title,
             cupertino: (context, platform) => CupertinoNavigationBarData(
               brightness: context.brightness,
@@ -46,19 +64,61 @@ class PlatformModalScaffold extends PlatformWidget {
                 iconTheme: IconThemeData(
                   color: sunnyColors.primaryColor,
                 )),
-            automaticallyImplyLeading: automaticallyImplyLeading,
+            automaticallyImplyLeading: dismissible && automaticallyImplyLeading,
+            leading: leading ?? buildNestedBackButton(context),
+            trailingActions: actions,
           );
-    if (isScrolling) {
-      return PlatformScaffold(
-        backgroundColor: sunnyColors.modalBackground,
-        appBar: appBar,
-        body: body,
-      ).tpad(dismissible ? 1 : 0);
+
+    var modalSize = ModalConstraints.of(context, [constraints]);
+    return modalSize.build(context,
+        child: PlatformScaffold(
+          backgroundColor: backgroundColor,
+          appBar: appBar,
+          body: body.pad(),
+        )
+        // : Layout.column().reset.min.crossAxisStretch.build(
+        //     [
+        //       if (dismissible) verticalSpace,
+        //       if (appBar != null) appBar,
+        //       body,
+        //       PlatformModalButtonRow(
+        //         buttons: buttons,
+        //       ),
+        //     ],
+        //   ),
+        );
+  }
+
+  Widget? buildNestedBackButton(BuildContext context,
+      {bool rootNavigator = true}) {
+    var isNested = NestedNavigatorContainer.isNested(context);
+    return isNested
+        ? PlatformBackButton(
+            onPressed: () {
+              NestedNavigatorContainer.popSingle(
+                context,
+                rootNavigator: rootNavigator,
+              );
+            },
+          )
+        : null;
+  }
+}
+
+class PlatformModalButtonRow extends StatelessWidget {
+  final List<Widget> buttons;
+
+  const PlatformModalButtonRow({Key? key, required this.buttons})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (buttons.length == 1) {
+      return buttons.first;
     } else {
-      return Layout.column().reset.min.build([
-        if (dismissible) verticalSpace,
-        if (appBar != null) appBar,
-        body,
+      return Layout.row().spacing(8).build([
+        for (var button in buttons)
+          Flexible(flex: 1, child: Center(child: button)),
       ]);
     }
   }

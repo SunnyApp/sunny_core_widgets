@@ -8,4 +8,5 @@ export 'routes/platform_page_route.dart';
 export 'routes/route_extensions.dart';
 export 'routes/router_factory.dart';
 export 'routes/routing.dart';
+export 'routes/scaffold_info.dart';
 export 'routes/tab_routes.dart';

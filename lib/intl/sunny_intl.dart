@@ -49,14 +49,14 @@ class SunnyIntl with ValidationIntl {
       "There doesn't seem to be anything here.",
       name: "defaultEmptyStateMessage");
 
-  String deleteConfirmTitle(String item) => Intl.message(
-        "Are you sure you want to delete ${item} from Trippi?",
+  String deleteConfirmTitle(String item, String appName) => Intl.message(
+        "Are you sure you want to delete ${item} from $appName?",
         name: "deleteConfirmTitle",
       );
 
-  final permissionRequestPhotos = Intl.message(
-      "Can Trippi use your photos to find profile pictures?",
-      name: "permissionRequestPhotos");
+  String permissionRequestPhotos(String appName) =>
+      Intl.message("Can $appName use your photos to find profile pictures?",
+          name: "permissionRequestPhotos");
 
   String message(final String msg) => IntlCore.message(msg);
 

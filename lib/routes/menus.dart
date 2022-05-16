@@ -14,12 +14,15 @@ import 'package:sunny_fluro/sunny_fluro.dart';
 import '../widgets/widget_extensions.dart';
 
 typedef OpenMenu<T> = Future<T?> Function(BuildContext context,
-    {required WidgetBuilder builder,
+    {required MenuBuilder<T> builder,
     bool displayDragHandle,
     bool dismissible,
+    Widget? title,
+    Widget? content,
     bool draggable,
     PathRouteSettings? settings,
     double? width,
+    dynamic extraOptions,
     double? height,
     bool expand,
     bool useRootNavigator,
@@ -27,9 +30,8 @@ typedef OpenMenu<T> = Future<T?> Function(BuildContext context,
     bool nestModals});
 
 typedef MenuOpenerOverride = OpenMenu<T>? Function<T>(BuildContext context);
-
 Future<T?> showPlatformMenu<T>(BuildContext context,
-    {required WidgetBuilder builder,
+    {required MenuBuilder<T> builder,
     bool useScaffold = true,
     bool displayDragHandle = true,
     bool dismissible = true,
@@ -38,6 +40,9 @@ Future<T?> showPlatformMenu<T>(BuildContext context,
     PathRouteSettings? settings,
     double? width,
     double? height,
+    Widget? title,
+    Widget? content,
+    dynamic extraOptions,
     bool expand = false,
     bool useRootNavigator = true,
     bool nestModals = false}) {
@@ -50,12 +55,65 @@ Future<T?> showPlatformMenu<T>(BuildContext context,
     draggable: draggable,
     settings: settings,
     width: width,
+    title: title,
+    content: content,
     useRootNavigator: useRootNavigator,
     height: height,
+    extraOptions: extraOptions,
     expand: expand,
     nestModals: nestModals,
     constraints: constraints,
   );
+}
+
+typedef MenuBuilder<T> = PlatformContextMenuBase<T> Function(
+    BuildContext context);
+typedef MenuItemSelected<T> = void Function(T selected);
+
+abstract class PlatformContextMenuBase<K> implements Widget {
+  Widget? get title;
+  Widget? get content;
+  List<PlatformContextMenuItem<K>> get items;
+  MenuItemSelected<K>? get onItemSelected;
+}
+
+extension PlatformMenuBaseExtension<K> on PlatformContextMenuBase<K> {
+  PlatformContextMenuItem<K>? findByValue(K? value) {
+    var filtered = items.where((element) => element.value == value);
+    return filtered.isEmpty ? null : filtered.first;
+  }
+}
+
+class PlatformContextMenuItem<K> {
+  final String label;
+  final List<PlatformContextMenuItem<K>> children;
+  final K value;
+  final VoidCallback? onTap;
+  final bool isDestructive;
+  final bool isDefaultAction;
+  final bool isCloseOnTap;
+
+  const PlatformContextMenuItem({
+    required this.label,
+    this.isDestructive = false,
+    this.isDefaultAction = false,
+    this.onTap,
+    this.isCloseOnTap = true,
+    this.children = const [],
+    required this.value,
+  });
+
+  static PlatformContextMenuItem<String> simple(String label,
+          {bool isCloseOnTap = true,
+          bool isDestructive = false,
+          VoidCallback? onTap}) =>
+      PlatformContextMenuItem<String>(
+        label: label,
+        value: label,
+        isCloseOnTap: isCloseOnTap,
+        isDestructive: isDestructive,
+        onTap: onTap,
+      );
 }
 
 class Menus {
@@ -77,7 +135,7 @@ class Menus {
       return override;
     }
     if (layoutInfo.screenType == DeviceScreenType.desktop) {
-      return openDesktopMenu<T>;
+      return showDesktopMenu<T>;
     } else if (infoX.isAndroid) {
       return openAndroidMenu<T>;
     } else if (useScaffold && infoX.isIOS) {
@@ -90,15 +148,18 @@ class Menus {
   }
 }
 
-Future<T?> openDesktopMenu<T>(
+Future<T?> showDesktopMenu<T>(
   BuildContext context, {
-  required WidgetBuilder builder,
+  required MenuBuilder<T> builder,
   bool displayDragHandle = true,
   bool dismissible = true,
   bool draggable = true,
   PathRouteSettings? settings,
+  Widget? title,
+  Widget? content,
   double? width,
   double? height,
+  dynamic extraOptions,
   bool useRootNavigator = true,
   bool expand = false,
   bool nestModals = false,
@@ -108,6 +169,7 @@ Future<T?> openDesktopMenu<T>(
   height ??= 570.px;
   return showPlatformDialog<T>(
     context: context,
+    extraOptions: extraOptions,
     useRootNavigator: useRootNavigator,
     barrierDismissible: dismissible,
     routeSettings: settings,
@@ -135,10 +197,12 @@ Future<T?> openDesktopMenu<T>(
 OpenMenu<T> cupertinoMenuOpener<T>({bool useScaffold = true}) {
   return <T>(
     BuildContext context, {
-    required WidgetBuilder builder,
+    required MenuBuilder<T> builder,
     bool displayDragHandle = true,
     bool dismissible = true,
     bool draggable = true,
+    Widget? title,
+    Widget? content,
     PathRouteSettings? settings,
     double? width,
     double? height,
@@ -146,104 +210,67 @@ OpenMenu<T> cupertinoMenuOpener<T>({bool useScaffold = true}) {
     bool expand = false,
     bool nestModals = false,
     Constraints? constraints,
+    dynamic extraOptions,
   }) {
-    showCupertinoModalPopup(context: context, builder: builder);
-    final scaffold = CupertinoScaffold.of(context);
-    final nested = Provided.find<NestedNavigatorContainer>(context);
-    if (nested?.child != null &&
-        nestModals &&
-        nested?.navigatorKey?.currentState != null) {
-      return nested!.navigatorKey!.currentState!
-          .push<T>(PlatformPageRoute(builder: builder));
-    } else {
-      final buildNested = (BuildContext context) {
-        final parentNav = !nestModals
-            ? null
-            : Navigator.of(context, rootNavigator: useRootNavigator);
-        final navKey = !nestModals
-            ? null
-            : GlobalKey<NavigatorState>(debugLabel: 'nestedNavKey');
-        final nav = !nestModals
-            ? null
-            : Navigator(
-                key: navKey,
-                pages: [
-                  CupertinoPage(
-                      child: Builder(builder: builder), fullscreenDialog: true)
-                ],
-                onPopPage: (_, __) {
-                  return false;
-                },
-              );
+    var menu = builder(context);
 
-        final theWidget =
-            (nestModals ? nav! : Builder(builder: builder)).maybeWrap(
-          height != null,
-          (child) => SizedBox(height: height!, child: child),
-        );
-        final widgetWithHandle =
-            displayDragHandle ? theWidget.withDragHandle() : theWidget;
+    Widget? w;
 
-        return !nestModals
-            ? widgetWithHandle
-            : Provider(
-                create: (_) => NestedNavigatorContainer(
-                      child: nav,
-                      parent: parentNav,
-                      navigatorKey: navKey,
-                    ),
-                child: widgetWithHandle);
-      };
-      if (scaffold != null && useScaffold && useRootNavigator == true) {
-        return CupertinoScaffold.showCupertinoModalBottomSheet<T>(
-          context: context,
-          useRootNavigator: useRootNavigator,
-          bounce: true,
-          backgroundColor: sunnyColors.modalBackground,
-          enableDrag: draggable,
-          expand: expand,
-          settings: settings,
-          isDismissible: dismissible,
-          builder: (context) {
-            Widget? w;
-            return w ??= buildNested(context);
+    Widget buildNested(BuildContext context) {
+      return CupertinoActionSheet(
+        title: menu.title ?? title,
+        message: menu.content ?? content,
+        actions: [
+          for (final item in menu.items)
+            CupertinoActionSheetAction(
+              child: Text(item.label),
+              isDestructiveAction: item.isDestructive,
+              isDefaultAction: item.isDefaultAction,
+              onPressed: () {
+                if (item.isCloseOnTap) {
+                  Navigator.pop(context, item.value);
+                }
+                item.onTap?.call();
+                menu.onItemSelected?.call(item.value);
+              },
+            ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          child: Text('Cancel'),
+          onPressed: () {
+            Navigator.pop(context);
           },
-        );
-      } else {
-        Widget? w;
-
-        return showCupertinoModalBottomSheet<T>(
-          context: context,
-          bounce: true,
-          expand: expand,
-          enableDrag: draggable,
-          backgroundColor: sunnyColors.modalBackground,
-          useRootNavigator: useRootNavigator,
-          settings: settings,
-          barrierColor: Colors.black54,
-          isDismissible: dismissible,
-          builder: (context) {
-            return w ??= buildNested(context);
-          },
-        );
-      }
+        ),
+      );
     }
+
+    return showCupertinoModalPopup<T>(
+      context: context,
+      useRootNavigator: useRootNavigator,
+      barrierColor: Colors.black54,
+      builder: (context) {
+        return w ??= buildNested(context);
+      },
+    );
   };
 }
 
 Future<T?> openAndroidMenu<T>(
   BuildContext context, {
-  required WidgetBuilder builder,
+  required MenuBuilder<T> builder,
   bool displayDragHandle = true,
   bool dismissible = true,
   bool draggable = true,
   PathRouteSettings? settings,
   double? width,
   double? height,
+  Widget? title,
+  Widget? content,
   bool expand = false,
   bool useRootNavigator = true,
   bool nestModals = false,
   Constraints? constraints,
+  dynamic extraOptions,
 }) {
   Widget? w;
 

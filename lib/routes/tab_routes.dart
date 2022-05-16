@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sunny_core_widgets/routes/nested_navigation.dart';
+import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 import 'package:sunny_fluro/sunny_fluro.dart';
 import 'package:sunny_sdk_core/model_exports.dart';
 
@@ -25,14 +26,15 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
     bool useScaffold = true,
     P? args,
     ModalArgsBuilder<P>? argsBuilder,
+    bool displayTitle = true,
+    dynamic extraOptions,
     bool expand = true,
     bool showHandle = true,
+    Color? backgroundColor,
     bool dismissible = true,
     String? label,
     bool replace = false,
-    double? height,
-    double? width,
-    Constraints? constraints,
+    ModalConstraints? constraints,
     bool nestModals = false,
     bool useRootNavigator = true,
   }) async {
@@ -42,12 +44,13 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
       return await Modals.open<R>(
         context,
         useScaffold: useScaffold,
+        backgroundColor: backgroundColor,
         displayDragHandle: showHandle,
         dismissible: dismissible,
         draggable: dismissible,
+        extraOptions: extraOptions,
+        displayTitle: displayTitle,
         nestModals: nestModals,
-        height: height,
-        width: width,
         useRootNavigator: useRootNavigator,
         expand: expand,
         settings: PathRouteSettings.ofAppRoute(ar, routeParams: _args),
@@ -58,6 +61,43 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
             return ar.handleAny(context, _args);
           },
         ),
+      );
+    } else {
+      return await go(context, args: _args);
+    }
+  }
+
+  Future<R?> openNestedModal(
+    BuildContext context, {
+    P? args,
+    ModalArgsBuilder<P>? argsBuilder,
+    dynamic extraOptions,
+    bool showHandle = true,
+    bool expand = true,
+    String? label,
+    bool replace = false,
+    bool useRootNavigator = true,
+  }) async {
+    final _args = args ?? argsBuilder?.call(null);
+    if (this is AppPageRoute<R, P>) {
+      final ar = this as AppPageRoute<R, P>;
+      return await Modals.open<R>(
+        context,
+        useScaffold: true,
+        // backgroundColor: backgroundColor,
+        displayDragHandle: showHandle,
+        dismissible: false,
+        draggable: true,
+        extraOptions: extraOptions,
+        displayTitle: false,
+        nestModals: true,
+        useRootNavigator: useRootNavigator,
+        expand: expand,
+        settings: PathRouteSettings.ofAppRoute(ar, routeParams: _args),
+        builder: (context) {
+          final _args = args ?? argsBuilder?.call(null);
+          return ar.handleAny(context, _args);
+        },
       );
     } else {
       return await go(context, args: _args);

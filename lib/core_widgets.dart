@@ -29,13 +29,16 @@ Widget defaultTypeaheadOptionBuilder(
     Widget? trailing,
     VoidCallback? onTap,
     Widget? subtitle}) {
-  return ListTile(
-      leading: leading,
-      trailing: trailing,
-      onTap: onTap,
-      subtitle: subtitle,
-      title: title,
-      dense: true);
+  return Padding(
+    padding: const EdgeInsets.only(left: 8.0),
+    child: ListTile(
+        leading: leading,
+        trailing: trailing,
+        onTap: onTap,
+        subtitle: subtitle,
+        title: title,
+        dense: true),
+  );
 }
 
 CoreWidgetsProvider CoreWidgets = const CoreWidgetsProvider();
