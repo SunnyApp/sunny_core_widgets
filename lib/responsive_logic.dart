@@ -67,6 +67,7 @@ T ForScreenSize<T>(
   }
 }
 
+
 WidgetWrapper restOfScreen(BuildContext context) {
   return (child) {
     var size = MediaQuery.of(context).size;

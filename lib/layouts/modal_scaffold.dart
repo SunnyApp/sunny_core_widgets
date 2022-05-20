@@ -15,6 +15,7 @@ class PlatformModalScaffold extends PlatformWidget {
   final List<Widget> actions;
   final ModalConstraints? constraints;
   final List<Widget> buttons;
+  final bool scrolling;
 
   PlatformModalScaffold({
     Key? key,
@@ -27,6 +28,7 @@ class PlatformModalScaffold extends PlatformWidget {
     this.constraints,
     this.backgroundColor,
     this.title,
+    this.scrolling = false,
     this.automaticallyImplyLeading = false,
     this.buttons = const [],
     required this.body,

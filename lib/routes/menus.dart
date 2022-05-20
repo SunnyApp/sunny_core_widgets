@@ -4,14 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 import 'package:info_x/info_x.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart' hide WidgetBuilder;
 import 'package:sunny_core_widgets/core_ext.dart';
 import 'package:sunny_core_widgets/routes.dart';
 import 'package:sunny_essentials/sunny_essentials.dart';
 import 'package:sunny_fluro/sunny_fluro.dart';
 
-import '../widgets/widget_extensions.dart';
 
 typedef OpenMenu<T> = Future<T?> Function(BuildContext context,
     {required MenuBuilder<T> builder,
@@ -73,18 +71,32 @@ typedef MenuItemSelected<T> = void Function(T selected);
 abstract class PlatformContextMenuBase<K> implements Widget {
   Widget? get title;
   Widget? get content;
-  List<PlatformContextMenuItem<K>> get items;
+  List<PlatformContextMenuElement<K>> get items;
   MenuItemSelected<K>? get onItemSelected;
 }
 
 extension PlatformMenuBaseExtension<K> on PlatformContextMenuBase<K> {
   PlatformContextMenuItem<K>? findByValue(K? value) {
-    var filtered = items.where((element) => element.value == value);
+    var filtered = items
+        .whereType<PlatformContextMenuItem<K>>()
+        .where((element) => element.value == value);
     return filtered.isEmpty ? null : filtered.first;
   }
 }
 
-class PlatformContextMenuItem<K> {
+abstract class PlatformContextMenuElement<K> {}
+
+class PlatformContextMenuDivider<K> implements PlatformContextMenuElement<K> {
+  const PlatformContextMenuDivider();
+}
+
+class PlatformContextMenuLabel<K> implements PlatformContextMenuElement<K> {
+  final String label;
+
+  const PlatformContextMenuLabel(this.label);
+}
+
+class PlatformContextMenuItem<K> implements PlatformContextMenuElement<K> {
   final String label;
   final List<PlatformContextMenuItem<K>> children;
   final K value;
@@ -221,7 +233,7 @@ OpenMenu<T> cupertinoMenuOpener<T>({bool useScaffold = true}) {
         title: menu.title ?? title,
         message: menu.content ?? content,
         actions: [
-          for (final item in menu.items)
+          for (final item in menu.items.whereType<PlatformContextMenuItem<T>>())
             CupertinoActionSheetAction(
               child: Text(item.label),
               isDestructiveAction: item.isDestructive,
