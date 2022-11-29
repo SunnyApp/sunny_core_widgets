@@ -11,7 +11,7 @@ extension AppRouteNavigationExtension<R, P extends RouteParams>
       final ar = this as AppPageRoute<R, P>;
       return nestedModal<R>(context, (context) {
         return ar.handleAny(context, args);
-      }, settings: null);
+      });
     }
     return go(context, args: args ?? const DefaultRouteParams() as P);
   }

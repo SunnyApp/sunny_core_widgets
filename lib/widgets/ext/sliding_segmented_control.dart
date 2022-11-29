@@ -379,7 +379,7 @@ class _SegmentedControlState<T>
   }
 
   T? _pressed;
-  set pressed(T newValue) {
+  set pressed(T? newValue) {
     if (_pressed == newValue) return;
 
     if (_pressed != null) {

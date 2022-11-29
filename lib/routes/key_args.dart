@@ -136,7 +136,7 @@ class AuthModalArgs extends ScrollerArgs with EquatableMixin {
   }) : super({"topMessage": topMessage, "bottomWidget": bottomWidget, "showLogo": showLogo, "scroller": scroller});
 
   /// Makes it easy to pass to builder arg
-  static AuthModalArgs builder(ScrollController controller) {
+  static AuthModalArgs builder(ScrollController? controller) {
     return AuthModalArgs(scroller: controller, showLogo: false);
   }
 

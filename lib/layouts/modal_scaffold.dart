@@ -58,11 +58,11 @@ class PlatformModalScaffold extends PlatformWidget {
               brightness: context.brightness,
             ),
             material: (context, platform) => MaterialAppBarData(
-                brightness: context.brightness,
+                // brightness: context.brightness,
                 centerTitle: true,
-                textTheme: sunnyText
-                    .apply(TextTheme())
-                    .withBrightness(context.brightness),
+                // textTheme: sunnyText
+                //     .apply(TextTheme())
+                //     .withBrightness(context.brightness),
                 iconTheme: IconThemeData(
                   color: sunnyColors.primaryColor,
                 )),

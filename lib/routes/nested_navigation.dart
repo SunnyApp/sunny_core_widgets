@@ -144,7 +144,6 @@ Future<T?> nestedModal<T>(
   BuildContext context,
   WidgetBuilder scrollBuilder, {
   bool displayDragHandle = true,
-  required PathRouteSettings? settings,
 }) {
   Widget? w;
   return context.page<T>((context) {
