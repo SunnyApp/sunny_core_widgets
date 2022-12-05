@@ -3,14 +3,13 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
-import 'package:info_x/info_x.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart' hide WidgetBuilder;
 import 'package:sunny_core_widgets/core_ext.dart';
 import 'package:sunny_core_widgets/routes.dart';
 import 'package:sunny_essentials/sunny_essentials.dart';
-import 'package:sunny_fluro/sunny_fluro.dart';
+
 import 'package:sunny_sdk_core/model_exports.dart';
 
 typedef Route<T> RouteBuilder<T>(WidgetBuilder builder);
@@ -154,7 +153,9 @@ class DesktopModalOpener implements ModalOpener {
           child: Layout.container()
               .borderRadiusAll(16)
               .backgroundColor(backgroundColor ??
-                  (expand == false ? Colors.transparent : sunnyColors.white))
+                  (expand == false
+                      ? Colors.transparent
+                      : context.sunnyColors.white))
               .single(
                 Container(
                   padding: EdgeInsets.all(16),
@@ -330,7 +331,7 @@ class CupertinoModalOpener<T> implements ModalOpener {
       return result.future;
     }
     var background = ModalScaffoldInfo(
-      background: backgroundColor ?? sunnyColors.modalBackground,
+      background: backgroundColor ?? context.sunnyColors.modalBackground,
     );
     var _builder = displayDragHandle
         ? (BuildContext context) => result.builder(context).withDragHandle()
@@ -396,7 +397,7 @@ class AndroidModalOpener<T> implements ModalOpener {
       bounce: true,
       expand: expand,
       enableDrag: draggable,
-      backgroundColor: backgroundColor ?? sunnyColors.modalBackground,
+      backgroundColor: backgroundColor ?? context.sunnyColors.modalBackground,
       isDismissible: dismissible,
       builder: (context) {
         return w ??= displayDragHandle

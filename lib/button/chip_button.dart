@@ -51,7 +51,7 @@ class _ChipButtonState extends State<ChipButton> {
           widget.dense == true ? VisualDensity.compact : VisualDensity.standard,
       labelPadding: _padding,
 //      padding: EdgeInsets.zero,
-      backgroundColor: sunnyColors.g100,
+      backgroundColor: context.sunnyColors.g100,
       isEnabled: _processing != true,
       onPressed: () => _doTap(),
     );

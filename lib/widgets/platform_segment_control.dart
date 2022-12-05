@@ -11,6 +11,7 @@ const kSegmentControlHeight = 64.0;
 const kSegmentControlHeightMaterial = 74.0;
 
 abstract class PlatformSegmentControl implements Widget, PreferredSizeWidget {
+
   int? get currentTab;
 
   Map<int, SlidingTab> get tabs;
@@ -18,11 +19,17 @@ abstract class PlatformSegmentControl implements Widget, PreferredSizeWidget {
   TabChanged? get onTabChange;
 
   String? get name;
+  Color? get tabBackgroundColor;
+  Color? get tabForegroundColor;
+
+
 
   factory PlatformSegmentControl.stateless(
           {Key? key,
           required String name,
           int currentTab = 0,
+            Color? tabBackgroundColor,
+            Color? tabForegroundColor,
           required Map<int, SlidingTab> tabs,
           Color? backgroundColor,
           TabChanged? onTabChange}) =>
@@ -30,12 +37,16 @@ abstract class PlatformSegmentControl implements Widget, PreferredSizeWidget {
           name: name,
           currentTab: currentTab,
           tabs: tabs,
+          tabForegroundColor: tabForegroundColor,
+          tabBackgroundColor: tabBackgroundColor,
           backgroundColor: backgroundColor,
           onTabChange: onTabChange);
 
   factory PlatformSegmentControl.stateful(
           {Key? key,
           required String name,
+            Color? tabBackgroundColor,
+            Color? tabForegroundColor,
           int currentTab = 0,
           Color? backgroundColor,
           required Map<int, SlidingTab> tabs,
@@ -43,6 +54,8 @@ abstract class PlatformSegmentControl implements Widget, PreferredSizeWidget {
       _StatefulPlatformSegmentControl(
           name: name,
           currentTab: currentTab,
+          tabForegroundColor: tabForegroundColor,
+          tabBackgroundColor: tabBackgroundColor,
           tabs: tabs,
           backgroundColor: backgroundColor,
           onTabChange: onTabChange);
@@ -53,9 +66,9 @@ mixin PlatformSegmentControlMixin on Widget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(kSegmentControlHeight.px);
   Color? get backgroundColor;
 
-  Widget withPadding() {
+  Widget withPadding(BuildContext context) {
     return Container(
-        color: backgroundColor ?? sunnyColors.appBarBackground,
+        color: backgroundColor ?? context.sunnyColors.appBarBackground,
         child: this,
         padding: EdgeInsets.only(
           top: 8.px,
@@ -69,6 +82,9 @@ mixin PlatformSegmentControlMixin on Widget implements PreferredSizeWidget {
 class _StatelessPlatformSegmentControl extends StatelessWidget
     with PlatformSegmentControlMixin
     implements PlatformSegmentControl {
+  final Color? tabBackgroundColor;
+  final Color? tabForegroundColor;
+
   final int? currentTab;
   final Map<int, SlidingTab> tabs;
   final TabChanged? onTabChange;
@@ -78,6 +94,8 @@ class _StatelessPlatformSegmentControl extends StatelessWidget
   _StatelessPlatformSegmentControl(
       {Key? key,
       required this.name,
+      this.tabBackgroundColor,
+      this.tabForegroundColor,
       this.currentTab,
       required this.tabs,
       this.onTabChange,
@@ -101,12 +119,16 @@ class _StatefulPlatformSegmentControl extends StatefulWidget
   final TabChanged? onTabChange;
   final String? name;
   final Color? backgroundColor;
+  final Color? tabBackgroundColor;
+  final Color? tabForegroundColor;
 
   _StatefulPlatformSegmentControl(
       {Key? key,
       this.currentTab,
       required this.tabs,
       this.onTabChange,
+        this.tabBackgroundColor,
+        this.tabForegroundColor,
       this.name,
       required this.backgroundColor})
       : super(key: key);
@@ -159,6 +181,12 @@ extension PlatformSegmentControlExt on PlatformSegmentControl {
 //final selectedTabStyle =
 //    tabStyle.copyWith(color: sunnyColors.g800, fontWeight: FontWeight.w600);
 
+const CupertinoDynamicColor _kThumbColor = CupertinoDynamicColor.withBrightness(
+  color: Color(0xFFFFFFFF),
+  darkColor: Color(0xFF636366),
+);
+
+
 class SlidingTab extends StatelessWidget {
   final bool isSelected;
   final String label;
@@ -174,14 +202,14 @@ class SlidingTab extends StatelessWidget {
       height: 36.px,
       padding: EdgeInsets.symmetric(horizontal: 5),
       child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        if (icon != null) Icon(icon, size: 18.px),
+        if (icon != null) Icon(icon, size: 18.px, color: context.sunnyColors.text),
         if (icon != null) horizontalSpace,
         AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 200),
-            style: sunnyText.body2Medium,
+            style: sunnyText.body2Medium.withBrightness(context),
             child: Text(
               label,
-              style: isSelected ? sunnyText.body2Medium.selected : null,
+              style: (isSelected ? sunnyText.body2Medium.selected : null)?.withBrightness(context),
             )),
       ]),
     );
@@ -201,26 +229,27 @@ Widget _buildSegment(
     {TabChanged? extraTabChange, required Color? backgroundColor}) {
   final isTrue = 1 == 1;
   return Container(
-      color: backgroundColor ?? sunnyColors.appBarBackground,
+      color: backgroundColor ?? context.sunnyColors.appBarBackground,
       child: isTrue
-          ? CupertinoSlidingSegmentedControl2<int>(
+          ? CupertinoSlidingSegmentedControl<int>(
               key: Key("${widget.name}-tabs"),
               children: widget.tabs.map((k, v) {
                 return MapEntry(
                     k, k == widget.currentTab ? v.selected() : v.unselected());
               }),
+              thumbColor: (widget.tabBackgroundColor ?? _kThumbColor).resolveFrom(context),
               // padding: EdgeInsets.all(2.px),
-              backgroundColor: sunnyColors.g200,
+              backgroundColor: context.sunnyColors.g200,
               groupValue: currentTab,
               onValueChanged: (i) {
-                widget.onTabChange?.call(context, i);
-                extraTabChange?.call(context, i);
+                widget.onTabChange?.call(context, i!);
+                extraTabChange?.call(context, i!);
               },
             )
           : MaterialSegmentedControl<int>(
               key: Key("${widget.name}-tabs"),
-              selectedColor: sunnyColors.primaryColor,
-              unselectedColor: sunnyColors.g200,
+              selectedColor: context.sunnyColors.primaryColor,
+              unselectedColor: context.sunnyColors.g200,
               children: widget.tabs.map((k, v) {
                 return MapEntry(
                     k, k == widget.currentTab ? v.selected() : v.unselected());

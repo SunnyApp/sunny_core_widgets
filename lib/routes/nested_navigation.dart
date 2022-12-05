@@ -6,7 +6,6 @@ import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:responsive_builder/responsive_builder.dart' as rb;
 import 'package:sunny_essentials/sunny_essentials.dart';
-import 'package:sunny_fluro/sunny_fluro.dart';
 
 final nestedGlobalKey =
     GlobalKey<NavigatorState>(debugLabel: "nestedGlobalKey");

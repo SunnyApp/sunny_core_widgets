@@ -33,15 +33,12 @@ Widget kErrorHandler(BuildContext context, Object? err, StackTrace? stack) {
   _log.severe(
       "Error rendering snapshot!: $err", err, stack ?? StackTrace.current);
   // analytics.encounteredError(err, stack, "Rendering snapshot ${X}");
-  return Layout.container().alignCenter.padAll(sunnySpacing * 2).single(
-        context.richText(
-          (_) => _
-              .center()
-              .color(sunnyColors.red)
-              .softWrap()
-              .body1("There was a problem loading"),
-        ),
-      );
+  return Layout.container().alignCenter.padAll(sunnySpacing * 2).single(context
+      .richText
+      .center()
+      .color(context.sunnyColors.red)
+      .softWrap()
+      .body1("There was a problem loading"));
 }
 
 Widget kLoader() => loadingIndicator;

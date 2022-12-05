@@ -8,8 +8,6 @@ import 'package:responsive_builder/responsive_builder.dart' hide WidgetBuilder;
 import 'package:sunny_core_widgets/core_ext.dart';
 import 'package:sunny_core_widgets/routes.dart';
 import 'package:sunny_essentials/sunny_essentials.dart';
-import 'package:sunny_fluro/sunny_fluro.dart';
-
 
 typedef OpenMenu<T> = Future<T?> Function(BuildContext context,
     {required MenuBuilder<T> builder,
@@ -146,13 +144,14 @@ class Menus {
     if (override != null) {
       return override;
     }
+    var target = infoX.targetPlatform(context);
     if (layoutInfo.screenType == DeviceScreenType.desktop) {
       return showDesktopMenu<T>;
-    } else if (infoX.isAndroid) {
+    } else if (target == TargetPlatform.android) {
       return openAndroidMenu<T>;
-    } else if (useScaffold && infoX.isIOS) {
+    } else if (useScaffold && target == TargetPlatform.iOS) {
       return cupertinoMenuOpener<T>(useScaffold: useScaffold);
-    } else if (infoX.isIOS) {
+    } else if (target == TargetPlatform.iOS) {
       return cupertinoMenuOpener<T>(useScaffold: false);
     } else {
       return openAndroidMenu<T>;
@@ -189,8 +188,9 @@ Future<T?> showDesktopMenu<T>(
       (context) => Center(
         child: Layout.container()
             .borderRadiusAll(16)
-            .backgroundColor(
-                expand == false ? Colors.transparent : sunnyColors.white)
+            .backgroundColor(expand == false
+                ? Colors.transparent
+                : context.sunnyColors.white)
             .single(
               Container(
                 padding: EdgeInsets.all(16),
@@ -292,7 +292,7 @@ Future<T?> openAndroidMenu<T>(
     bounce: true,
     expand: expand,
     enableDrag: draggable,
-    backgroundColor: sunnyColors.modalBackground,
+    backgroundColor: context.sunnyColors.modalBackground,
     isDismissible: dismissible,
     builder: (context) {
       return w ??= displayDragHandle

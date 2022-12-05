@@ -12,10 +12,13 @@ typedef DataServiceWidgetBuilderWithContext<X> = Widget Function(
 typedef RecordDataServiceWidgetBuilder<X, KType> = Widget Function(
     X data, RecordDataService<X, KType> service);
 
+typedef RecordDataWidgetBuilderWithContext<X> = Widget Function(
+    BuildContext context, X data);
+
 typedef RecordDataServiceWidgetBuilderWithContext<X, KType> = Widget Function(
     BuildContext context, X data, RecordDataService<X, KType> service);
 
-extension DataServiceBuilder<X> on DataService<X> {
+extension DataServiceBuilderExtensions<X> on DataService<X> {
   Widget buildFromStream(
       {DataServiceWidgetBuilder<X>? builder,
       key,
@@ -160,5 +163,33 @@ extension RecordDataServiceBuilder<X, KType> on RecordDataService<X, KType> {
                   }),
             ),
     );
+  }
+}
+
+extension RelatedDataServiceBuilderExtensions<KType, X>
+    on RecordDataService<KeyedRelatedData<KType, X>, KType> {
+  Widget buildRelated({
+    required KType id,
+    RecordDataServiceWidgetBuilderWithContext<KeyedRelatedData<KType, X>?,
+            KType>?
+        builder2,
+    WidgetDataBuilder<X>? builder,
+    String? key,
+    bool isSliver = false,
+    bool allowNull = false,
+
+    /// This is useful when the record you want hasn't been loaded by this data
+    /// service, but was loaded embedded into another object.  You can use that
+    /// local version while you fetch the real one
+    X? initialValue,
+  }) {
+    return this.builder(id,
+        successFn: builder == null ? null : (record) => builder(record.related),
+        builder: builder2,
+        initialValue:
+            initialValue == null ? null : KeyedRelatedData(id, initialValue),
+        allowNull: allowNull,
+        isSliver: isSliver,
+        key: key);
   }
 }

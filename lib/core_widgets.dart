@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 
 typedef OpenSettings = Future<bool?> Function(BuildContext context);
 typedef TypeaheadOptionBuilder = Widget Function(
@@ -31,14 +32,16 @@ Widget defaultTypeaheadOptionBuilder(
     Widget? subtitle}) {
   return Padding(
     padding: const EdgeInsets.only(left: 8.0),
-    child: ListTile(
+    child: DefaultTextStyle(
+      style: sunnyText.body2Normal,
+      child: ListTile(
         leading: leading,
         trailing: trailing,
         onTap: onTap,
         subtitle: subtitle,
         title: title,
         dense: true),
-  );
+  ),);
 }
 
 CoreWidgetsProvider CoreWidgets = const CoreWidgetsProvider();

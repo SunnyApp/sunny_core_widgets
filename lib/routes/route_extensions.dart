@@ -1,55 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 import 'package:info_x/info_x.dart';
-import 'package:sunny_fluro/sunny_fluro.dart';
+
 import 'package:responsive_builder/responsive_builder.dart' as rb;
 import 'package:sunny_core_widgets/core_ext/layout_info.dart';
 import 'package:sunny_core_widgets/routes/platform_page_route.dart';
-import 'package:sunny_core_widgets/routes/routing.dart';
 import 'package:sunny_sdk_core/api_exports.dart';
-
-class RouteExtensions {}
-
-extension AppRouteExtension on AppRoute {
-  String? routeUriForId(key) {
-    if (key is MKey) {
-      key = key.mxid;
-    } else if (key is RecordKey) {
-      key = key.mxid;
-    } else {
-      key = "$key";
-    }
-    return routeUri({"id": key});
-  }
-}
-
-extension AppRouteMatchExtensions on AppRouteMatch {
-  Future go(BuildContext context) {
-    return SunnyRouting.router.navigateToDynamicRoute(context, this.route,
-        parameters: this.parameters);
-  }
-
-  Widget build(BuildContext context) {
-    return this.route!.asPageRoute()!.handleAny(context, parameters);
-  }
-
-  Page toPage(
-    BuildContext context, {
-    bool maintainState = true,
-    LocalKey? key,
-    bool fullscreenDialog = false,
-  }) =>
-      platformPage(
-        context: context,
-        child: build(context),
-        maintainState: maintainState,
-        key: key,
-        fullscreenDialog: fullscreenDialog,
-        name: this.route!.route,
-        title: this.route!.routeTitle(this.parameters),
-        arguments: this.parameters,
-      );
-}
 
 extension BuildContextDeviceScreenTypeExt on BuildContext {
   LayoutInfo get layoutInfo => sunny.get(context: this);
@@ -60,5 +16,28 @@ extension BuildContextDeviceScreenTypeExt on BuildContext {
       builder: builder,
       maintainState: true,
     ));
+  }
+
+  PageRouteInfo get loginRoute => match('/login');
+  PageRouteInfo get settingsRoute => match('/settings');
+  PageRouteInfo get registerRoute => match('/register');
+
+  PageRouteInfo match(String uri) {
+    var matches = router.root.matcher.match(uri);
+    if (matches == null || matches.isEmpty) {
+      return illegalState('No route found for $uri');
+    } else {
+      return matches.first.toPageRouteInfo();
+    }
+  }
+
+  PageRouteInfo? tryMatch(String? uri) {
+    if (uri == null) return null;
+    var matches = router.root.matcher.match(uri);
+    if (matches == null || matches.isEmpty) {
+      return null;
+    } else {
+      return matches.first.toPageRouteInfo();
+    }
   }
 }

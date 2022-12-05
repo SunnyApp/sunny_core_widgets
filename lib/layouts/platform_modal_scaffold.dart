@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 
@@ -16,10 +17,12 @@ class PlatformModalScaffold extends PlatformWidget {
   final ModalConstraints? constraints;
   final List<Widget> buttons;
   final bool scrolling;
+  final bool inSheet;
 
   PlatformModalScaffold({
     Key? key,
     this.dismissible = true,
+    this.inSheet = false,
     this.hideAppBar = false,
     this.actions = const [],
     this.leading,
@@ -47,36 +50,44 @@ class PlatformModalScaffold extends PlatformWidget {
   Widget createWidget(BuildContext context) {
     var backgroundColor = this.backgroundColor ??
         ModalScaffoldInfo.backgroundColor(context) ??
-        sunnyColors.modalBackground;
+        context.sunnyColors.modalBackground;
 
     final appBar = title == null
         ? null
         : PlatformAppBar(
             backgroundColor: backgroundColor,
             title: title,
-            cupertino: (context, platform) => CupertinoNavigationBarData(
-              brightness: context.brightness,
-            ),
+            cupertino: (context, platform) {
+              var brightness = context.brightness;
+              return CupertinoNavigationBarData(
+                brightness: brightness,
+              );
+            },
             material: (context, platform) => MaterialAppBarData(
-                brightness: context.brightness,
+                systemOverlayStyle: context.brightness.light
+                    ? SystemUiOverlayStyle.light
+                    : SystemUiOverlayStyle.dark,
                 centerTitle: true,
-                textTheme: sunnyText
-                    .apply(TextTheme())
-                    .withBrightness(context.brightness),
+
+                // textTheme: sunnyText
+                //     .apply(TextTheme())
+                //     .withBrightness(context.brightness),
                 iconTheme: IconThemeData(
-                  color: sunnyColors.primaryColor,
+                  color: context.sunnyColors.primaryColor,
                 )),
             automaticallyImplyLeading: dismissible && automaticallyImplyLeading,
             leading: leading ?? buildNestedBackButton(context),
             trailingActions: actions,
           );
 
-    var modalSize = ModalConstraints.of(context, [constraints]);
-    return modalSize.build(context,
+    var modalConstraints = ModalConstraints.of(context, [constraints]);
+    return modalConstraints.build(context,
         child: PlatformScaffold(
           backgroundColor: backgroundColor,
           appBar: appBar,
-          body: body.pad(),
+          body: scrolling
+              ? Column(children: [Expanded(child: body.pad())])
+              : body.pad(),
         )
         // : Layout.column().reset.min.crossAxisStretch.build(
         //     [

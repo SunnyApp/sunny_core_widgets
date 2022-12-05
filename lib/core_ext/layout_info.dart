@@ -2,10 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
+import 'package:sunny_essentials/sunny_essentials.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:info_x/info_x.dart';
 
-typedef ScreenInit = void Function(BuildContext context, LayoutInfo layoutInfo);
+typedef ScreenInit = void Function(BuildContext context, SunnyColors colors, LayoutInfo layoutInfo);
 typedef PlatformScreenInit = void Function(
     PlatformLayoutInfo platformLayoutInfo);
 

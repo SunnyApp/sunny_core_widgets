@@ -44,3 +44,23 @@ mixin ThrottledChangeNotifier on ChangeNotifier {
     }
   }
 }
+
+abstract class ChangeNotifierDelegate implements ChangeNotifier {
+  ChangeNotifier get notifierDelegate;
+  @override
+  void addListener(VoidCallback listener) =>
+      notifierDelegate.addListener(listener);
+
+  @override
+  void dispose() => notifierDelegate.dispose();
+
+  @override
+  bool get hasListeners => notifierDelegate.hasListeners;
+
+  @override
+  void notifyListeners() => notifierDelegate.notifyListeners();
+
+  @override
+  void removeListener(VoidCallback listener) =>
+      notifierDelegate.removeListener(listener);
+}

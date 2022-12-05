@@ -49,7 +49,7 @@ class DragHandle extends StatelessWidget {
       height: 6,
       width: (width ?? 40).px,
       decoration: BoxDecoration(
-        color: sunnyColors.g400,
+        color: context.sunnyColors.g400,
         borderRadius: BorderRadius.circular(6),
       ),
     );
@@ -67,7 +67,10 @@ Widget widgetWithDragHandle({Widget? child}) {
     alignment: Alignment.topCenter,
     fit: StackFit.loose,
     children: [
-      Padding(padding: EdgeInsets.only(top: 6), child: child!),
+      const SizedBox(
+        height: 6,
+      ),
+      child!,
       SizedBox(
         height: 18,
         child: const Center(child: const DragHandle()),
