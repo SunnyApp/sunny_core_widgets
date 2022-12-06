@@ -16,8 +16,8 @@ dependencies:
   responsive_builder: ^0.4.2
   timeago: ^3.2.2
   modal_bottom_sheet: ^2.1.2
-  auto_route: ^5.0.3
-
+  auto_route: 
+    path: /Users/ericm/sunny/local_plugins/auto_route_library/auto_route
   macos_ui: 
     path: /Users/ericm/sunny/local_plugins/macos_ui
   uri: 
