@@ -7,16 +7,23 @@ packages:
       name: _flutterfire_internals
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.9"
   after_layout:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: after_layout
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
-  async:
+    version: "1.2.0"
+  args:
     dependency: transitive
+    description:
+      name: args
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.2"
+  async:
+    dependency: "direct overridden"
     description:
       name: async
       url: "https://pub.dartlang.org"
@@ -25,10 +32,10 @@ packages:
   auto_route:
     dependency: "direct main"
     description:
-      name: auto_route
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "5.0.3"
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/auto_route_library/auto_route"
+      relative: false
+    source: path
+    version: "5.0.0"
   avoid_keyboard:
     dependency: "direct main"
     description:
@@ -58,7 +65,7 @@ packages:
     source: hosted
     version: "3.2.3"
   cached_network_image_platform_interface:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: cached_network_image_platform_interface
       url: "https://pub.dartlang.org"
@@ -105,30 +112,37 @@ packages:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.7.7"
+    version: "5.9.0"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.10"
+    version: "3.1.0"
   collection:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
   collection_diff:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: "../collection_diff"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/collection_diff"
+      relative: false
     source: path
     version: "2.0.3+6"
+  collection_diff_worker:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/collection_diff_worker"
+      relative: false
+    source: path
+    version: "0.5.5+7"
   crypto:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: crypto
       url: "https://pub.dartlang.org"
@@ -142,7 +156,7 @@ packages:
     source: hosted
     version: "3.0.2"
   dartx:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: dartx
       url: "https://pub.dartlang.org"
@@ -151,19 +165,19 @@ packages:
   dartxx:
     dependency: "direct main"
     description:
-      path: "../dartxx"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/dartxx"
+      relative: false
     source: path
     version: "0.5.5"
   dio:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.6"
   dynamic_color:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: dynamic_color
       url: "https://pub.dartlang.org"
@@ -179,8 +193,8 @@ packages:
   expanding_cards:
     dependency: "direct main"
     description:
-      path: "../expanding_cards"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/expanding_cards"
+      relative: false
     source: path
     version: "0.8.0+6"
   fake_async:
@@ -191,12 +205,12 @@ packages:
     source: hosted
     version: "1.3.1"
   ffi:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: ffi
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "2.0.1"
   file:
     dependency: transitive
     description:
@@ -205,52 +219,52 @@ packages:
     source: hosted
     version: "6.1.0"
   firebase_auth:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.11.2"
+    version: "4.1.5"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.10.1"
+    version: "6.11.3"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.6.1"
+    version: "5.1.3"
   firebase_core:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.15.0"
+    version: "2.3.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.5.1"
+    version: "4.5.2"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.3"
+    version: "2.0.1"
   flexidate:
     dependency: "direct main"
     description:
-      path: "../flexidate"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/flexidate"
+      relative: false
     source: path
     version: "0.8.0+3"
   flutter:
@@ -273,24 +287,24 @@ packages:
     source: hosted
     version: "3.3.0"
   flutter_datetime_picker:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: flutter_datetime_picker
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.1"
   flutter_degen_annotations:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: "../flutter_degen_annotations"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/flutter_degen_annotations"
+      relative: false
     source: path
     version: "1.7.0"
   flutter_screen_scaling:
     dependency: "direct main"
     description:
-      path: "../flutter_screen_scaling"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/flutter_screen_scaling"
+      relative: false
     source: path
     version: "3.3.2+3"
   flutter_test:
@@ -304,7 +318,7 @@ packages:
     source: sdk
     version: "0.0.0"
   http:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -318,7 +332,7 @@ packages:
     source: hosted
     version: "4.0.0"
   inflection3:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: inflection3
       url: "https://pub.dartlang.org"
@@ -327,8 +341,8 @@ packages:
   info_x:
     dependency: "direct main"
     description:
-      path: "../info_x"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/info_x"
+      relative: false
     source: path
     version: "0.8.0+3"
   intl:
@@ -338,34 +352,69 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
+  isolates:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/isolate"
+      relative: false
+    source: path
+    version: "3.0.3+8"
   js:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: js
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-  lint:
+  json_class:
     dependency: transitive
     description:
-      name: lint
+      name: json_class
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.10.0"
+    version: "2.1.4+1"
+  json_schema2:
+    dependency: transitive
+    description:
+      name: json_schema2
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2+20"
+  json_theme:
+    dependency: transitive
+    description:
+      name: json_theme
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.3+4"
   logging:
     dependency: "direct main"
     description:
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.0"
+  logging_config:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/logging_config"
+      relative: false
+    source: path
+    version: "0.6.7+7"
+  m_entity:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/sunny_entities/m_entity"
+      relative: false
+    source: path
+    version: "1.1.4"
   macos_ui:
     dependency: "direct main"
     description:
-      path: "/Users/ericm/sunny/local_plugins/macos_ui"
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/macos_ui"
       relative: false
     source: path
-    version: "1.7.4"
+    version: "1.7.7"
   matcher:
     dependency: transitive
     description:
@@ -395,12 +444,19 @@ packages:
     source: hosted
     version: "2.0.1"
   meta:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: meta
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  mobx:
+    dependency: "direct overridden"
+    description:
+      name: mobx
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.3"
   modal_bottom_sheet:
     dependency: "direct main"
     description:
@@ -415,22 +471,29 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  observable_collections:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/observable_collections"
+      relative: false
+    source: path
+    version: "0.7.1"
   octo_image:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: octo_image
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
   path:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: path
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
   path_provider:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
@@ -479,7 +542,7 @@ packages:
     source: hosted
     version: "2.0.5"
   pedantic:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: pedantic
       url: "https://pub.dartlang.org"
@@ -491,40 +554,40 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.0.0"
+    version: "10.2.0"
   permission_handler_android:
     dependency: transitive
     description:
       name: permission_handler_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.0.0"
+    version: "10.2.0"
   permission_handler_apple:
     dependency: transitive
     description:
       name: permission_handler_apple
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "9.0.4"
+    version: "9.0.7"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.7.0"
+    version: "3.9.0"
   permission_handler_windows:
     dependency: transitive
     description:
       name: permission_handler_windows
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.1.2"
   pfile:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: "../pfile"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/pfile"
+      relative: false
     source: path
     version: "2.2.0"
   phone_number_metadata:
@@ -535,12 +598,12 @@ packages:
     source: hosted
     version: "5.0.4"
   phone_numbers_parser:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: phone_numbers_parser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.0.0"
+    version: "7.0.0+1"
   pigment:
     dependency: transitive
     description:
@@ -549,26 +612,26 @@ packages:
     source: hosted
     version: "1.0.4"
   platform:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: platform
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
   platform_detect2:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: "/Users/ericm/sunny/local_plugins/platform_detect"
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/platform_detect"
       relative: false
     source: path
     version: "1.5.0+2"
   plugin_platform_interface:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.3"
   process:
     dependency: transitive
     description:
@@ -582,14 +645,14 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.3"
+    version: "6.0.4"
   pub_semver:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.3"
   quiver:
     dependency: transitive
     description:
@@ -598,19 +661,26 @@ packages:
     source: hosted
     version: "3.1.0"
   recase:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: recase
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.1.0"
   responsive_builder:
     dependency: "direct main"
     description:
       name: responsive_builder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.2"
+    version: "0.4.3"
+  rest_client:
+    dependency: transitive
+    description:
+      name: rest_client
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.0+7"
   rxdart:
     dependency: transitive
     description:
@@ -624,7 +694,7 @@ packages:
     source: sdk
     version: "0.0.99"
   sliver_tools:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: sliver_tools
       url: "https://pub.dartlang.org"
@@ -638,19 +708,19 @@ packages:
     source: hosted
     version: "1.9.0"
   sqflite:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+3"
+    version: "2.2.2"
   sqflite_common:
     dependency: transitive
     description:
       name: sqflite_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0+2"
+    version: "2.4.0+2"
   stack_trace:
     dependency: transitive
     description:
@@ -666,12 +736,12 @@ packages:
     source: hosted
     version: "2.1.0"
   stream_transform:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: stream_transform
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   string_scanner:
     dependency: transitive
     description:
@@ -680,33 +750,47 @@ packages:
     source: hosted
     version: "1.1.1"
   sunny_dart:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: "../sunny_dart"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/sunny_dart"
+      relative: false
     source: path
     version: "0.11.1"
+  sunny_data:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/sunny_data"
+      relative: false
+    source: path
+    version: "1.0.0+2"
   sunny_essentials:
     dependency: "direct main"
     description:
-      path: "../sunny_essentials"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/sunny_essentials"
+      relative: false
     source: path
     version: "0.8.2+1"
   sunny_platform_widgets:
     dependency: "direct main"
     description:
-      path: "/Users/ericm/sunny/local_plugins/sunny_platform_widgets"
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/flutter_platform_widgets"
       relative: false
     source: path
     version: "2.0.0"
   sunny_sdk_core:
     dependency: "direct main"
     description:
-      path: "../sunny_sdk_core"
-      relative: true
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/sunny_sdk_core"
+      relative: false
     source: path
     version: "2.5.0"
+  sunny_service_stubs:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/ericmartineau/sunny_service_stubs"
+      relative: false
+    source: path
+    version: "0.5.1"
   synchronized:
     dependency: transitive
     description:
@@ -741,21 +825,21 @@ packages:
       name: timeago
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.2"
+    version: "3.3.0"
   timezone:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: timezone
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.0"
+    version: "0.9.0"
   tinycolor2:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: tinycolor2
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "3.0.1"
   typed_data:
     dependency: transitive
     description:
@@ -766,17 +850,17 @@ packages:
   uri:
     dependency: "direct main"
     description:
-      path: "/Users/ericm/sunny/local_plugins/uri.dart"
-      relative: false
-    source: path
-    version: "1.0.1-dev"
+      name: uri
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   uuid:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.6"
+    version: "3.0.7"
   vector_math:
     dependency: transitive
     description:
@@ -785,12 +869,19 @@ packages:
     source: hosted
     version: "2.1.2"
   win32:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.5"
+    version: "2.7.0"
+  worker_service:
+    dependency: "direct overridden"
+    description:
+      path: "/Users/ericm/reliveit/checkout/SunnyApp/worker_service"
+      relative: false
+    source: path
+    version: "0.7.4"
   xdg_directories:
     dependency: transitive
     description:
@@ -798,6 +889,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.1"
+  yaon:
+    dependency: transitive
+    description:
+      name: yaon
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1+9"
 sdks:
   dart: ">=2.18.0 <3.0.0"
   flutter: ">=3.3.0"

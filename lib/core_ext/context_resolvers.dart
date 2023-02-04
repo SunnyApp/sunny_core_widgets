@@ -14,8 +14,7 @@ class ProviderBuildContextResolver with SplitRegistrationResolver {
   const ProviderBuildContextResolver();
 
   @override
-  Widget? registerAll(BuildContext context, List<Inst> inits,
-      {Widget? child, Key? key}) {
+  Widget? registerAll(List<Inst> inits, {Widget? child, Key? key}) {
     final x = inits.toList();
     if (x.isNotEmpty) {
       return MultiProvider(
@@ -32,12 +31,10 @@ class ProviderBuildContextResolver with SplitRegistrationResolver {
 }
 
 mixin SplitRegistrationResolver implements BuildContextResolver {
-  Widget? registerAll(BuildContext context, List<Inst> inits,
-      {Widget? child, Key? key});
+  Widget? registerAll(List<Inst> inits, {Widget? child, Key? key});
 
   @override
-  Widget register(BuildContext context, resolverOrList,
-      {Widget? child, Key? key}) {
+  Widget register(resolverOrList, {Widget? child, Key? key}) {
     Iterable<Inst> extract(final input) {
       if (input is Iterable) {
         return input.expand((e) => extract(e));
@@ -49,7 +46,7 @@ mixin SplitRegistrationResolver implements BuildContextResolver {
     }
 
     final items = extract(resolverOrList).toList();
-    return registerAll(context, items, child: child, key: key)!;
+    return registerAll(items, child: child, key: key)!;
   }
 }
 
@@ -58,7 +55,7 @@ extension ResolverInitToProviderExt<T extends Object> on Inst<T> {
     Provider<X> _toProvider<X extends Object>(Inst<X> inst) {
       return isFactory
           ? Provider<X>(
-              create: inst.factory!,
+              create: (_) => inst.factory!(),
               dispose: ((_, _inst) => inst.dispose?.call(_inst)),
             )
           : Provider<X>.value(

@@ -6,6 +6,8 @@ import 'package:sunny_core_widgets/sunny_core_widgets.dart';
 class PlatformModalScaffold extends PlatformWidget {
   final bool dismissible;
   final Widget? title;
+  final double? titleWidth;
+  final bool? centerTitle;
   final Widget? leading;
   final bool hideAppBar;
   final bool hasAppBar;
@@ -18,9 +20,12 @@ class PlatformModalScaffold extends PlatformWidget {
   final List<Widget> buttons;
   final bool scrolling;
   final bool inSheet;
+  final bool isScaffold;
 
   PlatformModalScaffold({
     Key? key,
+    this.titleWidth,
+    this.centerTitle,
     this.dismissible = true,
     this.inSheet = false,
     this.hideAppBar = false,
@@ -30,6 +35,7 @@ class PlatformModalScaffold extends PlatformWidget {
     this.padding,
     this.constraints,
     this.backgroundColor,
+    this.isScaffold = true,
     this.title,
     this.scrolling = false,
     this.automaticallyImplyLeading = false,
@@ -81,14 +87,17 @@ class PlatformModalScaffold extends PlatformWidget {
           );
 
     var modalConstraints = ModalConstraints.of(context, [constraints]);
+    var paddedBody = scrolling
+        ? Column(children: [Expanded(child: body.pad())])
+        : body.pad();
     return modalConstraints.build(context,
-        child: PlatformScaffold(
-          backgroundColor: backgroundColor,
-          appBar: appBar,
-          body: scrolling
-              ? Column(children: [Expanded(child: body.pad())])
-              : body.pad(),
-        )
+        child: !isScaffold && appBar == null
+            ? paddedBody
+            : PlatformScaffold(
+                backgroundColor: backgroundColor,
+                appBar: appBar,
+                body: paddedBody,
+              )
         // : Layout.column().reset.min.crossAxisStretch.build(
         //     [
         //       if (dismissible) verticalSpace,

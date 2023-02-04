@@ -11,7 +11,6 @@ import 'package:sunny_sdk_core/api_exports.dart';
 import 'modals.dart';
 import 'nested_navigation.dart';
 
-//
 extension AutoRouteInfoExt<T> on PageRouteInfo<T> {
   Future<R?> openModal<R>(
     BuildContext context, {
@@ -42,22 +41,41 @@ extension AutoRouteInfoExt<T> on PageRouteInfo<T> {
       expand: expand,
       settings: routeSettings,
       constraints: constraints,
-      builder: memoizeScrollBuild(toWidget),
+      builder: memoizeScrollBuild((context) => toWidget(
+            context,
+            useRootRouter: useRootNavigator,
+          )),
     );
   }
 
-  Widget toWidget(BuildContext context, {RootStackRouter? router}) {
-    var next = context.router;
-    router ??= context.router.root as RootStackRouter;
-    var match = router.matcher.matchByRoute(this);
-    if (match == null) {
-      throw ArgumentError('Cannot match route: $routeName');
-    }
-    var pageFactory = router.pagesMap[routeName] ??
-        illegalState('Pag factory not found for $routeName');
+  Widget toWidget(BuildContext context,
+      {StackRouter? router, bool useRootRouter = false}) {
+    /// Start with self, and walk backwards looking for an AutoRouter that handles
 
-    var page = pageFactory!(RouteData(
-        route: match, router: router, pendingChildren: match.children ?? []));
+    RoutingController? tmpRouter = router ?? context.router;
+    final root = tmpRouter.root as RootStackRouter;
+    RouteMatch? match;
+    final attempts = <RoutingController>[];
+    while (match == null && tmpRouter != null) {
+      attempts.add(tmpRouter);
+      match = tmpRouter.matcher.matchByRoute(this);
+      if (match == null) tmpRouter = tmpRouter.parent<RoutingController>();
+    }
+
+    if (match == null) {
+      throw ArgumentError(
+          'Cannot match route: $routeName: checked: ${attempts.map((e) => e.key)}');
+    }
+    var pageFactory = root.pagesMap[routeName] ??
+        illegalState('Page factory not found for $routeName');
+
+    var page = pageFactory!(
+      RouteData(
+        route: match,
+        router: tmpRouter!,
+        pendingChildren: match.children ?? [],
+      ),
+    );
     if (page is AutoRoutePage) {
       return page.buildPage(context);
     } else if (page is MaterialPage) {
