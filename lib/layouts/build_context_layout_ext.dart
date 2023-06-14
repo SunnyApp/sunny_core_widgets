@@ -4,7 +4,8 @@ import 'package:sunny_platform_widgets/sunny_platform_widgets.dart';
 
 extension BuildContextCoreLayoutExt on BuildContext {
   bool get isMacos {
-    return platform(this) == PlatformTarget.macOS && !kIsWeb;
+    var thisPlatform = platform(this);
+    return thisPlatform == PlatformTarget.macOS && !kIsWeb;
   }
 
   bool get isMacosOrWeb {

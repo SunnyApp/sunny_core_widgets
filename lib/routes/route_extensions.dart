@@ -28,7 +28,6 @@ class PageRoutePaths {
   }
 }
 
-
 extension BuildContextDeviceScreenTypeExt on BuildContext {
   LayoutInfo get layoutInfo => sunny.get(context: this);
   rb.DeviceScreenType get screenType => layoutInfo.screenType;
@@ -42,7 +41,11 @@ extension BuildContextDeviceScreenTypeExt on BuildContext {
 
   PageRouteInfo get loginRoute => match(PageRoutePaths.fullLoginPath);
   PageRouteInfo get settingsRoute => match(PageRoutePaths.settingsPath);
-  PageRouteInfo get registerRoute => match(PageRoutePaths.registerPath);
+  PageRouteInfo get registerRoute {
+    var foundMatch = match(PageRoutePaths.fullRegisterPath);
+    return foundMatch;
+  }
+
   PageRouteInfo loginProvider(String providerName) =>
       match(PageRoutePaths.loginProvider(providerName));
   PageRouteInfo registerProvider(String providerName) =>

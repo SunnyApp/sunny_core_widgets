@@ -6,6 +6,7 @@ import 'package:macos_ui/macos_ui.dart';
 import 'package:sunny_core_widgets/layouts/build_context_layout_ext.dart';
 import 'package:sunny_core_widgets/routes/path_route_settings.dart';
 import 'package:sunny_essentials/platform/modal_options.dart';
+import 'package:sunny_essentials/theme.dart';
 import 'package:sunny_sdk_core/api_exports.dart';
 
 import 'modals.dart';
@@ -71,6 +72,8 @@ extension AutoRouteInfoExt<T> on PageRouteInfo<T> {
 
     var page = pageFactory!(
       RouteData(
+        type: RouteType.adaptive(),
+        stackKey: ValueKey('global'),
         route: match,
         router: tmpRouter!,
         pendingChildren: match.children ?? [],
@@ -89,6 +92,7 @@ extension AutoRouteInfoExt<T> on PageRouteInfo<T> {
   }
 
   PathRouteSettings get routeSettings {
-    return PathRouteSettings(route: this.path, label: this.routeName);
+    return PathRouteSettings(route: this.routeName, label: this.fragment);
+    // return PathRouteSettings(route: this.path, label: this.routeName);
   }
 }

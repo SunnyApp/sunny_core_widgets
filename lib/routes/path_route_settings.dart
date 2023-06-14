@@ -32,7 +32,7 @@ class PathRouteSettings extends RouteSettings implements RouteInformation {
   }
 
   @override
-  String? get location => resolvedPath ?? route;
+  String get location => resolvedPath ?? route!;
 
   @override
   PathRouteSettings get state => this;
@@ -46,6 +46,9 @@ class PathRouteSettings extends RouteSettings implements RouteInformation {
       'routeParams': this.routeParams,
     } as Map<String, dynamic>;
   }
+
+  @override
+  Uri get uri => resolvedPath!.toUri()!;
 }
 
 String? _simpleNameOfType(Type type) {
