@@ -59,6 +59,7 @@ extension AutoRouteInfoExt<T> on PageRouteInfo<T> {
     final attempts = <RoutingController>[];
     while (match == null && tmpRouter != null) {
       attempts.add(tmpRouter);
+
       match = tmpRouter.matcher.matchByRoute(this);
       if (match == null) tmpRouter = tmpRouter.parent<RoutingController>();
     }
